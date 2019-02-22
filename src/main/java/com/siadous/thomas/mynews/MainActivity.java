@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureToolbar(){
         // Get the toolbar view inside the activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Sets the Toolbar
         setSupportActionBar(toolbar);
     }
