@@ -1,5 +1,7 @@
-package com.siadous.thomas.mynews.controller;
+package com.siadous.thomas.mynews.Controllers.Activities;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.siadous.thomas.mynews.Adapters.PageAdapter;
 import com.siadous.thomas.mynews.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.configureToolbar();
+        configureViewPager();
     }
 
     @Override
@@ -25,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    // ----
 
     private void configureToolbar(){
         // Get the toolbar view inside the activity layout
@@ -47,5 +50,18 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void configureViewPager(){
+
+        ViewPager pager = findViewById(R.id.activity_main_viewpager);
+
+        pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+
+        TabLayout tabs = findViewById(R.id.activity_main_tabs);
+
+        tabs.setupWithViewPager(pager);
+
+        tabs.setTabMode(TabLayout.MODE_FIXED);
     }
 }
