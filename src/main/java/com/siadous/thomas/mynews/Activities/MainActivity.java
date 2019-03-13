@@ -1,4 +1,4 @@
-package com.siadous.thomas.mynews.Controllers.Activities;
+package com.siadous.thomas.mynews.Activities;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;

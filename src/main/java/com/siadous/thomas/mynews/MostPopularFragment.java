@@ -1,4 +1,4 @@
-package com.siadous.thomas.mynews.Controllers.Fragments;
+package com.siadous.thomas.mynews;
 
 
 import android.os.Bundle;
@@ -7,16 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.siadous.thomas.mynews.R;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BusinessFragment extends Fragment {
+public class MostPopularFragment extends Fragment {
 
 
-    public static BusinessFragment newInstance() {
-        return(new BusinessFragment());
+    public static MostPopularFragment newInstance() {
+        return(new MostPopularFragment());
     }
 
 
@@ -24,7 +22,7 @@ public class BusinessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_business, container, false);
+        return inflater.inflate(R.layout.fragment_most_popular, container, false);
     }
 
 }

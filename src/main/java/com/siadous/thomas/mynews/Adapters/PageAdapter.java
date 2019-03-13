@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.siadous.thomas.mynews.Controllers.Fragments.BusinessFragment;
-import com.siadous.thomas.mynews.Controllers.Fragments.MostPopularFragment;
-import com.siadous.thomas.mynews.Controllers.Fragments.TopStoriesFragment;
+import com.siadous.thomas.mynews.BusinessFragment;
+import com.siadous.thomas.mynews.MostPopularFragment;
+import com.siadous.thomas.mynews.TopStoriesFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
