@@ -1,21 +1,22 @@
-package com.siadous.thomas.mynews;
+package com.siadous.thomas.mynews.top_stories_list;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.siadous.thomas.mynews.Utils.NewYorkTimesCalls;
-
-import java.util.List;
+import com.siadous.thomas.mynews.Model.ResultList;
+import com.siadous.thomas.mynews.Model.Results;
+import com.siadous.thomas.mynews.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopStoriesFragment extends Fragment implements NewYorkTimesCalls.Callbacks {
+public class TopStoriesFragment extends Fragment  {
 
 
     public static TopStoriesFragment newInstance() {
@@ -36,21 +37,23 @@ public class TopStoriesFragment extends Fragment implements NewYorkTimesCalls.Ca
     }
 
     @Override
-    public void onResponse(@Nullable List<TopStoriesData> data) {
-        if (data != null) this.updateUIWithListOfTopStories(data);
+    public void onResponse(@Nullable ResultList results) {
+        Log.e("thomas", "on response");
+      //  if (results != null) this.updateUIWithListOfTopStories(results);
     }
 
     @Override
-    public void onFailure() {
-
+    public void onFailure(Throwable t) {
+        Log.e("thomas", "on failure", t);
     }
 
-
-    private void updateUIWithListOfTopStories(List<TopStoriesData> storiesData){
+/*
+    private void updateUIWithListOfTopStories(ResultList storiesData){
         StringBuilder stringBuilder = new StringBuilder();
-        for (TopStoriesData topStoriesData : storiesData){
-            stringBuilder.append("-"+topStoriesData.results+"\n");
+        for (Results result : storiesData){
+            stringBuilder.append("-"+ result() +"\n");
         }
 
     }
+ */
 }

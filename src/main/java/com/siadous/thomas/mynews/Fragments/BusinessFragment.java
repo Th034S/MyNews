@@ -1,4 +1,4 @@
-package com.siadous.thomas.mynews;
+package com.siadous.thomas.mynews.Fragments;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.siadous.thomas.mynews.R;
 
 /**
  * A simple {@link Fragment} subclass.
