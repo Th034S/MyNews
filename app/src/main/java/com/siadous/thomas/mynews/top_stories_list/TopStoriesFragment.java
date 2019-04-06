@@ -19,13 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
-import com.siadous.thomas.mynews.Model.ResultList;
-import com.siadous.thomas.mynews.Model.Results;
 import com.siadous.thomas.mynews.Model.TopStories;
 import com.siadous.thomas.mynews.R;
+import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,9 +87,9 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         topStoriesList = new ArrayList<>();
         topStoriesAdapter = new TopStoriesAdapter(this, topStoriesList);
 
-        mLayoutManager = new GridLayoutManager(this,1);
+        mLayoutManager = new GridLayoutManager(this.getContext(),1);
         rvTopStoriesList.setLayoutManager(mLayoutManager);
-        rvTopStoriesList.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(this, 10), true));
+        rvTopStoriesList.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(this.getContext(), 10), true));
         rvTopStoriesList.setItemAnimator(new DefaultItemAnimator());
         rvTopStoriesList.setAdapter(topStoriesAdapter);
 
