@@ -22,7 +22,7 @@ public class TopStories {
     @SerializedName("section")
     private String section;
 
-    @SerializedName("abstracts")
+    @SerializedName("abstract")
     private String abstracts;
 
     @SerializedName("title")

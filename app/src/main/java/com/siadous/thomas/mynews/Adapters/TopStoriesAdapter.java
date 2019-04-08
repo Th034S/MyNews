@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews.Adapters;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -59,8 +60,8 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
         holder.fragmentDate.setText(topStories.getPublished_date());
 
         // loading album cover using Glide library
-        Glide.with(TopStoriesFragment)
-                .load(ApiClient.IMAGE_BASE_URL + topStories.getThumbPath())
+        Glide.with(holder.getContext())
+                .load(topStories.getMultimedia()[topStories.getMultimedia().length - 1].getUrl())
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -72,7 +73,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
                         return false;
                     }
                 })
-                .apply(new RequestOptions().placeholder(R.drawable.ic_place_holder).error(R.drawable.ic_place_holder))
+                .apply(new RequestOptions())
                 .into(holder.fragmentImageView);
 
     }
@@ -101,6 +102,9 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentDate = itemView.findViewById(R.id.fragment_date);
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
 
+        }
+        public Context getContext() {
+            return fragmentItemTitle.getContext();
         }
     }
 }
