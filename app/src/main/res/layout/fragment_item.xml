@@ -38,6 +38,7 @@
             <TextView
                 android:id="@+id/fragment_date"
                 android:layout_width="wrap_content"
+                android:layout_gravity="end"
                 android:layout_height="10dp"
                 android:layout_weight="0.5"
                 android:textSize="22sp"

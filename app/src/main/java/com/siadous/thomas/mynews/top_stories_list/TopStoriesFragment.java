@@ -1,11 +1,9 @@
 package com.siadous.thomas.mynews.top_stories_list;
 
 
-import android.app.Activity;
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
 import com.siadous.thomas.mynews.Model.TopStories;
 import com.siadous.thomas.mynews.R;
@@ -60,10 +56,11 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         result = inflater.inflate(R.layout.fragment_top_stories, container, false);
+
 
         // Référencer les éléments graphique + créer une list de Movie
         initUI();
@@ -106,7 +103,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         rvTopStoriesList.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
                 visibleItemCount = rvTopStoriesList.getChildCount();

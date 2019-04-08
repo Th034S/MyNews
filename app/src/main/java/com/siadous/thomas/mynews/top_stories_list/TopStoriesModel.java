@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews.top_stories_list;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.siadous.thomas.mynews.Model.TopStories;
@@ -34,14 +35,19 @@ public class TopStoriesModel implements TopStoriesContract.Model {
         call.enqueue(new Callback<TopStoriesListResponse>() {
 
             @Override
-            public void onResponse(Call<TopStoriesListResponse> call, Response<TopStoriesListResponse> response) {
-                List<TopStories> topStories = response.body().getResults();
-                Log.d(TAG, "Number of articles received: " + topStories.size());
-                onFinishedListener.onFinished(topStories);
+            public void onResponse(@NonNull Call<TopStoriesListResponse> call, @NonNull Response<TopStoriesListResponse> response) {
+                try {
+                    assert response.body() != null;
+                    List<TopStories> topStories = response.body().getResults();
+                    Log.d(TAG, "Number of articles received: " + topStories.size());
+                    onFinishedListener.onFinished(topStories);
+                } catch (NullPointerException e) {
+                    Log.d("TAG", "NullPointerException");
+                }
             }
 
             @Override
-            public void onFailure(Call<TopStoriesListResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<TopStoriesListResponse> call, @NonNull Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
                 onFinishedListener.onFailure(t);

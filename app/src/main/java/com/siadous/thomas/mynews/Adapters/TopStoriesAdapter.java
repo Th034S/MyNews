@@ -8,9 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,25 +19,22 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.siadous.thomas.mynews.Model.TopStories;
 import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.Utils.ApiClient;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesFragment;
 
-
 import java.util.List;
-import java.util.Locale;
 
 public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.MyViewHolder> {
 
     private TopStoriesFragment topStoriesFragment;
     private List<TopStories> topStoriesList;
-    private List<TopStories> originalTopStoriesList;
+    //private List<TopStories> originalTopStoriesList;
 
 
     // Constructeur
     public TopStoriesAdapter(TopStoriesFragment topStoriesFragment, List<TopStories> topStoriesList) {
         this.topStoriesFragment = topStoriesFragment;
         this.topStoriesList = topStoriesList;
-        this.originalTopStoriesList = topStoriesList;
+       // this.originalTopStoriesList = topStoriesList;
     }
 
     @NonNull
@@ -86,16 +81,16 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
 
 
     // On référence les éléments de movie card
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView fragmentItemTitle;
+        TextView fragmentItemTitle;
 
-        public TextView fragmentDate;
+        TextView fragmentDate;
 
-        public ImageView fragmentImageView;
+        ImageView fragmentImageView;
 
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
 
             fragmentItemTitle = itemView.findViewById(R.id.fragment_item_title);
@@ -103,7 +98,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
 
         }
-        public Context getContext() {
+        Context getContext() {
             return fragmentItemTitle.getContext();
         }
     }
