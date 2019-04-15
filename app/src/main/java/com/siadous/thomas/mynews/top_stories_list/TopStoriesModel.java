@@ -42,7 +42,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
                     Log.d(TAG, "Number of articles received: " + topStories.size());
                     onFinishedListener.onFinished(topStories);
                 } catch (NullPointerException e) {
-                    Log.d("TAG", "NullPointerException");
+                    Log.d("TAG", String.valueOf(e));
                 }
             }
 

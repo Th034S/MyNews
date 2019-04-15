@@ -74,7 +74,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         topStoriesPresenter.requestDataFromServer();
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_stories, container, false);
+        return result;
     }
 
 
@@ -142,7 +142,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
     @Override
     public void setDataToRecyclerView(List<TopStories> topStoriesArrayList) {
-        topStoriesList.addAll(topStoriesArrayList);
+        topStoriesAdapter.updateList(topStoriesArrayList);
         topStoriesAdapter.notifyDataSetChanged();
 
         // This will help us to fetch data from next page no.

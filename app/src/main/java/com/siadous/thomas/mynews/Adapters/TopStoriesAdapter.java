@@ -56,26 +56,26 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
 
         holder.fragmentItemTitle.setText(topStories.getTitle());
         holder.fragmentDate.setText(topStories.getPublished_date());
+        if (topStories.getMultimedia().length >= 1) {
+            // loading album cover using Glide library
+            Glide.with(holder.getContext())
+                    .load(topStories.getMultimedia()[topStories.getMultimedia().length - 1].getUrl())
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                           // holder.pbLoadImage.setVisibility(View.GONE);
+                            return false;
+                        }
 
-        // loading album cover using Glide library
-        Glide.with(holder.getContext())
-                .load(topStories.getMultimedia()[topStories.getMultimedia().length - 1].getUrl())
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        holder.pbLoadImage.setVisibility(View.GONE);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        holder.pbLoadImage.setVisibility(View.GONE);
-                        return false;
-                    }
-                })
-                .apply(new RequestOptions())
-                .into(holder.fragmentImageView);
-
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                           // holder.pbLoadImage.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .apply(new RequestOptions())
+                    .into(holder.fragmentImageView);
+        }
     }
 
     // Le nombre d'éléments à afficher
@@ -85,6 +85,9 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
         return topStoriesList.size();
     }
 
+    public void updateList( List<TopStories> topStoriesList) {
+        this.topStoriesList = topStoriesList;
+    }
 
     // On référence les éléments de movie card
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -103,7 +106,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentItemTitle = itemView.findViewById(R.id.fragment_item_title);
             fragmentDate = itemView.findViewById(R.id.fragment_date);
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
-            pbLoadImage = itemView.findViewById(R.id.pb_load_image);
+            //pbLoadImage = itemView.findViewById(R.id.pb_load_image);
 
         }
         Context getContext() {
