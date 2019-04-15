@@ -1,5 +1,7 @@
 package com.siadous.thomas.mynews.Model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -263,6 +265,7 @@ public class TopStories {
         this.kicker = kicker;
     }
 
+    @NonNull
     @Override
     public String toString()
     {

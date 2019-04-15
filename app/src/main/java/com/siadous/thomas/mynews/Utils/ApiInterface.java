@@ -8,6 +8,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
-    @GET("topstories")
+    @GET("svc/topstories/v2/home.json")
     Call<TopStoriesListResponse> getTopStories(@Query("api_key") String apiKey, @Query("page") int PageNo);
 }

@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
     private static Retrofit retrofit = null;
-    public static final String BASE_URL = "https://api.nytimes.com/svc/";
+    public static final String BASE_URL = "https://api.nytimes.com/";
     public static final String API_KEY = "JrCGkvBIqnBYpL6DjHPBpzLPZndGGBcQ";
 
     public static Retrofit getClient() {

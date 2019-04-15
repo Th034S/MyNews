@@ -1,14 +1,17 @@
 package com.siadous.thomas.mynews.Adapters;
 
+import android.app.MediaRouteButton;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -60,11 +63,13 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        holder.pbLoadImage.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        holder.pbLoadImage.setVisibility(View.GONE);
                         return false;
                     }
                 })
@@ -76,6 +81,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     // Le nombre d'éléments à afficher
     @Override
     public int getItemCount() {
+        Log.e("testsiadous", String.valueOf(topStoriesList.size()));
         return topStoriesList.size();
     }
 
@@ -83,6 +89,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     // On référence les éléments de movie card
     class MyViewHolder extends RecyclerView.ViewHolder {
 
+        ProgressBar pbLoadImage;
         TextView fragmentItemTitle;
 
         TextView fragmentDate;
@@ -96,6 +103,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentItemTitle = itemView.findViewById(R.id.fragment_item_title);
             fragmentDate = itemView.findViewById(R.id.fragment_date);
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
+            pbLoadImage = itemView.findViewById(R.id.pb_load_image);
 
         }
         Context getContext() {

@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
 import com.siadous.thomas.mynews.Model.TopStories;
 import com.siadous.thomas.mynews.R;
@@ -61,7 +63,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
         result = inflater.inflate(R.layout.fragment_top_stories, container, false);
 
-
         // Référencer les éléments graphique + créer une list de Movie
         initUI();
 
@@ -85,10 +86,10 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         topStoriesAdapter = new TopStoriesAdapter(this, topStoriesList);
 
         mLayoutManager = new GridLayoutManager(this.getContext(),1);
-        rvTopStoriesList.setLayoutManager(mLayoutManager);
         rvTopStoriesList.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(this.getContext(), 10), true));
         rvTopStoriesList.setItemAnimator(new DefaultItemAnimator());
         rvTopStoriesList.setAdapter(topStoriesAdapter);
+        rvTopStoriesList.setLayoutManager(mLayoutManager);
 
         pbLoading = result.findViewById(R.id.pb_loading);
 
@@ -151,6 +152,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     @Override
     public void onResponseFailure(Throwable throwable) {
         Log.e(TAG, throwable.getMessage());
+        Toast.makeText(this.getContext(), getString(R.string.communication_error), Toast.LENGTH_LONG).show();
     }
 
     @Override
