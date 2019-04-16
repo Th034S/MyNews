@@ -30,6 +30,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
 
     private TopStoriesFragment topStoriesFragment;
     private List<TopStories> topStoriesList;
+    private TopStories topStories;
     //private List<TopStories> originalTopStoriesList;
 
 
@@ -51,11 +52,19 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-
-        TopStories topStories = topStoriesList.get(position);
+        String category;
+        topStories = topStoriesList.get(position);
 
         holder.fragmentItemTitle.setText(topStories.getTitle());
-        holder.fragmentDate.setText(topStories.getPublished_date());
+        if(!topStories.getSection().equals("") && !topStories.getSubsection().equals("")) {
+            category = topStories.getSection() + " > " + topStories.getSubsection();
+            holder.fragmentCategory.setText(category);
+        }
+        else {
+            category = topStories.getSection();
+            holder.fragmentCategory.setText(category);
+        }
+        holder.fragmentDate.setText(configureFormatDate());
         if (topStories.getMultimedia().length >= 1) {
             // loading album cover using Glide library
             Glide.with(holder.getContext())
@@ -85,6 +94,16 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
         return topStoriesList.size();
     }
 
+    public String configureFormatDate() {
+        String date = topStories.getPublished_date();
+        String[] split = date.split("T");
+        date = split[0];
+        split = date.split("-");
+        String[] year = split[0].split("0");
+        date = split[2] + "/" + split[1] + "/" + year[1];
+        return date;
+    }
+
     public void updateList( List<TopStories> topStoriesList) {
         this.topStoriesList = topStoriesList;
     }
@@ -94,10 +113,9 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
 
         ProgressBar pbLoadImage;
         TextView fragmentItemTitle;
-
         TextView fragmentDate;
-
         ImageView fragmentImageView;
+        TextView fragmentCategory;
 
 
         MyViewHolder(View itemView) {
@@ -106,6 +124,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentItemTitle = itemView.findViewById(R.id.fragment_item_title);
             fragmentDate = itemView.findViewById(R.id.fragment_date);
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
+            fragmentCategory = itemView.findViewById(R.id.fragment_category);
             //pbLoadImage = itemView.findViewById(R.id.pb_load_image);
 
         }
