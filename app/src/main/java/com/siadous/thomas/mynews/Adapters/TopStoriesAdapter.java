@@ -21,6 +21,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.siadous.thomas.mynews.Model.TopStories;
+import com.siadous.thomas.mynews.Model.TopStoriesListResponse;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesFragment;
 
@@ -38,8 +39,14 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     public TopStoriesAdapter(TopStoriesFragment topStoriesFragment, List<TopStories> topStoriesList) {
         this.topStoriesFragment = topStoriesFragment;
         this.topStoriesList = topStoriesList;
+
        // this.originalTopStoriesList = topStoriesList;
     }
+
+    public interface Listener {
+        void onClickDeleteButton(int position);
+    }
+
 
     @NonNull
     @Override
@@ -54,6 +61,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         String category;
         topStories = topStoriesList.get(position);
+
 
         holder.fragmentItemTitle.setText(topStories.getTitle());
         if(!topStories.getSection().equals("") && !topStories.getSubsection().equals("")) {
@@ -85,7 +93,10 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
                     .apply(new RequestOptions())
                     .into(holder.fragmentImageView);
         }
+
     }
+
+
 
     // Le nombre d'éléments à afficher
     @Override
@@ -104,6 +115,10 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
         return date;
     }
 
+    public TopStories getArticle(int position){
+        return this.topStories.get(position);
+    }
+
     public void updateList( List<TopStories> topStoriesList) {
         this.topStoriesList = topStoriesList;
     }
@@ -116,6 +131,8 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
         TextView fragmentDate;
         ImageView fragmentImageView;
         TextView fragmentCategory;
+
+
 
 
         MyViewHolder(View itemView) {
@@ -132,4 +149,6 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             return fragmentItemTitle.getContext();
         }
     }
+
+
 }

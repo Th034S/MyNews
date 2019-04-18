@@ -63,6 +63,9 @@ public class TopStories {
     @SerializedName("kicker")
     private String kicker;
 
+    public TopStories() {
+    }
+
     public TopStories(String[] per_facet, String subsection, String item_type, String[] org_facet, String section, String abstracts, String title, String[] des_facet, String url,
                       String short_url, String material_type_facet, Multimedia[] multimedia, String[] geo_facet, String updated_date, String created_date, String byline, String published_date, String kicker) {
         this.per_facet = per_facet;
@@ -83,6 +86,11 @@ public class TopStories {
         this.byline = byline;
         this.published_date = published_date;
         this.kicker = kicker;
+    }
+
+    public TopStories get( int position) {
+        TopStories topStories = new TopStories();
+        return topStories;
     }
 
     public String[] getPer_facet ()

@@ -3,6 +3,7 @@ package com.siadous.thomas.mynews.top_stories_list;
 
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
 import com.siadous.thomas.mynews.Model.TopStories;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
+import com.siadous.thomas.mynews.Utils.ItemClickSupport;
 
 
 import java.util.ArrayList;
@@ -78,6 +80,8 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         topStoriesPresenter = new TopStoriesPresenter(this);
         // Obtenir les données de la page 1
         topStoriesPresenter.requestDataFromServer();
+
+        this.configureOnClickRecyclerView();
 
         // Inflate the layout for this fragment
         return result;
@@ -134,25 +138,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
             }
         });
-        Log.d("TAG", "0000000000000");
-                linearLayoutItem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Log.d("TAG", "11111111111111");
-                        TopStoriesDetailsFragment topStoriesDetailsFragment = new TopStoriesDetailsFragment();
-                        Bundle args = new Bundle();
-                        args.putString("key", topStories.getUrl());
-                        topStoriesDetailsFragment.setArguments(args);
-                        getFragmentManager().beginTransaction().replace(R.id.web_view_details, topStoriesDetailsFragment).addToBackStack("Some string").commit();
-                        Log.d("TAG", "222222222222222");
-
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        TopStoriesDetailsFragment myFragment = new TopStoriesDetailsFragment();
-                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.web_view_details, myFragment).addToBackStack(null).commit();
-
-
-                    }
-                });
 
     }
 
@@ -186,6 +171,31 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     public void onDestroy() {
         super.onDestroy();
         topStoriesPresenter.onDestroy();
+    }
+
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        TopStories topStories = topStoriesAdapter.getArticle(position);
+
+                        Log.e("TAG", "Position : "+position);
+                        Log.d("TAG", "11111111111111");
+                        TopStoriesDetailsFragment topStoriesDetailsFragment = new TopStoriesDetailsFragment();
+                        Bundle args = new Bundle();
+                        args.putString("key", topStories.getUrl());
+                        topStoriesDetailsFragment.setArguments(args);
+                        getFragmentManager().beginTransaction().replace(R.id.web_view_details, topStoriesDetailsFragment).addToBackStack("Some string").commit();
+                        Log.d("TAG", "222222222222222");
+
+                        TopStoriesDetailsFragment topStoriesDetailsFragment1= new TopStoriesDetailsFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.web_view_details, topStoriesDetailsFragment, "findThisFragment")
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                });
     }
 
 
