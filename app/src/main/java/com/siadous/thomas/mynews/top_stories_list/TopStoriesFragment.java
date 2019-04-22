@@ -2,6 +2,7 @@ package com.siadous.thomas.mynews.top_stories_list;
 
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.siadous.thomas.mynews.Activities.MainActivity;
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
+import com.siadous.thomas.mynews.Fragments.HomeFragment;
 import com.siadous.thomas.mynews.Model.TopStories;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
@@ -133,30 +136,44 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                     topStoriesPresenter.getMoreData(pageNo);
                     loading = true;
                 }
-
             }
         });
-
     }
+
 
 
     public void launchTopStoriesDetails() {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.top_stories_detail_page, topStoriesDetailsFragment, "findThisFragment")
+                .replace(R.id.top_stories_detail_page, topStoriesDetailsFragment)
                 .addToBackStack(null)
                 .commit();
     }
 
     public void saveGetUrlOnBundle() {
         Bundle args = new Bundle();
-        args.putString("key", topStories.getUrl());
-        topStoriesDetailsFragment.setArguments(args);
-        getFragmentManager().beginTransaction().replace(R.id.web_view_details, topStoriesDetailsFragment).addToBackStack("Some string").commit();
         Log.d("TAG", "222222222222222");
+        args.putString("key", topStories.getUrl());
+        Log.d("TAG", "333333333333333");
+        topStoriesDetailsFragment.setArguments(args);
+        getFragmentManager().beginTransaction().replace(R.id.top_stories_detail_page, topStoriesDetailsFragment).addToBackStack("Some string").commit();
+
     }
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        topStories = topStoriesAdapter.getArticle(position);
 
+                        topStoriesDetailsFragment = new TopStoriesDetailsFragment();
 
+                        saveGetUrlOnBundle();
 
+                        launchTopStoriesDetails();
+
+                    }
+                });
+    }
 
 
     @Override
@@ -188,24 +205,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     public void onDestroy() {
         super.onDestroy();
         topStoriesPresenter.onDestroy();
-    }
-
-    private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories)
-                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-                    @Override
-                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        TopStories topStories = topStoriesAdapter.getArticle(position);
-
-                        topStoriesDetailsFragment = new TopStoriesDetailsFragment();
-
-                        saveGetUrlOnBundle();
-
-                        launchTopStoriesDetails();
-
-
-                    }
-                });
     }
 
 
