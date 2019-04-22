@@ -93,4 +93,5 @@ public class ItemClickSupport {
 
         boolean onItemLongClicked(RecyclerView recyclerView, int position, View v);
     }
+
 }

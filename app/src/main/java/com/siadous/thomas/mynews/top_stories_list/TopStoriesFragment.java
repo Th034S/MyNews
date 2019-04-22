@@ -2,13 +2,9 @@ package com.siadous.thomas.mynews.top_stories_list;
 
 
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,6 +43,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
     private TopStories topStories;
+    private TopStoriesDetailsFragment topStoriesDetailsFragment;
 
     public View result;
 
@@ -106,6 +103,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         tvEmptyView = result.findViewById(R.id.tv_empty_view);
 
         linearLayoutItem = result.findViewById(R.id.linear_layout_item);
+
     }
 
     /**
@@ -140,6 +138,25 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         });
 
     }
+
+
+    public void launchTopStoriesDetails() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.top_stories_detail_page, topStoriesDetailsFragment, "findThisFragment")
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void saveGetUrlOnBundle() {
+        Bundle args = new Bundle();
+        args.putString("key", topStories.getUrl());
+        topStoriesDetailsFragment.setArguments(args);
+        getFragmentManager().beginTransaction().replace(R.id.web_view_details, topStoriesDetailsFragment).addToBackStack("Some string").commit();
+        Log.d("TAG", "222222222222222");
+    }
+
+
+
 
 
     @Override
@@ -180,20 +197,13 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         TopStories topStories = topStoriesAdapter.getArticle(position);
 
-                        Log.e("TAG", "Position : "+position);
-                        Log.d("TAG", "11111111111111");
-                        TopStoriesDetailsFragment topStoriesDetailsFragment = new TopStoriesDetailsFragment();
-                        Bundle args = new Bundle();
-                        args.putString("key", topStories.getUrl());
-                        topStoriesDetailsFragment.setArguments(args);
-                        getFragmentManager().beginTransaction().replace(R.id.web_view_details, topStoriesDetailsFragment).addToBackStack("Some string").commit();
-                        Log.d("TAG", "222222222222222");
+                        topStoriesDetailsFragment = new TopStoriesDetailsFragment();
 
-                        TopStoriesDetailsFragment topStoriesDetailsFragment1= new TopStoriesDetailsFragment();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.web_view_details, topStoriesDetailsFragment, "findThisFragment")
-                                .addToBackStack(null)
-                                .commit();
+                        saveGetUrlOnBundle();
+
+                        launchTopStoriesDetails();
+
+
                     }
                 });
     }

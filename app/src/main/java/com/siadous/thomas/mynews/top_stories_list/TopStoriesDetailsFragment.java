@@ -37,8 +37,6 @@ public class TopStoriesDetailsFragment extends Fragment {
         webSettings.setJavaScriptEnabled(true);
         webView.loadUrl(data);
 
-
-
         // Inflate the layout for this fragment
         return view;
     }

@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -23,8 +24,10 @@ import com.bumptech.glide.request.target.Target;
 import com.siadous.thomas.mynews.Model.TopStories;
 import com.siadous.thomas.mynews.Model.TopStoriesListResponse;
 import com.siadous.thomas.mynews.R;
+import com.siadous.thomas.mynews.top_stories_list.TopStoriesDetailsFragment;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesFragment;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.MyViewHolder> {
@@ -32,20 +35,15 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     private TopStoriesFragment topStoriesFragment;
     private List<TopStories> topStoriesList;
     private TopStories topStories;
-    //private List<TopStories> originalTopStoriesList;
 
 
-    // Constructeur
+
     public TopStoriesAdapter(TopStoriesFragment topStoriesFragment, List<TopStories> topStoriesList) {
         this.topStoriesFragment = topStoriesFragment;
         this.topStoriesList = topStoriesList;
 
-       // this.originalTopStoriesList = topStoriesList;
     }
 
-    public interface Listener {
-        void onClickDeleteButton(int position);
-    }
 
 
     @NonNull
@@ -57,11 +55,12 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
         return new MyViewHolder(itemView);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         String category;
         topStories = topStoriesList.get(position);
-
 
         holder.fragmentItemTitle.setText(topStories.getTitle());
         if(!topStories.getSection().equals("") && !topStories.getSubsection().equals("")) {
@@ -94,6 +93,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
                     .into(holder.fragmentImageView);
         }
 
+
     }
 
 
@@ -116,7 +116,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     }
 
     public TopStories getArticle(int position){
-        return this.topStories.get(position);
+        return this.topStoriesList.get(position);
     }
 
     public void updateList( List<TopStories> topStoriesList) {
@@ -134,7 +134,6 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
 
 
 
-
         MyViewHolder(View itemView) {
             super(itemView);
 
@@ -143,6 +142,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
             fragmentCategory = itemView.findViewById(R.id.fragment_category);
             //pbLoadImage = itemView.findViewById(R.id.pb_load_image);
+
 
         }
         Context getContext() {
