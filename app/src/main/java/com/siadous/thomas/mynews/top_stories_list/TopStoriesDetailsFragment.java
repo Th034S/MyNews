@@ -35,7 +35,7 @@ public class TopStoriesDetailsFragment extends Fragment {
         webView = view.findViewById(R.id.web_view_details);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl(data);
+        webView.loadUrl("https://www.google.com/");
 
         // Inflate the layout for this fragment
         return view;

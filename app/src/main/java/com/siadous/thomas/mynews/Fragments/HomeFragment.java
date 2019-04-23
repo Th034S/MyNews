@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //3 - Handle actions on menu items
@@ -66,7 +67,7 @@ public class HomeFragment extends Fragment {
 
         ViewPager pager = view.findViewById(R.id.activity_main_viewpager);
 
-        pager.setAdapter(new PageAdapter(getActivity().getSupportFragmentManager()));
+        pager.setAdapter(new PageAdapter(getChildFragmentManager()));
 
         TabLayout tabs = view.findViewById(R.id.activity_main_tabs);
 

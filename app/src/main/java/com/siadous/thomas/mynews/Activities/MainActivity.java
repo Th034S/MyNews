@@ -1,15 +1,9 @@
 package com.siadous.thomas.mynews.Activities;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.siadous.thomas.mynews.Adapters.PageAdapter;
 import com.siadous.thomas.mynews.Fragments.HomeFragment;
 import com.siadous.thomas.mynews.R;
 

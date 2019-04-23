@@ -142,34 +142,33 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
 
 
-    public void launchTopStoriesDetails() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.top_stories_detail_page, topStoriesDetailsFragment)
-                .addToBackStack(null)
-                .commit();
-    }
+  /**  public void launchTopStoriesDetails() {
 
+    }
+   **/
+/**
     public void saveGetUrlOnBundle() {
-        Bundle args = new Bundle();
-        Log.d("TAG", "222222222222222");
-        args.putString("key", topStories.getUrl());
-        Log.d("TAG", "333333333333333");
-        topStoriesDetailsFragment.setArguments(args);
-        getFragmentManager().beginTransaction().replace(R.id.top_stories_detail_page, topStoriesDetailsFragment).addToBackStack("Some string").commit();
-
     }
+    **/
+
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        topStories = topStoriesAdapter.getArticle(position);
+                      //  topStories = topStoriesAdapter.getArticle(position);
 
                         topStoriesDetailsFragment = new TopStoriesDetailsFragment();
 
-                        saveGetUrlOnBundle();
+                        Bundle args = new Bundle();
+                        args.putString("key", topStoriesAdapter.getArticle(position).getUrl());
+                        topStoriesDetailsFragment.setArguments(args);
+                        //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.top_stories_detail_page, topStoriesDetailsFragment).addToBackStack("Some string").commit();
 
-                        launchTopStoriesDetails();
+                        getChildFragmentManager().beginTransaction()
+                                .replace(R.id.top_stories_detail_page, topStoriesDetailsFragment)
+                                .addToBackStack(null)
+                                .commit();
 
                     }
                 });
