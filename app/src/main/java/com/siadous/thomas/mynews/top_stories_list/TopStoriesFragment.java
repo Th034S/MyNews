@@ -142,33 +142,26 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
 
 
-  /**  public void launchTopStoriesDetails() {
-
-    }
-   **/
-/**
-    public void saveGetUrlOnBundle() {
-    }
-    **/
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories)
+        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories_details)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                       //  topStories = topStoriesAdapter.getArticle(position);
 
                         topStoriesDetailsFragment = new TopStoriesDetailsFragment();
-
+                        Log.d("TAG", "12871255");
                         Bundle args = new Bundle();
                         args.putString("key", topStoriesAdapter.getArticle(position).getUrl());
                         topStoriesDetailsFragment.setArguments(args);
                         //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.top_stories_detail_page, topStoriesDetailsFragment).addToBackStack("Some string").commit();
-
+                        Log.d("TAG", "6666666666666");
                         getChildFragmentManager().beginTransaction()
-                                .replace(R.id.top_stories_detail_page, topStoriesDetailsFragment)
+                                .replace(R.id.fragment_page_top_stories, topStoriesDetailsFragment)
                                 .addToBackStack(null)
                                 .commit();
+                        Log.d("TAG", "77777777777");
 
                     }
                 });

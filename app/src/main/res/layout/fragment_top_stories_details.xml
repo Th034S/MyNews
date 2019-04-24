@@ -4,18 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/top_stories_detail_page"
     tools:context=".Activities.MainActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/top_stories_detail_page">
+
 
     <WebView
         android:id="@+id/web_view_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    </FrameLayout>
+
 
 </LinearLayout>
 

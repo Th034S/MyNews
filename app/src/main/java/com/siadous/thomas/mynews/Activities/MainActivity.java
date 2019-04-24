@@ -3,7 +3,11 @@ package com.siadous.thomas.mynews.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.siadous.thomas.mynews.Fragments.HomeFragment;
 import com.siadous.thomas.mynews.R;
 
@@ -16,9 +20,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         this.configureAndShowMainFragment();
 
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
