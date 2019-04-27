@@ -1,6 +1,5 @@
 package com.siadous.thomas.mynews.Adapters;
 
-import android.app.MediaRouteButton;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -15,19 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.siadous.thomas.mynews.Model.TopStories;
-import com.siadous.thomas.mynews.Model.TopStoriesListResponse;
+import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesDetailsFragment;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesFragment;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.MyViewHolder> {

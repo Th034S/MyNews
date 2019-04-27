@@ -1,4 +1,4 @@
-package com.siadous.thomas.mynews.Model;
+package com.siadous.thomas.mynews.Model.TopStories;
 
 import com.google.gson.annotations.SerializedName;
 

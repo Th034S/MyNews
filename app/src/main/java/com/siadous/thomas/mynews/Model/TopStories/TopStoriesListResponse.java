@@ -1,8 +1,8 @@
-package com.siadous.thomas.mynews.Model;
+package com.siadous.thomas.mynews.Model.TopStories;
 
 import com.google.gson.annotations.SerializedName;
+import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TopStoriesListResponse {

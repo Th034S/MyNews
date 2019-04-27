@@ -2,7 +2,6 @@ package com.siadous.thomas.mynews.top_stories_list;
 
 
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -18,10 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.siadous.thomas.mynews.Activities.MainActivity;
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
-import com.siadous.thomas.mynews.Fragments.HomeFragment;
-import com.siadous.thomas.mynews.Model.TopStories;
+import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
 import com.siadous.thomas.mynews.Utils.ItemClickSupport;
@@ -157,10 +154,13 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                         topStoriesDetailsFragment.setArguments(args);
                         //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.top_stories_detail_page, topStoriesDetailsFragment).addToBackStack("Some string").commit();
                         Log.d("TAG", "6666666666666");
-                        getChildFragmentManager().beginTransaction()
+
+                        getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_page_top_stories, topStoriesDetailsFragment)
                                 .addToBackStack(null)
                                 .commit();
+
+
                         Log.d("TAG", "77777777777");
 
                     }

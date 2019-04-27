@@ -1,11 +1,9 @@
 package com.siadous.thomas.mynews.Utils;
 
-import com.siadous.thomas.mynews.Model.TopStories;
-import com.siadous.thomas.mynews.Model.TopStoriesListResponse;
+import com.siadous.thomas.mynews.Model.TopStories.TopStoriesListResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -13,3 +11,4 @@ public interface ApiInterface {
     Call<TopStoriesListResponse> getTopStories(@Query("api-key") String apiKey, @Query("page") int PageNo);
 
 }
+//   https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=JrCGkvBIqnBYpL6DjHPBpzLPZndGGBcQ

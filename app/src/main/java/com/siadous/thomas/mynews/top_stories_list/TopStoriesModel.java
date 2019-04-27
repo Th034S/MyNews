@@ -3,8 +3,8 @@ package com.siadous.thomas.mynews.top_stories_list;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.siadous.thomas.mynews.Model.TopStories;
-import com.siadous.thomas.mynews.Model.TopStoriesListResponse;
+import com.siadous.thomas.mynews.Model.TopStories.TopStories;
+import com.siadous.thomas.mynews.Model.TopStories.TopStoriesListResponse;
 import com.siadous.thomas.mynews.Utils.ApiClient;
 import com.siadous.thomas.mynews.Utils.ApiInterface;
 

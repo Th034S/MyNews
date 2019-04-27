@@ -1,13 +1,8 @@
-package com.siadous.thomas.mynews.Model;
+package com.siadous.thomas.mynews.Model.TopStories;
 
 import android.support.annotation.NonNull;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesDetailsFragment;
-
-import java.util.ArrayList;
 
 public class TopStories {
 
