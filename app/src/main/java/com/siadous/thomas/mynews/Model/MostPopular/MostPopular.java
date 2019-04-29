@@ -1,43 +1,63 @@
 package com.siadous.thomas.mynews.Model.MostPopular;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MostPopular {
 
+    @SerializedName("per_facet")
     private String per_facet;
 
+    @SerializedName("org_facet")
     private String[] org_facet;
 
     //private null column;
 
+    @SerializedName("section")
     private String section;
 
+    @SerializedName("abstracts")
     private String abstracts;
 
+    @SerializedName("source")
     private String source;
 
+    @SerializedName("asset_id")
     private String asset_id;
 
+    @SerializedName("media")
     private Media[] media;
 
+    @SerializedName("type")
     private String type;
 
+    @SerializedName("title")
     private String title;
 
+    @SerializedName("des_facet")
     private String[] des_facet;
 
+    @SerializedName("uri")
     private String uri;
 
+    @SerializedName("url")
     private String url;
 
+    @SerializedName("adx_keywords")
     private String adx_keywords;
 
+    @SerializedName("geo_facet")
     private String geo_facet;
 
+    @SerializedName("id")
     private String id;
 
+    @SerializedName("byline")
     private String byline;
 
+    @SerializedName("published_date")
     private String published_date;
 
+    @SerializedName("views")
     private String views;
 
     public String getPer_facet ()

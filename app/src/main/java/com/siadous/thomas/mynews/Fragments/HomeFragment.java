@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -66,6 +67,7 @@ public class HomeFragment extends Fragment {
 
     }
 
+
     private void configureViewPager(){
 
         ViewPager pager = view.findViewById(R.id.activity_main_viewpager);
@@ -78,4 +80,6 @@ public class HomeFragment extends Fragment {
 
         tabs.setTabMode(TabLayout.MODE_FIXED);
     }
+
+
 }

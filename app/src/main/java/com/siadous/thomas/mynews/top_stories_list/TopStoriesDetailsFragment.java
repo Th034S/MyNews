@@ -42,6 +42,7 @@ public class TopStoriesDetailsFragment extends Fragment {
         webView.loadUrl(data);
 
 
+
         // Inflate the layout for this fragment
         return view;
     }

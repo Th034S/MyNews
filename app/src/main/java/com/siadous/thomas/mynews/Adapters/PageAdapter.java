@@ -3,10 +3,9 @@ package com.siadous.thomas.mynews.Adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.siadous.thomas.mynews.Fragments.BusinessFragment;
-import com.siadous.thomas.mynews.Fragments.MostPopularFragment;
+import com.siadous.thomas.mynews.most_popular_list.MostPopularFragment;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {

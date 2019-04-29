@@ -1,4 +1,4 @@
-package com.siadous.thomas.mynews.top_stories_list;
+package com.siadous.thomas.mynews.Utils;
 
 public interface ShowEmptyView {
     void showEmptyView();

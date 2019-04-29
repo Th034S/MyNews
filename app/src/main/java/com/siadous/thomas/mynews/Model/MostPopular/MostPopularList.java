@@ -1,14 +1,23 @@
 package com.siadous.thomas.mynews.Model.MostPopular;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class MostPopularList {
 
+    @SerializedName("copyright")
     private String copyright;
 
-    private MostPopular[] mostPopular;
+    @SerializedName("results")
+    private List<MostPopular> results;
 
+    @SerializedName("num_results")
     private String num_results;
 
+    @SerializedName("status")
     private String status;
+
 
     public String getCopyright ()
     {
@@ -20,14 +29,14 @@ public class MostPopularList {
         this.copyright = copyright;
     }
 
-    public MostPopular[] getResults ()
+    public List<MostPopular> getResults ()
     {
-        return mostPopular;
+        return results;
     }
 
-    public void setResults (MostPopular[] results)
+    public void setResults (List<MostPopular> results)
     {
-        this.mostPopular = results;
+        this.results = results;
     }
 
     public String getNum_results ()
@@ -53,6 +62,6 @@ public class MostPopularList {
     @Override
     public String toString()
     {
-        return "ClassPojo [copyright = "+copyright+", results = "+mostPopular+", num_results = "+num_results+", status = "+status+"]";
+        return "ClassPojo [copyright = "+copyright+", results = "+results+", num_results = "+num_results+", status = "+status+"]";
     }
 }

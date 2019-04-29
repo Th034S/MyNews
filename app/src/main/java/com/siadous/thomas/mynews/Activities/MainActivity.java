@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     private void configureAndShowMainFragment(){
         // A - Get FragmentManager (Support) and Try to find existing instance of fragment in FrameLayout container
         homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_main);

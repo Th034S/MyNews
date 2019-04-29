@@ -1,5 +1,4 @@
-package com.siadous.thomas.mynews.top_stories_list;
-
+package com.siadous.thomas.mynews.most_popular_list;
 
 
 import android.os.Bundle;
@@ -17,13 +16,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.siadous.thomas.mynews.Adapters.MostPopularAdapter;
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
+import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
 import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
 import com.siadous.thomas.mynews.Utils.ItemClickSupport;
 import com.siadous.thomas.mynews.Utils.ShowEmptyView;
-
+import com.siadous.thomas.mynews.top_stories_list.TopStoriesContract;
+import com.siadous.thomas.mynews.top_stories_list.TopStoriesDetailsFragment;
+import com.siadous.thomas.mynews.top_stories_list.TopStoriesPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,18 +36,19 @@ import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopStoriesFragment extends Fragment implements TopStoriesContract.View, ShowEmptyView {
+public class MostPopularFragment extends Fragment implements MostPopularContract.View, ShowEmptyView {
+
 
     private static final String TAG = "TopStoriesFragment";
-    private TopStoriesPresenter topStoriesPresenter;
-    private RecyclerView rvTopStoriesList;
-    private List<TopStories> topStoriesList;
-    private TopStoriesAdapter topStoriesAdapter;
+    private MostPopularPresenter mostPopularPresenter;
+    private RecyclerView rvMostPopularList;
+    private List<MostPopular> mostPopularList;
+    private MostPopularAdapter mostPopularAdapter;  // A VOIR
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private TopStories topStories;
-    private TopStoriesDetailsFragment topStoriesDetailsFragment;
+    private MostPopular mostPopular;
+   // private TopStoriesDetailsFragment topStoriesDetailsFragment;
 
     public View result;
 
@@ -57,9 +61,8 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     int firstVisibleItem, visibleItemCount, totalItemCount;
     private GridLayoutManager mLayoutManager;
 
-
-    public static TopStoriesFragment newInstance() {
-        return(new TopStoriesFragment());
+    public static MostPopularFragment newInstance() {
+        return(new MostPopularFragment());
     }
 
 
@@ -67,37 +70,36 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        result = inflater.inflate(R.layout.fragment_top_stories, container, false);
+        result = inflater.inflate(R.layout.fragment_most_popular, container, false);
 
-        // Référencer les éléments graphique + créer une list de Movie
         initUI();
 
         setListeners();
 
+        Log.d(TAG, MostPopularFragment.TAG);
         // Initialiser le Presenter
-        topStoriesPresenter = new TopStoriesPresenter(this);
+        mostPopularPresenter = new MostPopularPresenter(this);
         // Obtenir les données de la page 1
-        topStoriesPresenter.requestDataFromServer();
+        mostPopularPresenter.requestDataFromServer();
 
-        this.configureOnClickRecyclerView();
-
+      //  this.configureOnClickRecyclerView();
         // Inflate the layout for this fragment
-        return result;
+        return result ;
     }
 
 
     private void initUI() {
 
-        rvTopStoriesList = result.findViewById(R.id.rv_top_stories_list);
+        rvMostPopularList = result.findViewById(R.id.rv_most_popular_list);
 
-        topStoriesList = new ArrayList<>();
-        topStoriesAdapter = new TopStoriesAdapter(this, topStoriesList);
+        mostPopularList = new ArrayList<>();
+        mostPopularAdapter = new MostPopularAdapter(this, mostPopularList);
 
         mLayoutManager = new GridLayoutManager(this.getContext(),1);
-        rvTopStoriesList.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(this.getContext(), 10), true));
-        rvTopStoriesList.setItemAnimator(new DefaultItemAnimator());
-        rvTopStoriesList.setAdapter(topStoriesAdapter);
-        rvTopStoriesList.setLayoutManager(mLayoutManager);
+        rvMostPopularList.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(this.getContext(), 10), true));
+        rvMostPopularList.setItemAnimator(new DefaultItemAnimator());
+        rvMostPopularList.setAdapter(mostPopularAdapter);
+        rvMostPopularList.setLayoutManager(mLayoutManager);
 
         pbLoading = result.findViewById(R.id.pb_loading);
 
@@ -112,13 +114,13 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
      */
     private void setListeners() {
 
-        rvTopStoriesList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvMostPopularList.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                visibleItemCount = rvTopStoriesList.getChildCount();
+                visibleItemCount = rvMostPopularList.getChildCount();
                 totalItemCount = mLayoutManager.getItemCount();
                 firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
 
@@ -131,7 +133,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                 }
                 if (!loading && (totalItemCount - visibleItemCount)
                         <= (firstVisibleItem + visibleThreshold)) {
-                    topStoriesPresenter.getMoreData(pageNo);
+                    mostPopularPresenter.getMoreData(pageNo);
                     loading = true;
                 }
             }
@@ -140,13 +142,13 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
 
 
-
+/**
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories_details)
+        ItemClickSupport.addTo(rvMostPopularList, R.layout.fragment_top_stories_details)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                      //  topStories = topStoriesAdapter.getArticle(position);
+                        //  topStories = topStoriesAdapter.getArticle(position);
 
                         topStoriesDetailsFragment = new TopStoriesDetailsFragment();
                         Log.d("TAG", "12871255");
@@ -167,7 +169,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                     }
                 });
     }
-
+**/
 
     @Override
     public void showProgress() {
@@ -180,9 +182,9 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     }
 
     @Override
-    public void setDataToRecyclerView(List<TopStories> topStoriesArrayList) {
-        topStoriesAdapter.updateList(topStoriesArrayList);
-        topStoriesAdapter.notifyDataSetChanged();
+    public void setDataToRecyclerView(List<MostPopular> mostPopularArrayList) {
+        mostPopularAdapter.updateList(mostPopularArrayList);
+        mostPopularAdapter.notifyDataSetChanged();
 
         // This will help us to fetch data from next page no.
         pageNo++;
@@ -197,7 +199,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     @Override
     public void onDestroy() {
         super.onDestroy();
-        topStoriesPresenter.onDestroy();
+        mostPopularPresenter.onDestroy();
     }
 
 
@@ -205,14 +207,15 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     @Override
     public void showEmptyView() {
 
-        rvTopStoriesList.setVisibility(View.GONE);
+        rvMostPopularList.setVisibility(View.GONE);
         tvEmptyView.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void hideEmptyView() {
-        rvTopStoriesList.setVisibility(View.VISIBLE);
+        rvMostPopularList.setVisibility(View.VISIBLE);
         tvEmptyView.setVisibility(View.GONE);
     }
+
 }
