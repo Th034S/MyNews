@@ -38,9 +38,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
     public MostPopularAdapter(MostPopularFragment mostPopularFragment, List<MostPopular> mostPopularList) {
         this.mostPopularFragment = mostPopularFragment;
         this.mostPopularList = mostPopularList;
-
     }
-
 
 
     @NonNull
@@ -72,7 +70,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
         if (mostPopular.getMedia().length >= 1) {
             // loading album cover using Glide library
             Glide.with(holder.getContext())
-                    .load(mostPopular.getMedia()[mostPopular.getMedia().length - 1].getMediaMetadata())  // PEUT ETRE UNE ERREUR
+                    .load(mostPopular.getMedia()[mostPopular.getMedia().length - 1].getMediaMetadata()[0].getUrl())  // PEUT ETRE UNE ERREUR
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

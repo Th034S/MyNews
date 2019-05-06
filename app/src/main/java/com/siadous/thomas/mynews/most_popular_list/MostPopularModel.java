@@ -30,19 +30,20 @@ public class MostPopularModel implements MostPopularContract.Model {
      */
     @Override
     public void getMostPopularList(final MostPopularContract.Model.OnFinishedListener onFinishedListener, int pageNo) {
-
+        Log.d("mostPop", "ghsrthbsertb");
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
         Call<MostPopularList> call = apiService.getMostPopular(API_KEY, pageNo);
+        Log.d("mostPop", "ghsrthbsertb");
         call.enqueue(new Callback<MostPopularList>() {
-
             @Override
             public void onResponse(@NonNull Call<MostPopularList> call, @NonNull Response<MostPopularList> response) {
                 try {
                     assert response.body() != null;
+                    Log.d("mostPop", "ufghfheruhjufffeh");
                     List<MostPopular> mostPopulars = response.body().getResults();
-                    Log.d(TAG, "Number of articles received: " + mostPopulars.size());
+                    Log.d("mostPop", "Number of articles received: " + mostPopulars.size());
                     onFinishedListener.onFinished(mostPopulars);
                 } catch (NullPointerException e) {
                     Log.d("TAG", String.valueOf(e));

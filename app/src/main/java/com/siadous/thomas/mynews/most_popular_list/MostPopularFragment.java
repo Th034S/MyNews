@@ -48,7 +48,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
     private MostPopular mostPopular;
-   // private TopStoriesDetailsFragment topStoriesDetailsFragment;
+    private MostPopularDetailFragment mostPopularDetailFragment;
 
     public View result;
 
@@ -76,13 +76,15 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
 
         setListeners();
 
-        Log.d(TAG, MostPopularFragment.TAG);
+        Log.d("mostPopular", "aaaaaaaaaaaaa");
         // Initialiser le Presenter
         mostPopularPresenter = new MostPopularPresenter(this);
+
+        Log.d("mostPopular", "bbbbbbbbbbbbb");
         // Obtenir les données de la page 1
         mostPopularPresenter.requestDataFromServer();
-
-      //  this.configureOnClickRecyclerView();
+        Log.d("mostPopular", "ccccccccccccc");
+        this.configureOnClickRecyclerView();
         // Inflate the layout for this fragment
         return result ;
     }
@@ -108,6 +110,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
         linearLayoutItem = result.findViewById(R.id.linear_layout_item);
 
     }
+
 
     /**
      * This function will contain listeners for all views.
@@ -142,34 +145,31 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
 
 
 
-/**
+
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvMostPopularList, R.layout.fragment_top_stories_details)
+        ItemClickSupport.addTo(rvMostPopularList, R.layout.fragment_most_popular_detail)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         //  topStories = topStoriesAdapter.getArticle(position);
 
-                        topStoriesDetailsFragment = new TopStoriesDetailsFragment();
+                        mostPopularDetailFragment = new MostPopularDetailFragment();
                         Log.d("TAG", "12871255");
                         Bundle args = new Bundle();
-                        args.putString("key", topStoriesAdapter.getArticle(position).getUrl());
-                        topStoriesDetailsFragment.setArguments(args);
-                        //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.top_stories_detail_page, topStoriesDetailsFragment).addToBackStack("Some string").commit();
+                        args.putString("key", mostPopularAdapter.getArticle(position).getUrl());
+                        mostPopularDetailFragment.setArguments(args);
                         Log.d("TAG", "6666666666666");
 
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_page_top_stories, topStoriesDetailsFragment)
+                                .replace(R.id.fragment_page_most_popular, mostPopularDetailFragment)
                                 .addToBackStack(null)
                                 .commit();
 
 
-                        Log.d("TAG", "77777777777");
-
                     }
                 });
     }
-**/
+
 
     @Override
     public void showProgress() {

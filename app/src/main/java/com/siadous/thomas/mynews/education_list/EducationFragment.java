@@ -1,4 +1,4 @@
-package com.siadous.thomas.mynews.Fragments;
+package com.siadous.thomas.mynews.education_list;
 
 
 import android.os.Bundle;
@@ -13,11 +13,11 @@ import com.siadous.thomas.mynews.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BusinessFragment extends Fragment {
+public class EducationFragment extends Fragment {
 
 
-    public static BusinessFragment newInstance() {
-        return(new BusinessFragment());
+    public static EducationFragment newInstance() {
+        return(new EducationFragment());
     }
 
 

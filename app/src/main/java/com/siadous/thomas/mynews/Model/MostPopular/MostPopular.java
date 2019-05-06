@@ -4,13 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class MostPopular {
 
-    @SerializedName("per_facet")
-    private String per_facet;
-
-    @SerializedName("org_facet")
-    private String[] org_facet;
-
-    //private null column;
 
     @SerializedName("section")
     private String section;
@@ -33,9 +26,6 @@ public class MostPopular {
     @SerializedName("title")
     private String title;
 
-    @SerializedName("des_facet")
-    private String[] des_facet;
-
     @SerializedName("uri")
     private String uri;
 
@@ -44,9 +34,6 @@ public class MostPopular {
 
     @SerializedName("adx_keywords")
     private String adx_keywords;
-
-    @SerializedName("geo_facet")
-    private String geo_facet;
 
     @SerializedName("id")
     private String id;
@@ -60,36 +47,7 @@ public class MostPopular {
     @SerializedName("views")
     private String views;
 
-    public String getPer_facet ()
-    {
-        return per_facet;
-    }
 
-    public void setPer_facet (String per_facet)
-    {
-        this.per_facet = per_facet;
-    }
-
-    public String[] getOrg_facet ()
-    {
-        return org_facet;
-    }
-
-    public void setOrg_facet (String[] org_facet)
-    {
-        this.org_facet = org_facet;
-    }
-/**
-    public null getColumn ()
-    {
-        return column;
-    }
-
-    public void setColumn (null column)
-    {
-        this.column = column;
-    }
-**/
     public String getSection ()
     {
         return section;
@@ -160,16 +118,6 @@ public class MostPopular {
         this.title = title;
     }
 
-    public String[] getDes_facet ()
-    {
-        return des_facet;
-    }
-
-    public void setDes_facet (String[] des_facet)
-    {
-        this.des_facet = des_facet;
-    }
-
     public String getUri ()
     {
         return uri;
@@ -200,15 +148,6 @@ public class MostPopular {
         this.adx_keywords = adx_keywords;
     }
 
-    public String getGeo_facet ()
-    {
-        return geo_facet;
-    }
-
-    public void setGeo_facet (String geo_facet)
-    {
-        this.geo_facet = geo_facet;
-    }
 
     public String getId ()
     {
@@ -253,6 +192,6 @@ public class MostPopular {
     @Override
     public String toString()
     {
-        return "ClassPojo [per_facet = "+per_facet+", org_facet = "+org_facet+/**", column = "+column+**/", section = "+section+", abstract = "+abstracts+", source = "+source+", asset_id = "+asset_id+", media = "+media+", type = "+type+", title = "+title+", des_facet = "+des_facet+", uri = "+uri+", url = "+url+", adx_keywords = "+adx_keywords+", geo_facet = "+geo_facet+", id = "+id+", byline = "+byline+", published_date = "+published_date+", views = "+views+"]";
+        return "ClassPojo [section = "+section+", abstract = "+abstracts+", source = "+source+", asset_id = "+asset_id+", media = "+media+", type = "+type+", title = "+title+", uri = "+uri+", url = "+url+", adx_keywords = "+adx_keywords+", geo_facet = "+", id = "+id+", byline = "+byline+", published_date = "+published_date+", views = "+views+"]";
     }
 }

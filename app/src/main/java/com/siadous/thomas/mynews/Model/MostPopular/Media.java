@@ -1,9 +1,12 @@
 package com.siadous.thomas.mynews.Model.MostPopular;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Media {
 
     private String copyright;
 
+    @SerializedName("media-metadata")
     private MediaMetadata[] mediaMetadata;
 
     private String subtype;
