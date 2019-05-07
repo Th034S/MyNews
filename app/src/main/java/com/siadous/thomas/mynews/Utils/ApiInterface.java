@@ -15,7 +15,7 @@ public interface ApiInterface {
     @GET("svc/mostpopular/v2/viewed/1.json")
     Call<MostPopularList> getMostPopular(@Query("api-key") String apiKey, @Query("page") int PageNo);
 
-    @GET("svc/search/v2/articlesearch.json?q=education&")
+    @GET("svc/search/v2/articlesearch.jsonq=education&")
     Call<EducationResponse> getEducation(@Query("api-key") String apiKey, @Query("page") int PageNo);
-
+ //   svc/search/v2/articlesearch.json?q=education&
 }

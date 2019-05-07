@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews.Model.Education;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Multimedia {
@@ -20,6 +21,7 @@ public class Multimedia {
     private String type;
 
     @SerializedName("url")
+    @Expose
     private String url;
 
     private String height;

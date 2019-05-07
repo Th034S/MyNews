@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.siadous.thomas.mynews.Fragments.BusinessFragment;
+import com.siadous.thomas.mynews.education_list.EducationFragment;
 import com.siadous.thomas.mynews.most_popular_list.MostPopularFragment;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesFragment;
 
@@ -22,7 +22,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return MostPopularFragment.newInstance();
             case 2:
-                return BusinessFragment.newInstance();
+                return EducationFragment.newInstance();
             default:
                 return null;
         }
@@ -42,7 +42,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Most Popular";
             case 2:
-                return "Business";
+                return "Education";
             default:
                 return null;
         }

@@ -1,25 +1,47 @@
 package com.siadous.thomas.mynews.Model.Education;
 
-public class Education {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Education {
+    @SerializedName("snippet")
+    @Expose
     private String snippet;
 
+    @SerializedName("print_page")
+    @Expose
     private String print_page;
 
+    @SerializedName("section_name")
+    @Expose
     private String section_name;
 
+    @SerializedName("abstracts")
+    @Expose
     private String abstracts;
 
+    @SerializedName("source")
+    @Expose
     private String source;
 
+    @SerializedName("blog")
+    @Expose
     private String blog;
 
+    @SerializedName("uri")
+    @Expose
     private String uri;
 
+    @SerializedName("news_desk")
+    @Expose
     private String news_desk;
 
+    @SerializedName("pub_date")
+    @Expose
     private String pub_date;
 
+    @SerializedName("multimedia")
+    @Expose
     private Multimedia[] multimedia;
 
     private String word_count;
@@ -32,6 +54,8 @@ public class Education {
 
     private String _id;
 
+    @SerializedName("subsection_name")
+    @Expose
     private String subsection_name;
 
 
