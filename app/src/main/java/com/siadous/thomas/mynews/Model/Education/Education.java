@@ -44,22 +44,51 @@ public class Education {
     @Expose
     private Multimedia[] multimedia;
 
+    @SerializedName("word_count")
     private String word_count;
 
+    @SerializedName("lead_paragraph")
     private String lead_paragraph;
 
+    @SerializedName("type_of_material")
     private String type_of_material;
 
+    @SerializedName("web_url")
     private String web_url;
 
-    private String _id;
+    @SerializedName("id")
+    private String id;
 
     @SerializedName("subsection_name")
     @Expose
     private String subsection_name;
 
-
+    @SerializedName("document_type")
+    @Expose
     private String document_type;
+
+    public Education() {
+    }
+
+    public Education(String snippet, String print_page, String section_name, String abstracts, String source, String blog, String uri, String news_desk, String pub_date, Multimedia[] multimedia, String word_count, String lead_paragraph, String type_of_material, String web_url, String id, String subsection_name, String document_type) {
+        this.snippet = snippet;
+        this.print_page = print_page;
+        this.section_name = section_name;
+        this.abstracts = abstracts;
+        this.source = source;
+        this.blog = blog;
+        this.uri = uri;
+        this.news_desk = news_desk;
+        this.pub_date = pub_date;
+        this.multimedia = multimedia;
+        this.word_count = word_count;
+        this.lead_paragraph = lead_paragraph;
+        this.type_of_material = type_of_material;
+        this.web_url = web_url;
+        this.id = id;
+        this.subsection_name = subsection_name;
+        this.document_type = document_type;
+    }
 
     public String getSnippet ()
     {
@@ -202,14 +231,14 @@ public class Education {
         this.web_url = web_url;
     }
 
-    public String get_id ()
+    public String getid ()
     {
-        return _id;
+        return id;
     }
 
-    public void set_id (String _id)
+    public void setid (String _id)
     {
-        this._id = _id;
+        this.id = id;
     }
 
     public String getSubsection_name ()
@@ -236,6 +265,6 @@ public class Education {
     @Override
     public String toString()
     {
-        return "ClassPojo [snippet = "+snippet+", print_page = "+print_page+", section_name = "+section_name+", abstracts = "+abstracts+", source = "+source+", blog = "+blog+", uri = "+uri+", news_desk = "+news_desk+", pub_date = "+pub_date+", multimedia = "+multimedia+", word_count = "+word_count+", lead_paragraph = "+lead_paragraph+", type_of_material = "+type_of_material+", web_url = "+web_url+", _id = "+_id+", subsection_name = "+subsection_name+", document_type = "+document_type+"]";
+        return "ClassPojo [snippet = "+snippet+", print_page = "+print_page+", section_name = "+section_name+", abstracts = "+abstracts+", source = "+source+", blog = "+blog+", uri = "+uri+", news_desk = "+news_desk+", pub_date = "+pub_date+", multimedia = "+multimedia+", word_count = "+word_count+", lead_paragraph = "+lead_paragraph+", type_of_material = "+type_of_material+", web_url = "+web_url+", id = "+id+", subsection_name = "+subsection_name+", document_type = "+document_type+"]";
     }
 }

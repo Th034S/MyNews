@@ -8,6 +8,7 @@ import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.Utils.ApiClient;
 import com.siadous.thomas.mynews.Utils.ApiInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,16 +39,18 @@ public class EducationModel implements EducationContract.Model {
         call.enqueue(new Callback<EducationResponse>() {
             @Override
             public void onResponse(@NonNull Call<EducationResponse> call, @NonNull Response<EducationResponse> response) {
-                try {
-                    assert response.body() != null;
 
+                if (response.body() != null) {
+                    try {
                         Log.d(TAG, "getEducationList");
-                        List<Education> educations = response.body().getDocs();
-                        Log.d(TAG, "Number of articles received: " + educations.size());
+                        List<Education> educations = new ArrayList<Education>();
+                        educations = response.body().getDocs(); // Erreur probable
+                        Log.d(TAG, "Number of articles received: "  + educations.size());
                         onFinishedListener.onFinished(educations);
-                    } catch(NullPointerException e){
+                    } catch(NullPointerException e) {
                         Log.d(TAG, String.valueOf(e));
                     }
+                }
 
             }
 

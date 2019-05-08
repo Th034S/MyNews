@@ -3,13 +3,14 @@ package com.siadous.thomas.mynews.Model.Education;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EducationResponse {
 
     @SerializedName("docs")
     @Expose
-    private List<Education> docs = null;
+    private List<Education> docs = new ArrayList<Education>();
 
 
     public List<Education> getDocs ()
