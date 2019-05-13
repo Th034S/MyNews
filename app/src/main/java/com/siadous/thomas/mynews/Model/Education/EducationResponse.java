@@ -8,19 +8,19 @@ import java.util.List;
 
 public class EducationResponse {
 
-    @SerializedName("docs")
+    @SerializedName("educations")
     @Expose
-    private List<Education> docs = new ArrayList<Education>();
+    private ArrayList<Education> educations;
 
 
-    public List<Education> getDocs ()
+    public ArrayList<Education> getEducations ()
     {
-        return docs;
+        return educations;
     }
 
-    public void setDocs (List<Education> docs)
+    public void setDocs (ArrayList<Education> educations)
     {
-        this.docs = docs;
+        this.educations = educations;
     }
 
 

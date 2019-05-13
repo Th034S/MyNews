@@ -43,8 +43,8 @@ public class EducationModel implements EducationContract.Model {
                 if (response.body() != null) {
                     try {
                         Log.d(TAG, "getEducationList");
-                        List<Education> educations = new ArrayList<Education>();
-                        educations = response.body().getDocs(); // Erreur probable
+                        ArrayList<Education> educations = new ArrayList<Education>();
+                        educations = response.body().getEducations(); // Erreur probable
                         Log.d(TAG, "Number of articles received: "  + educations.size());
                         onFinishedListener.onFinished(educations);
                     } catch(NullPointerException e) {

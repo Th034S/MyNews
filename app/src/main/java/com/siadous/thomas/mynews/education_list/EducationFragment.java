@@ -179,7 +179,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
     }
 
     @Override
-    public void setDataToRecyclerView(List<Education>educationArrayList) {
+    public void setDataToRecyclerView(List<Education> educationArrayList) {
         educationAdapter.updateList(educationArrayList);
         educationAdapter.notifyDataSetChanged();
 

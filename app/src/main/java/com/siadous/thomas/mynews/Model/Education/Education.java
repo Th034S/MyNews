@@ -67,28 +67,6 @@ public class Education {
     @Expose
     private String document_type;
 
-    public Education() {
-    }
-
-    public Education(String snippet, String print_page, String section_name, String abstracts, String source, String blog, String uri, String news_desk, String pub_date, Multimedia[] multimedia, String word_count, String lead_paragraph, String type_of_material, String web_url, String id, String subsection_name, String document_type) {
-        this.snippet = snippet;
-        this.print_page = print_page;
-        this.section_name = section_name;
-        this.abstracts = abstracts;
-        this.source = source;
-        this.blog = blog;
-        this.uri = uri;
-        this.news_desk = news_desk;
-        this.pub_date = pub_date;
-        this.multimedia = multimedia;
-        this.word_count = word_count;
-        this.lead_paragraph = lead_paragraph;
-        this.type_of_material = type_of_material;
-        this.web_url = web_url;
-        this.id = id;
-        this.subsection_name = subsection_name;
-        this.document_type = document_type;
-    }
 
     public String getSnippet ()
     {
