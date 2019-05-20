@@ -2,8 +2,8 @@ package com.siadous.thomas.mynews.education_list;
 
 import android.util.Log;
 
-import com.siadous.thomas.mynews.Model.Education.Education;
 
+import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class EducationPresenter implements EducationContract.Presenter, Educatio
     }
 
     @Override
-    public void onFinished(List<Education> educationList) {
+    public void onFinished(List<EducationResponse> educationList) {
         educationListView.setDataToRecyclerView(educationList);
         if (educationListView != null) {
             educationListView.hideProgress();

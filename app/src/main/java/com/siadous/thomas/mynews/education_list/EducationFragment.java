@@ -17,8 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.siadous.thomas.mynews.Adapters.EducationAdapter;
-import com.siadous.thomas.mynews.Model.Education.Education;
 
+
+import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
 
@@ -39,12 +40,12 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
     private static final String TAG = "EducationFragment";
     private EducationPresenter educationPresenter;
     private RecyclerView rvEducationList;
-    private List<Education> educationList;
+    private List<EducationResponse> educationList;
     private EducationAdapter educationAdapter;  // A VOIR
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private Education education;
+    private EducationResponse education;
   //  private MostPopularDetailFragment mostPopularDetailFragment;
 
     public View result;
@@ -179,7 +180,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
     }
 
     @Override
-    public void setDataToRecyclerView(List<Education> educationArrayList) {
+    public void setDataToRecyclerView(List<EducationResponse> educationArrayList) {
         educationAdapter.updateList(educationArrayList);
         educationAdapter.notifyDataSetChanged();
 

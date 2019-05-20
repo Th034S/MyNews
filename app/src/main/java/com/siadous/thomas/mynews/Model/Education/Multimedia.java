@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Multimedia {
 
-
     private String subtype;
 
     private String crop_name;
@@ -14,9 +13,7 @@ public class Multimedia {
 
     private String rank;
 
-
     private String subType;
-
 
     private String type;
 

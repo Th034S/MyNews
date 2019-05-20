@@ -19,23 +19,22 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.siadous.thomas.mynews.Model.Education.Education;
-import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
+
+import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.education_list.EducationFragment;
-import com.siadous.thomas.mynews.most_popular_list.MostPopularFragment;
 
 import java.util.List;
 
 public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyViewHolder>{
 
     private EducationFragment educationFragment;
-    private List<Education> educationList;
-    private Education education;
+    private List<EducationResponse> educationList;
+    private EducationResponse education;
 
 
 
-    public EducationAdapter(EducationFragment educationFragment, List<Education> educationList) {
+    public EducationAdapter(EducationFragment educationFragment, List<EducationResponse> educationList) {
         this.educationFragment = educationFragment;
         this.educationList = educationList;
     }
@@ -110,11 +109,11 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
         return date;
     }
 
-    public Education getArticle(int position){
+    public EducationResponse getArticle(int position){
         return this.educationList.get(position);
     }
 
-    public void updateList( List<Education> educationList ) {
+    public void updateList( List<EducationResponse> educationList ) {
         this.educationList = educationList;
     }
 

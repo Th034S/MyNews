@@ -1,8 +1,7 @@
 package com.siadous.thomas.mynews.education_list;
 
 
-import com.siadous.thomas.mynews.Model.Education.Education;
-
+import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface EducationContract {
 
         interface OnFinishedListener {
 
-            void onFinished(List<Education> educationList);
+            void onFinished(List<EducationResponse> educationList);
 
             void onFailure(Throwable t);
         }
@@ -27,7 +26,7 @@ public interface EducationContract {
 
         void hideProgress();
 
-        void setDataToRecyclerView(List<Education> educationList);
+        void setDataToRecyclerView(List<EducationResponse> educationList);
 
         void onResponseFailure(Throwable throwable);
 

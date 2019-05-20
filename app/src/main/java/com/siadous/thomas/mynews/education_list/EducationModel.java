@@ -8,7 +8,6 @@ import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.Utils.ApiClient;
 import com.siadous.thomas.mynews.Utils.ApiInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,17 +33,16 @@ public class EducationModel implements EducationContract.Model {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        Call<EducationResponse> call = apiService.getEducation(API_KEY, pageNo);
+        Call<Education> call = apiService.getEducation(API_KEY, pageNo);
 
-        call.enqueue(new Callback<EducationResponse>() {
+        call.enqueue(new Callback<Education>() {
             @Override
-            public void onResponse(@NonNull Call<EducationResponse> call, @NonNull Response<EducationResponse> response) {
+            public void onResponse(@NonNull Call<Education> call, @NonNull Response<Education> response) {
 
                 if (response.body() != null) {
                     try {
                         Log.d(TAG, "getEducationList");
-                        ArrayList<Education> educations = new ArrayList<Education>();
-                        educations = response.body().getEducations(); // Erreur probable
+                        List<EducationResponse> educations = response.body().getResponse(); // Erreur probable
                         Log.d(TAG, "Number of articles received: "  + educations.size());
                         onFinishedListener.onFinished(educations);
                     } catch(NullPointerException e) {
@@ -55,7 +53,7 @@ public class EducationModel implements EducationContract.Model {
             }
 
             @Override
-            public void onFailure(@NonNull Call<EducationResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Education> call, @NonNull Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
                 onFinishedListener.onFailure(t);
