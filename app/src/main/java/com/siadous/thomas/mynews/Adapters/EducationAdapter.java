@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
+import com.siadous.thomas.mynews.Model.Education.Docs;
 import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.education_list.EducationFragment;
@@ -29,12 +30,12 @@ import java.util.List;
 public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyViewHolder>{
 
     private EducationFragment educationFragment;
-    private List<EducationResponse> educationList;
-    private EducationResponse education;
+    private List<Docs> educationList;
+    private Docs education;
 
 
 
-    public EducationAdapter(EducationFragment educationFragment, List<EducationResponse> educationList) {
+    public EducationAdapter(EducationFragment educationFragment, List<Docs> educationList) {
         this.educationFragment = educationFragment;
         this.educationList = educationList;
     }
@@ -109,11 +110,11 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
         return date;
     }
 
-    public EducationResponse getArticle(int position){
+    public Docs getArticle(int position){
         return this.educationList.get(position);
     }
 
-    public void updateList( List<EducationResponse> educationList ) {
+    public void updateList( List<Docs> educationList ) {
         this.educationList = educationList;
     }
 

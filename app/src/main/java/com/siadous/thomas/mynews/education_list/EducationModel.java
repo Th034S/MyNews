@@ -3,6 +3,7 @@ package com.siadous.thomas.mynews.education_list;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.siadous.thomas.mynews.Model.Education.Docs;
 import com.siadous.thomas.mynews.Model.Education.Education;
 import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.Utils.ApiClient;
@@ -42,7 +43,7 @@ public class EducationModel implements EducationContract.Model {
                 if (response.body() != null) {
                     try {
                         Log.d(TAG, "getEducationList");
-                        List<EducationResponse> educations = response.body().getResponse(); // Erreur probable
+                        List<Docs> educations = response.body().getResponse(); // Erreur probable
                         Log.d(TAG, "Number of articles received: "  + educations.size());
                         onFinishedListener.onFinished(educations);
                     } catch(NullPointerException e) {

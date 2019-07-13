@@ -9,7 +9,7 @@ public class Education {
     private String copyright;
 
     @SerializedName("response")
-    private List<EducationResponse> response;
+    private EducationResponse response;
 
     @SerializedName("status")
     private String status;
@@ -24,12 +24,12 @@ public class Education {
         this.copyright = copyright;
     }
 
-    public List<EducationResponse> getResponse ()
+    public EducationResponse getResponse ()
     {
         return response;
     }
 
-    public void setResponse (List<EducationResponse> response)
+    public void setResponse (EducationResponse response)
     {
         this.response = response;
     }
