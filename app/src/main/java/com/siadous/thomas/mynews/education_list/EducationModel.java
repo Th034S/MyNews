@@ -29,8 +29,6 @@ public class EducationModel implements EducationContract.Model {
     @Override
     public void getEducationList(final EducationContract.Model.OnFinishedListener onFinishedListener, int pageNo) {
 
-
-
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
@@ -43,7 +41,7 @@ public class EducationModel implements EducationContract.Model {
                 if (response.body() != null) {
                     try {
                         Log.d(TAG, "getEducationList");
-                        List<Docs> educations = response.body().getResponse(); // Erreur probable
+                        List<Docs> educations = response.body().getResponse().getDocs(); // Erreur probable
                         Log.d(TAG, "Number of articles received: "  + educations.size());
                         onFinishedListener.onFinished(educations);
                     } catch(NullPointerException e) {

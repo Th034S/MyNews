@@ -26,10 +26,10 @@ public class Docs {
     @Expose
     private String source;
 
-    @SerializedName("blog")
+  /*  @SerializedName("blog")
     @Expose
     private String blog;
-
+*/
     @SerializedName("uri")
     @Expose
     private String uri;
@@ -120,7 +120,7 @@ public class Docs {
     {
         this.source = source;
     }
-
+/*
     public String getBlog ()
     {
         return blog;
@@ -130,7 +130,7 @@ public class Docs {
     {
         this.blog = blog;
     }
-
+*/
     public String getUri ()
     {
         return uri;
@@ -245,7 +245,7 @@ public class Docs {
     @Override
     public String toString()
     {
-        return "ClassPojo [snippet = "+snippet+", print_page = "+print_page+", section_name = "+section_name+", abstracts = "+abstracts+", source = "+source+", blog = "+blog+", uri = "+uri+", news_desk = "+news_desk+", pub_date = "+pub_date+", multimedia = "+multimedia+", word_count = "+word_count+", lead_paragraph = "+lead_paragraph+", type_of_material = "+type_of_material+", web_url = "+web_url+", id = "+id+", subsection_name = "+subsection_name+", document_type = "+document_type+"]";
+        return "ClassPojo [snippet = "+snippet+", print_page = "+print_page+", section_name = "+section_name+", abstracts = "+abstracts+", source = "+source+", uri = "+uri+", news_desk = "+news_desk+", pub_date = "+pub_date+", multimedia = "+multimedia+", word_count = "+word_count+", lead_paragraph = "+lead_paragraph+", type_of_material = "+type_of_material+", web_url = "+web_url+", id = "+id+", subsection_name = "+subsection_name+", document_type = "+document_type+"]";
     }
 
 }

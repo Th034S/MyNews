@@ -1,16 +1,17 @@
 package com.siadous.thomas.mynews.Model.Education;
 
+import java.util.List;
+
 public class EducationResponse {
 
-    private Docs[] docs;
+    private List<Docs> docs;
 
-
-    public Docs[] getDocs ()
+    public List<Docs> getDocs ()
     {
         return docs;
     }
 
-    public void setDocs (Docs[] docs)
+    public void setDocs (List<Docs> docs)
     {
         this.docs = docs;
     }

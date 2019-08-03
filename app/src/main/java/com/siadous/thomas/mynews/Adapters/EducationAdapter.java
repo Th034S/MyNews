@@ -58,7 +58,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
         education = educationList.get(position);
 
         holder.fragmentItemTitle.setText(education.getSnippet());
-        if(!education.getSection_name().equals("") && !education.getSubsection_name().equals("")) {
+        if(!education.getSection_name().equals(" ") && !education.getSubsection_name().equals(" ")) {
             category = education.getSection_name() + " > " + education.getSubsection_name();
             holder.fragmentCategory.setText(category);
         }
