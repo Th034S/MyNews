@@ -58,19 +58,16 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
         mostPopular = mostPopularList.get(position);
 
         holder.fragmentItemTitle.setText(mostPopular.getTitle());
-        if(!mostPopular.getSection().equals("") /** && !mostPopular.getSubsection().equals("")**/) {
-            category = mostPopular.getSection(); // + " > " + mostPopular.getSubsection();
-            holder.fragmentCategory.setText(category);
-        }
-        else {
+        if(!mostPopular.getSection().equals("") ) {
             category = mostPopular.getSection();
             holder.fragmentCategory.setText(category);
         }
+
         holder.fragmentDate.setText(configureFormatDate());
         if (mostPopular.getMedia().length >= 1) {
             // loading album cover using Glide library
             Glide.with(holder.getContext())
-                    .load(mostPopular.getMedia()[mostPopular.getMedia().length - 1].getMediaMetadata()[0].getUrl())  // PEUT ETRE UNE ERREUR
+                    .load(mostPopular.getMedia()[mostPopular.getMedia().length - 1].getMediaMetadata()[0].getUrl())
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

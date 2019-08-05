@@ -21,7 +21,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
 import com.siadous.thomas.mynews.Model.Education.Docs;
-import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.education_list.EducationFragment;
 
@@ -31,7 +30,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
 
     private EducationFragment educationFragment;
     private List<Docs> educationList;
-    private Docs education;
+    private Docs education = null;
 
 
 
@@ -58,7 +57,8 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
         education = educationList.get(position);
 
         holder.fragmentItemTitle.setText(education.getSnippet());
-        if(!education.getSection_name().equals(" ") && !education.getSubsection_name().equals(" ")) {
+
+        if(education.getSection_name() != null && education.getSubsection_name() != null) {
             category = education.getSection_name() + " > " + education.getSubsection_name();
             holder.fragmentCategory.setText(category);
         }
@@ -66,11 +66,13 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
             category = education.getSection_name();
             holder.fragmentCategory.setText(category);
         }
+
         holder.fragmentDate.setText(configureFormatDate());
+
         if (education.getMultimedia().length >= 1) {
             // loading album cover using Glide library
             Glide.with(holder.getContext())
-                    .load(education.getMultimedia()[education.getMultimedia().length - 1].getUrl())  // PEUT ETRE UNE ERREUR
+                    .load(education.getMultimedia()[(education.getMultimedia().length) - 1].getUrl())
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
