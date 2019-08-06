@@ -14,11 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import com.siadous.thomas.mynews.Model.Education.Docs;
 import com.siadous.thomas.mynews.R;
@@ -72,8 +67,9 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
         if (education.getMultimedia().length >= 1) {
             // loading album cover using Glide library
             Glide.with(holder.getContext())
-                    .load(education.getMultimedia()[(education.getMultimedia().length) - 1].getUrl())
-                    .listener(new RequestListener<Drawable>() {
+                    .load("https://static01.nyt.com/"
+                            + education.getMultimedia()[education.getMultimedia().length - 1].getUrl())
+                   /** .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                             // holder.pbLoadImage.setVisibility(View.GONE);
@@ -86,7 +82,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
                             return false;
                         }
                     })
-                    .apply(new RequestOptions())
+                    .apply(new RequestOptions()) **/
                     .into(holder.fragmentImageView);
         }
 

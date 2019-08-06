@@ -6,7 +6,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ import com.siadous.thomas.mynews.R;
 public class HomeFragment extends Fragment {
 
     View view;
+    SearchFragment searchFragment;
+    String TAG = "HomeFragment";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -40,8 +44,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-
-
+/**
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //3 - Handle actions on menu items
@@ -56,7 +59,7 @@ public class HomeFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+**/
     private void configureToolbar(){
         // Get the toolbar view inside the activity layout
         Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -64,8 +67,15 @@ public class HomeFragment extends Fragment {
         ((MainActivity) getActivity()).setSupportActionBar(toolbar);
 
     }
-
-
+/**
+    private void launchSearchFragment() {
+        searchFragment = new SearchFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.linear_layout_home_fragment, searchFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+**/
     private void configureViewPager(){
 
         ViewPager pager = view.findViewById(R.id.activity_main_viewpager);
