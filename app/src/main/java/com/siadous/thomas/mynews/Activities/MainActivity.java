@@ -1,6 +1,7 @@
 package com.siadous.thomas.mynews.Activities;
 
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         this.configureAndShowMainFragment();
 
     }
@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_activity_main_search:
                 launchSearchFragment();
                 Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
+                return true;
+            case android.R.id.home:
+                getSupportFragmentManager().popBackStack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.frame_layout_main , searchFragment)
                 .addToBackStack(null)
                 .commit();
+
     }
 
     @Override

@@ -147,7 +147,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
 
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvMostPopularList, R.layout.fragment_most_popular_detail)
+        ItemClickSupport.addTo(rvMostPopularList, R.layout.fragment_details)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

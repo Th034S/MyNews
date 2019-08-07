@@ -28,7 +28,7 @@ public class MostPopularDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_most_popular_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
         String data = getArguments().getString("key");
 
 

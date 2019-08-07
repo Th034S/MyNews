@@ -1,10 +1,8 @@
 package com.siadous.thomas.mynews.top_stories_list;
 
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import com.siadous.thomas.mynews.Activities.MainActivity;
 import com.siadous.thomas.mynews.R;
 
 /**
@@ -32,7 +29,7 @@ public class TopStoriesDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_top_stories_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
 
         Log.d("TopStoriesDetailsFra", "on create view method");
         String data = getArguments().getString("key");

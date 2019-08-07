@@ -142,7 +142,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_top_stories_details)
+        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_details)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

@@ -30,7 +30,7 @@ public class EducationDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_education_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
 
         Log.d("EducationDetail", "on create view method");
         String data = getArguments().getString("key");

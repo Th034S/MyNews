@@ -147,7 +147,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
 
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvEducationList, R.layout.fragment_education_detail)
+        ItemClickSupport.addTo(rvEducationList, R.layout.fragment_details)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

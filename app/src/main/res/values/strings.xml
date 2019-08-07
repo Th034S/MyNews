@@ -6,4 +6,12 @@
     <string name="no_articles">No results</string>
     <string name="communication_error">Error in getting data. Please try again later.</string>
     <string name="search_edit_text">Search query term</string>
+
+    // Category check box
+    <string name="category_arts">Arts</string>
+    <string name="category_business">Business</string>
+    <string name="category_entrepreneurs">Entrepreneurs</string>
+    <string name="category_politics">Politics</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_travel">Travel</string>
 </resources>
