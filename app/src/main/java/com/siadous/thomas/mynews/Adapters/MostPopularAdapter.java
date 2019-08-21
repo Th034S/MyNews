@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -20,10 +19,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 import com.siadous.thomas.mynews.R;
+import com.siadous.thomas.mynews.Utils.DateUtils;
 import com.siadous.thomas.mynews.most_popular_list.MostPopularFragment;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesFragment;
 
 import java.util.List;
 
@@ -63,7 +61,7 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
             holder.fragmentCategory.setText(category);
         }
 
-        holder.fragmentDate.setText(configureFormatDate());
+        holder.fragmentDate.setText(DateUtils.configureFormatDate(mostPopular.getPublished_date()));
         if (mostPopular.getMedia().length >= 1) {
             // loading album cover using Glide library
             Glide.with(holder.getContext())
@@ -89,22 +87,11 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
     }
 
 
-
     // Le nombre d'éléments à afficher
     @Override
     public int getItemCount() {
         Log.e("testsiadous", String.valueOf(mostPopularList.size()));
         return mostPopularList.size();
-    }
-
-    public String configureFormatDate() {
-        String date = mostPopular.getPublished_date();
-        String[] split = date.split("T");
-        date = split[0];
-        split = date.split("-");
-        String[] year = split[0].split("0");
-        date = split[2] + "/" + split[1] + "/" + year[1];
-        return date;
     }
 
     public MostPopular getArticle(int position){

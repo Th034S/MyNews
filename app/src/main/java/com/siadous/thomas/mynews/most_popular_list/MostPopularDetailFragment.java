@@ -22,16 +22,12 @@ public class MostPopularDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         View view = inflater.inflate(R.layout.fragment_details, container, false);
         String data = getArguments().getString("key");
-
-
 
         webView = view.findViewById(R.id.web_view_details);
         WebSettings webSettings = webView.getSettings();

@@ -1,6 +1,5 @@
 package com.siadous.thomas.mynews.education_list;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,19 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.siadous.thomas.mynews.Adapters.EducationAdapter;
-
-
 import com.siadous.thomas.mynews.Model.Education.Docs;
 import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
-
 import com.siadous.thomas.mynews.Utils.ItemClickSupport;
 import com.siadous.thomas.mynews.Utils.ShowEmptyView;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,14 +69,11 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
 
         setListeners();
 
-        Log.d("educationFragment", "aaaaaaaaaaaaa");
         // Initialiser le Presenter
         educationPresenter = new EducationPresenter(this);
 
-        Log.d("educationFragment", "bbbbbbbbbbbbb");
         // Obtenir les données de la page 1
         educationPresenter.requestDataFromServer();
-        Log.d("educationFragment", "ccccccccccccc");
         this.configureOnClickRecyclerView();
         // Inflate the layout for this fragment
         return result ;
@@ -151,20 +141,16 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        //  topStories = topStoriesAdapter.getArticle(position);
 
                         educationDetailFragment = new EducationDetailFragment();
-                        Log.d("TAG", "12871255");
                         Bundle args = new Bundle();
                         args.putString("key", educationAdapter.getArticle(position).getWeb_url());
                         educationDetailFragment.setArguments(args);
-                        Log.d("TAG", "6666666666666");
 
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_page_education, educationDetailFragment)
                                 .addToBackStack(null)
                                 .commit();
-
 
                     }
                 });

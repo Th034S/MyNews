@@ -1,6 +1,5 @@
 package com.siadous.thomas.mynews.most_popular_list;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,22 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.siadous.thomas.mynews.Adapters.MostPopularAdapter;
-import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
 import com.siadous.thomas.mynews.Utils.ItemClickSupport;
 import com.siadous.thomas.mynews.Utils.ShowEmptyView;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesContract;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesDetailsFragment;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesPresenter;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
 
 /**
@@ -39,7 +30,7 @@ import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
 public class MostPopularFragment extends Fragment implements MostPopularContract.View, ShowEmptyView {
 
 
-    private static final String TAG = "TopStoriesFragment";
+    private static final String TAG = "MostPopularFragment";
     private MostPopularPresenter mostPopularPresenter;
     private RecyclerView rvMostPopularList;
     private List<MostPopular> mostPopularList;
@@ -47,7 +38,6 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private MostPopular mostPopular;
     private MostPopularDetailFragment mostPopularDetailFragment;
 
     public View result;
@@ -76,14 +66,11 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
 
         setListeners();
 
-        Log.d("mostPopular", "aaaaaaaaaaaaa");
         // Initialiser le Presenter
         mostPopularPresenter = new MostPopularPresenter(this);
 
-        Log.d("mostPopular", "bbbbbbbbbbbbb");
         // Obtenir les données de la page 1
         mostPopularPresenter.requestDataFromServer();
-        Log.d("mostPopular", "ccccccccccccc");
         this.configureOnClickRecyclerView();
         // Inflate the layout for this fragment
         return result ;
@@ -151,14 +138,11 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        //  topStories = topStoriesAdapter.getArticle(position);
 
                         mostPopularDetailFragment = new MostPopularDetailFragment();
-                        Log.d("TAG", "12871255");
                         Bundle args = new Bundle();
                         args.putString("key", mostPopularAdapter.getArticle(position).getUrl());
                         mostPopularDetailFragment.setArguments(args);
-                        Log.d("TAG", "6666666666666");
 
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_page_most_popular, mostPopularDetailFragment)

@@ -2,8 +2,6 @@ package com.siadous.thomas.mynews.education_list;
 
 
 import com.siadous.thomas.mynews.Model.Education.Docs;
-import com.siadous.thomas.mynews.Model.Education.Education;
-import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 
 import java.util.List;
 

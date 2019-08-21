@@ -1,9 +1,7 @@
 package com.siadous.thomas.mynews.Adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import com.siadous.thomas.mynews.Model.Education.Docs;
 import com.siadous.thomas.mynews.R;
+import com.siadous.thomas.mynews.Utils.DateUtils;
 import com.siadous.thomas.mynews.education_list.EducationFragment;
 
 import java.util.List;
@@ -26,7 +23,6 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
     private EducationFragment educationFragment;
     private List<Docs> educationList;
     private Docs education = null;
-
 
 
     public EducationAdapter(EducationFragment educationFragment, List<Docs> educationList) {
@@ -62,7 +58,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
             holder.fragmentCategory.setText(category);
         }
 
-        holder.fragmentDate.setText(configureFormatDate());
+        holder.fragmentDate.setText(DateUtils.configureFormatDate(education.getPub_date()));
 
         if (education.getMultimedia().length >= 1) {
             // loading album cover using Glide library
@@ -98,15 +94,6 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.MyVi
         return educationList.size();
     }
 
-    public String configureFormatDate() {
-        String date = education.getPub_date();
-        String[] split = date.split("T");
-        date = split[0];
-        split = date.split("-");
-        String[] year = split[0].split("0");
-        date = split[2] + "/" + split[1] + "/" + year[1];
-        return date;
-    }
 
     public Docs getArticle(int position){
         return this.educationList.get(position);

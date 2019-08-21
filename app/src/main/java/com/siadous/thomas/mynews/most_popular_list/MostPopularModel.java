@@ -2,17 +2,11 @@ package com.siadous.thomas.mynews.most_popular_list;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopularList;
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
-import com.siadous.thomas.mynews.Model.TopStories.TopStoriesListResponse;
 import com.siadous.thomas.mynews.Utils.ApiClient;
 import com.siadous.thomas.mynews.Utils.ApiInterface;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesContract;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +35,6 @@ public class MostPopularModel implements MostPopularContract.Model {
             public void onResponse(@NonNull Call<MostPopularList> call, @NonNull Response<MostPopularList> response) {
                 try {
                     assert response.body() != null;
-                    Log.d("mostPop", "ufghfheruhjufffeh");
                     List<MostPopular> mostPopulars = response.body().getResults();
                     Log.d("mostPop", "Number of articles received: " + mostPopulars.size());
                     onFinishedListener.onFinished(mostPopulars);

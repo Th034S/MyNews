@@ -1,32 +1,47 @@
 package com.siadous.thomas.mynews.Activities;
 
-
-import android.support.v4.app.FragmentManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.siadous.thomas.mynews.Fragments.HomeFragment;
 import com.siadous.thomas.mynews.Fragments.SearchFragment;
 import com.siadous.thomas.mynews.R;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
     private HomeFragment homeFragment;
     SearchFragment searchFragment;
-    @Override
 
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.configureAndShowMainFragment();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            
+
+        this.configureAndShowHomeFragment();
+
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -39,23 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 launchSearchFragment();
                 Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
                 return true;
-            case android.R.id.home:
-                getSupportFragmentManager().popBackStack();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() == 1) {
-            moveTaskToBack(false);
-        }
-        else {
-            super.onBackPressed();
-        }
-    }
+
 
     private void launchSearchFragment() {
         searchFragment = new SearchFragment();
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void configureAndShowMainFragment(){
+    private void configureAndShowHomeFragment(){
         // A - Get FragmentManager (Support) and Try to find existing instance of fragment in FrameLayout container
         homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_main);
 

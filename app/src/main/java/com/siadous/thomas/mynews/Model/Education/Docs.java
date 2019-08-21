@@ -26,10 +26,6 @@ public class Docs {
     @Expose
     private String source;
 
-  /*  @SerializedName("blog")
-    @Expose
-    private String blog;
-*/
     @SerializedName("uri")
     @Expose
     private String uri;
@@ -120,17 +116,7 @@ public class Docs {
     {
         this.source = source;
     }
-/*
-    public String getBlog ()
-    {
-        return blog;
-    }
 
-    public void setBlog (String blog)
-    {
-        this.blog = blog;
-    }
-*/
     public String getUri ()
     {
         return uri;

@@ -24,7 +24,6 @@ public class Multimedia {
     private String height;
 
 
-
     public String getSubtype ()
     {
         return subtype;

@@ -1,7 +1,6 @@
 package com.siadous.thomas.mynews.top_stories_list;
 
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,19 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
 import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
 import com.siadous.thomas.mynews.Utils.ItemClickSupport;
 import com.siadous.thomas.mynews.Utils.ShowEmptyView;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +39,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private TopStories topStories;
     private TopStoriesDetailsFragment topStoriesDetailsFragment;
 
     public View result;
@@ -69,14 +64,14 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
         result = inflater.inflate(R.layout.fragment_top_stories, container, false);
 
-        // Référencer les éléments graphique + créer une list de Movie
+        // Reference
         initUI();
 
         setListeners();
 
-        // Initialiser le Presenter
+        // Initialize the Presenter
         topStoriesPresenter = new TopStoriesPresenter(this);
-        // Obtenir les données de la page 1
+        // Get data of page one
         topStoriesPresenter.requestDataFromServer();
 
         this.configureOnClickRecyclerView();
@@ -146,23 +141,16 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                      //  topStories = topStoriesAdapter.getArticle(position);
 
                         topStoriesDetailsFragment = new TopStoriesDetailsFragment();
-                        Log.d("TAG", "12871255");
                         Bundle args = new Bundle();
                         args.putString("key", topStoriesAdapter.getArticle(position).getUrl());
                         topStoriesDetailsFragment.setArguments(args);
-                        //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.top_stories_detail_page, topStoriesDetailsFragment).addToBackStack("Some string").commit();
-                        Log.d("TAG", "6666666666666");
 
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_page_top_stories, topStoriesDetailsFragment)
                                 .addToBackStack(null)
                                 .commit();
-
-
-                        Log.d("TAG", "77777777777");
 
                     }
                 });
@@ -201,13 +189,10 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     }
 
 
-
     @Override
     public void showEmptyView() {
-
         rvTopStoriesList.setVisibility(View.GONE);
         tvEmptyView.setVisibility(View.VISIBLE);
-
     }
 
     @Override
