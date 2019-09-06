@@ -14,6 +14,7 @@ public class PageAdapter extends FragmentPagerAdapter {
         super(mgr);
     }
 
+    // Display each fragment for each tab
     @Override
     public Fragment getItem(int position) {
         switch (position){
@@ -29,11 +30,13 @@ public class PageAdapter extends FragmentPagerAdapter {
     }
 
 
+    // How many tabs do i want
     @Override
     public int getCount() {
         return 3;
     }
 
+    // Add title to each tab
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position){

@@ -34,6 +34,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
         Call<TopStoriesListResponse> call = apiService.getTopStories(API_KEY, pageNo);
         call.enqueue(new Callback<TopStoriesListResponse>() {
 
+            // correct call
             @Override
             public void onResponse(@NonNull Call<TopStoriesListResponse> call, @NonNull Response<TopStoriesListResponse> response) {
                 try {
@@ -46,6 +47,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
                 }
             }
 
+            // bad call or error
             @Override
             public void onFailure(@NonNull Call<TopStoriesListResponse> call, @NonNull Throwable t) {
                 // Log error here since request failed

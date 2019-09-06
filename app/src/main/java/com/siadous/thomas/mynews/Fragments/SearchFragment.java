@@ -14,10 +14,9 @@ public class SearchFragment extends Fragment {
 
     public SearchFragment() { }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
 
 
         return inflater.inflate(R.layout.search, container, false);

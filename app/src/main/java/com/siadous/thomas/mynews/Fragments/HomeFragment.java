@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-      //  this.configureToolbar();
+
         configureViewPager();
 
         // Inflate the layout for this fragment

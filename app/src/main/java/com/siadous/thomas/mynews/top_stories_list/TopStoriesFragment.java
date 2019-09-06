@@ -135,7 +135,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
 
 
-
+    // Click on article
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_details)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {

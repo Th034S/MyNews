@@ -9,6 +9,7 @@ public class ApiClient {
     public static final String BASE_URL = "https://api.nytimes.com/";
     public static final String API_KEY = "JrCGkvBIqnBYpL6DjHPBpzLPZndGGBcQ";
 
+    //launch retrofit
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()

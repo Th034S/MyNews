@@ -1,7 +1,6 @@
 package com.siadous.thomas.mynews.Activities;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,25 +23,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/**
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-**/
+        configureToolbar();
 
         this.configureAndShowHomeFragment();
 
 
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
 
+    // What to do when click on Search and params button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //3 - Handle actions on menu items
@@ -51,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_activity_main_search:
-                launchSearchFragment();
+                launchSearchActivity();
                 Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
                 return true;
             default:
@@ -59,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    private void configureToolbar() {
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
 
 
     private void launchSearchFragment() {
@@ -70,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private void launchSearchActivity() {
+        Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
+
+
+    // Add menu in Toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //2 - Inflate the menu and add it to the Toolbar
@@ -80,13 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void configureAndShowHomeFragment(){
-        // A - Get FragmentManager (Support) and Try to find existing instance of fragment in FrameLayout container
         homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_main);
 
         if (homeFragment == null) {
-            // B - Create new main fragment
+
             homeFragment = new HomeFragment();
-            // C - Add it to FrameLayout container
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.frame_layout_main, homeFragment)
                     .commit();
