@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews.Utils;
 
+import com.siadous.thomas.mynews.Model.ArticleSearch.ArticleSearch;
 import com.siadous.thomas.mynews.Model.Education.Education;
 import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopularList;
@@ -23,8 +24,7 @@ public interface ApiInterface {
     @GET("svc/search/v2/articlesearch.json?q=education")
     Call<Education> getEducation(@Query("api-key") String apiKey, @Query("page") int PageNo);
 
-/**
     @GET ("svc/search/v2/articlesearch.json")
     Call<ArticleSearch> getArticleSearch(@Query("api-key") String apiKey, @Query("q") List<String> categories, @Query("page") int PageNo, @Query("keyword") String keyword);
-**/
+
 }
