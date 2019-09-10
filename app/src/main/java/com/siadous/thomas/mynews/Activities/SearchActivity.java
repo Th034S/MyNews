@@ -7,9 +7,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.siadous.thomas.mynews.Fragments.SearchFragment;
 import com.siadous.thomas.mynews.R;
 
 public class SearchActivity extends AppCompatActivity {
+
+
+    SearchFragment searchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +27,34 @@ public class SearchActivity extends AppCompatActivity {
          setSupportActionBar(toolbar);
 
 
-         getSupportActionBar().setTitle("Search Articles");
-         // display back button
-         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        try {
+            getSupportActionBar().setTitle("Search Articles");
+
+            // display back button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+        } catch (NullPointerException e) {
+            Log.e("your app", e.toString());
+        }
 
+
+         configureAndShowSearchFragment();
+
+    }
+
+    private void configureAndShowSearchFragment() {
+        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.linear_layout_search_activity);
+
+        if (searchFragment == null) {
+
+            searchFragment = new SearchFragment();
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.linear_layout_search_activity, searchFragment)
+                    .commit();
+        }
     }
 
     @Override
