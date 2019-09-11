@@ -21,7 +21,7 @@
             android:padding="7dp"
             android:text="@string/category_politics"
             android:textStyle="normal"
-            android:onClick="itemPoliticsClicked"/>
+           />
 
         <CheckBox
             android:id="@+id/checkBox_sports"
@@ -31,7 +31,7 @@
             android:padding="7dp"
             android:text="@string/category_sports"
             android:textStyle="normal"
-            android:onClick="itemSportsClicked"/>
+           />
 
         <CheckBox
             android:id="@+id/checkBox_travel"
@@ -41,7 +41,7 @@
             android:padding="7dp"
             android:text="@string/category_travel"
             android:textStyle="normal"
-            android:onClick="itemTravelClicked"/>
+          />
 
 
     </LinearLayout>
@@ -63,7 +63,7 @@
             android:padding="7dp"
             android:text="@string/category_business"
             android:textStyle="normal"
-            android:onClick="itemBusinessClicked"/>
+            />
 
         <CheckBox
             android:id="@+id/checkBox_arts"
@@ -75,7 +75,7 @@
             android:padding="7dp"
             android:text="@string/category_arts"
             android:textStyle="normal"
-            android:onClick="itemArtsClicked"/>
+            />
 
         <CheckBox
             android:id="@+id/checkBox_entrepreneurs"
@@ -87,7 +87,7 @@
             android:padding="7dp"
             android:text="@string/category_entrepreneurs"
             android:textStyle="normal"
-            android:onClick="itemEntrepreneursClicked"/>
+            />
 
     </LinearLayout>
 </LinearLayout>

@@ -2,6 +2,8 @@ package com.siadous.thomas.mynews.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +12,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.most_popular_list.MostPopularDetailFragment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
 
     public SearchFragment() { }
 
 
-    List<String> categories;
+    ArrayList<String> categories;
     View view;
     Button searchButton;
     EditText editTextSearch;
@@ -37,9 +38,13 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.search, container, false);
+        view = inflater.inflate(R.layout.fragment_search, container, false);
 
         initUI();
+
+        searchButton.setEnabled(false);
+
+        enableSearchButton();
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,21 +59,42 @@ public class SearchFragment extends Fragment {
     }
 
     private void launchResultFragmentWithBundle() {
-        if (!(keyword.equals(" ") && categories.isEmpty())) {
+        if (!(categories.isEmpty())) {
             resultFragment = new ResultFragment();
             Bundle args = new Bundle();
             args.putString("key", keyword);
+            args.putStringArrayList("key", categories);
             resultFragment.setArguments(args);
 
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.linear_layout_search, resultFragment)
+                    .replace(R.id.relative_layout_search_fragment, resultFragment)
                     .addToBackStack(null)
                     .commit();
         }
 
     }
 
+    private void enableSearchButton() {
+        editTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchButton.setEnabled(s.toString().length() != 0);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
     private void retrieveCategories() {
+        categories = new ArrayList<>();
         if (politicsCheckBox.isChecked()) {
             categories.add("politics");
         }
@@ -96,13 +122,14 @@ public class SearchFragment extends Fragment {
 
     private void initUI() {
         searchButton = view.findViewById(R.id.search_button_fragment);
-        editTextSearch = view.findViewById(R.id.edit_text_search);
+        editTextSearch = view.findViewById(R.id.edit_text);
         politicsCheckBox = view.findViewById(R.id.checkBox_politics);
         sportsCheckBox = view.findViewById(R.id.checkBox_sports);
         travelCheckBox = view.findViewById(R.id.checkBox_travel);
         businessCheckBox = view.findViewById(R.id.checkBox_business);
         artsCheckBox = view.findViewById(R.id.checkBox_arts);
         entrepreneursCheckBox = view.findViewById(R.id.checkBox_entrepreneurs);
+
     }
 
 

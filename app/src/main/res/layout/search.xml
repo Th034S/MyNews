@@ -9,7 +9,6 @@
 
     <include
         layout="@layout/edit_text"
-        android:id="@+id/edit_text_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
