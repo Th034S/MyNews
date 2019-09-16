@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
-
     SearchFragment searchFragment;
 
     ArrayList<String> categories;
@@ -39,7 +38,6 @@ public class SearchActivity extends AppCompatActivity {
     ResultFragment resultFragment;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,23 +45,7 @@ public class SearchActivity extends AppCompatActivity {
 
          Log.d("TAG", "on create SearchActivity");
 
-
-         Toolbar toolbar = findViewById(R.id.toolbar);
-         setSupportActionBar(toolbar);
-
-
-        try {
-            getSupportActionBar().setTitle("Search Articles");
-
-            // display back button
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-        } catch (NullPointerException e) {
-            Log.e("your app", e.toString());
-        }
-
+        configureToolbar();
 
         initUI();
 
@@ -80,10 +62,28 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-
         configureAndShowSearchFragment();
-
     }
+
+
+   private void configureToolbar() {
+       Toolbar toolbar = findViewById(R.id.toolbar);
+       setSupportActionBar(toolbar);
+
+
+       try {
+           getSupportActionBar().setTitle("Search Articles");
+
+           // display back button
+           getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+           getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+       } catch (NullPointerException e) {
+           Log.e("your app", e.toString());
+       }
+
+   }
+
 
     private void configureAndShowSearchFragment() {
         searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.linear_layout_search_activity);

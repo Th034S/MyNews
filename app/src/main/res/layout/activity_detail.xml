@@ -8,6 +8,12 @@
     tools:context=".Activities.DetailActivity">
 
 
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
     <WebView
         android:id="@+id/web_view_details"
         android:layout_width="match_parent"

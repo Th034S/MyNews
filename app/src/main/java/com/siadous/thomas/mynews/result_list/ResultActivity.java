@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -17,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.siadous.thomas.mynews.Activities.DetailActivity;
+import com.siadous.thomas.mynews.Activities.MainActivity;
+import com.siadous.thomas.mynews.Activities.SearchActivity;
 import com.siadous.thomas.mynews.Adapters.ResultAdapter;
 import com.siadous.thomas.mynews.Model.ArticleSearch.ArticleSearchResponse;
 import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
@@ -73,6 +78,7 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
             categories = intent.getStringArrayListExtra("categories");
         }
 
+        configureToolbar();
 
 
         initUI();
@@ -85,8 +91,22 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
         // Obtenir les données de la page 1
         resultPresenter.requestDataFromServer(categories, keyword);
         this.configureOnClickRecyclerView();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
 
+                Intent intent = new Intent(ResultActivity.this, SearchActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void initUI() {
@@ -143,6 +163,23 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     }
 
 
+
+    private void configureToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        try {
+            getSupportActionBar().setTitle("Results");
+
+            // display back button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        } catch (NullPointerException e) {
+            Log.e("your app", e.toString());
+        }
+
+    }
 
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(rvResultList, R.layout.fragment_details)
