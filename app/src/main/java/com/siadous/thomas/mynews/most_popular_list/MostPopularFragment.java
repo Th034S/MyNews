@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews.most_popular_list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -14,12 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.siadous.thomas.mynews.Activities.DetailActivity;
 import com.siadous.thomas.mynews.Adapters.MostPopularAdapter;
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
 import com.siadous.thomas.mynews.Utils.ItemClickSupport;
 import com.siadous.thomas.mynews.Utils.ShowEmptyView;
+import com.siadous.thomas.mynews.result_list.ResultActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
@@ -50,6 +55,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
     private int visibleThreshold = 5;
     int firstVisibleItem, visibleItemCount, totalItemCount;
     private GridLayoutManager mLayoutManager;
+    private MostPopularFragment mostPopularFragment;
 
     public static MostPopularFragment newInstance() {
         return(new MostPopularFragment());
@@ -139,6 +145,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
+                    /**
                         mostPopularDetailFragment = new MostPopularDetailFragment();
                         Bundle args = new Bundle();
                         args.putString("key", mostPopularAdapter.getArticle(position).getUrl());
@@ -148,6 +155,14 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
                                 .replace(R.id.fragment_page_most_popular, mostPopularDetailFragment)
                                 .addToBackStack(null)
                                 .commit();
+
+                     **/
+
+                        Intent intent= new Intent(getActivity() , DetailActivity.class);
+
+                        intent.putExtra("key_url", mostPopularAdapter.getArticle(position).getUrl());
+
+                        startActivity(intent);
 
 
                     }

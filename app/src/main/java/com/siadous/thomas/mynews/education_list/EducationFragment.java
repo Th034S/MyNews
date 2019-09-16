@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews.education_list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.siadous.thomas.mynews.Activities.DetailActivity;
 import com.siadous.thomas.mynews.Adapters.EducationAdapter;
 import com.siadous.thomas.mynews.Model.Education.Docs;
 import com.siadous.thomas.mynews.Model.Education.EducationResponse;
@@ -141,7 +144,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
+                        /**
                         educationDetailFragment = new EducationDetailFragment();
                         Bundle args = new Bundle();
                         args.putString("key", educationAdapter.getArticle(position).getWeb_url());
@@ -151,6 +154,15 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
                                 .replace(R.id.fragment_page_education, educationDetailFragment)
                                 .addToBackStack(null)
                                 .commit();
+                        **/
+
+
+                        Intent intent= new Intent(getActivity() , DetailActivity.class);
+
+                        intent.putExtra("key_url", educationAdapter.getArticle(position).getWeb_url());
+
+                        startActivity(intent);
+
 
                     }
                 });

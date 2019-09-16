@@ -6,6 +6,7 @@ import com.siadous.thomas.mynews.Model.Education.EducationResponse;
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopularList;
 import com.siadous.thomas.mynews.Model.TopStories.TopStoriesListResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +26,6 @@ public interface ApiInterface {
     Call<Education> getEducation(@Query("api-key") String apiKey, @Query("page") int PageNo);
 
     @GET ("svc/search/v2/articlesearch.json")
-    Call<ArticleSearch> getArticleSearch(@Query("api-key") String apiKey, @Query("q") List<String> categories, @Query("page") int PageNo, @Query("keyword") String keyword);
+    Call<ArticleSearch> getArticleSearch(@Query("api-key") String apiKey, @Query("q") ArrayList<String> categories, @Query("page") int PageNo, @Query("keyword") String keyword);
 
 }

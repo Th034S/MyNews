@@ -14,7 +14,7 @@ public class Docs {
 
     private String source;
 
-    private String blog;
+   // private String blog;
 
     private String uri;
 
@@ -101,7 +101,7 @@ public class Docs {
     {
         this.source = source;
     }
-
+/**
     public String getBlog ()
     {
         return blog;
@@ -111,7 +111,7 @@ public class Docs {
     {
         this.blog = blog;
     }
-
+**/
     public String getUri ()
     {
         return uri;
@@ -245,6 +245,6 @@ public class Docs {
     @Override
     public String toString()
     {
-        return "ClassPojo [snippet = "+snippet+", print_page = "+print_page+/**", keywords = "+keywords+**/", section_name = "+section_name+", abstract = "+abstracts+", source = "+source+", blog = "+blog+", uri = "+uri+", news_desk = "+news_desk+", pub_date = "+pub_date+", multimedia = "+multimedia+", word_count = "+word_count+", lead_paragraph = "+lead_paragraph+", type_of_material = "+type_of_material+", web_url = "+web_url+", _id = "+_id+", subsection_name = "+subsection_name+/**", headline = "+headline+", byline = "+byline+**/", document_type = "+document_type+"]";
+        return "ClassPojo [snippet = "+snippet+", print_page = "+print_page+/**", keywords = "+keywords+**/", section_name = "+section_name+", abstract = "+abstracts+", source = "+source+/** ", blog = "+blog+**/", uri = "+uri+", news_desk = "+news_desk+", pub_date = "+pub_date+", multimedia = "+multimedia+", word_count = "+word_count+", lead_paragraph = "+lead_paragraph+", type_of_material = "+type_of_material+", web_url = "+web_url+", _id = "+_id+", subsection_name = "+subsection_name+/**", headline = "+headline+", byline = "+byline+**/", document_type = "+document_type+"]";
     }
 }

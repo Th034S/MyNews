@@ -1,4 +1,4 @@
-package com.siadous.thomas.mynews.education_list;
+package com.siadous.thomas.mynews.result_list;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,18 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
 import com.siadous.thomas.mynews.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class EducationDetailFragment extends Fragment {
+public class ResultDetailFragment extends Fragment {
 
     private WebView webView;
 
-    private static final String TAG = "EducationDetailsFragment";
+    private static final String TAG = "ResultDetailFragment";
 
-    public EducationDetailFragment() {
+    public ResultDetailFragment() {
         // Required empty public constructor
     }
 
@@ -30,7 +28,7 @@ public class EducationDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
 
-        Log.d("EducationDetail", "on create view method");
+        Log.d("TAG", "on create view method");
         String data = getArguments().getString("key");
 
         webView = view.findViewById(R.id.web_view_details);

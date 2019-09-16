@@ -2,6 +2,7 @@ package com.siadous.thomas.mynews.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.siadous.thomas.mynews.R;
+import com.siadous.thomas.mynews.result_list.ResultFragment;
 
 import java.util.ArrayList;
 
@@ -62,12 +64,18 @@ public class SearchFragment extends Fragment {
         if (!(categories.isEmpty())) {
             resultFragment = new ResultFragment();
             Bundle args = new Bundle();
-            args.putString("key", keyword);
-            args.putStringArrayList("key", categories);
+            args.putString("keyword", keyword);
+            args.putStringArrayList("categories", categories);
             resultFragment.setArguments(args);
 
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.relative_layout_search_fragment, resultFragment)
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+
+            for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
+                fm.popBackStack();
+            }
+
+            fm.beginTransaction()
+                    .replace(R.id.frame_layout_search_fragment, resultFragment)
                     .addToBackStack(null)
                     .commit();
         }

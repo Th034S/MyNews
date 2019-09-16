@@ -1,7 +1,6 @@
-package com.siadous.thomas.mynews.top_stories_list;
+package com.siadous.thomas.mynews.result_list;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,32 +16,40 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.siadous.thomas.mynews.Activities.DetailActivity;
-import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
+
+import com.siadous.thomas.mynews.Adapters.ResultAdapter;
+import com.siadous.thomas.mynews.Model.ArticleSearch.ArticleSearchResponse;
+import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
+
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
+
 import com.siadous.thomas.mynews.Utils.ItemClickSupport;
 import com.siadous.thomas.mynews.Utils.ShowEmptyView;
+
+
 import java.util.ArrayList;
 import java.util.List;
-import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
 
+import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopStoriesFragment extends Fragment implements TopStoriesContract.View, ShowEmptyView {
+public class ResultFragment extends Fragment implements ResultContract.View, ShowEmptyView {
 
-    private static final String TAG = "TopStoriesFragment";
-    private TopStoriesPresenter topStoriesPresenter;
-    private RecyclerView rvTopStoriesList;
-    private List<TopStories> topStoriesList;
-    private TopStoriesAdapter topStoriesAdapter;
+
+
+    private static final String TAG = "ResultFragment";
+    private ResultPresenter resultPresenter;
+    private RecyclerView rvResultList;
+    private List<Docs> resultList;
+    private ResultAdapter resultAdapter;
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private TopStoriesDetailsFragment topStoriesDetailsFragment;
+    private ArticleSearchResponse articleSearch;
+    private ResultDetailFragment resultDetailFragment;
 
     public View result;
 
@@ -55,47 +62,49 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     int firstVisibleItem, visibleItemCount, totalItemCount;
     private GridLayoutManager mLayoutManager;
 
+    String keyword;
+    ArrayList<String> categories;
 
-    public static TopStoriesFragment newInstance() {
-        return(new TopStoriesFragment());
+    public ResultFragment() {
+        // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        result = inflater.inflate(R.layout.fragment_result, container, false);
 
-        result = inflater.inflate(R.layout.fragment_top_stories, container, false);
+        keyword = getArguments().getString("keyword");
+        categories = getArguments().getStringArrayList("categories");
 
-        // Reference
         initUI();
 
         setListeners();
 
-        // Initialize the Presenter
-        topStoriesPresenter = new TopStoriesPresenter(this);
-        // Get data of page one
-        topStoriesPresenter.requestDataFromServer();
+        // Initialiser le Presenter
+        resultPresenter = new ResultPresenter(this);
 
+        // Obtenir les données de la page 1
+        resultPresenter.requestDataFromServer(categories, keyword);
         this.configureOnClickRecyclerView();
 
-        // Inflate the layout for this fragment
         return result;
     }
 
-
     private void initUI() {
 
-        rvTopStoriesList = result.findViewById(R.id.rv_top_stories_list);
+        rvResultList = result.findViewById(R.id.rv_result_list);
 
-        topStoriesList = new ArrayList<>();
-        topStoriesAdapter = new TopStoriesAdapter(this, topStoriesList);
+        resultList = new ArrayList<>();
+      //  resultAdapter = new ResultAdapter(this, resultList);
 
         mLayoutManager = new GridLayoutManager(this.getContext(),1);
-        rvTopStoriesList.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(this.getContext(), 10), true));
-        rvTopStoriesList.setItemAnimator(new DefaultItemAnimator());
-        rvTopStoriesList.setAdapter(topStoriesAdapter);
-        rvTopStoriesList.setLayoutManager(mLayoutManager);
+        rvResultList.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(this.getContext(), 10), true));
+        rvResultList.setItemAnimator(new DefaultItemAnimator());
+        rvResultList.setAdapter(resultAdapter);
+        rvResultList.setLayoutManager(mLayoutManager);
 
         pbLoading = result.findViewById(R.id.pb_loading);
 
@@ -105,18 +114,19 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
     }
 
+
     /**
      * This function will contain listeners for all views.
      */
     private void setListeners() {
 
-        rvTopStoriesList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvResultList.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                visibleItemCount = rvTopStoriesList.getChildCount();
+                visibleItemCount = rvResultList.getChildCount();
                 totalItemCount = mLayoutManager.getItemCount();
                 firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
 
@@ -129,7 +139,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                 }
                 if (!loading && (totalItemCount - visibleItemCount)
                         <= (firstVisibleItem + visibleThreshold)) {
-                    topStoriesPresenter.getMoreData(pageNo);
+                    resultPresenter.getMoreData(pageNo, categories, keyword);
                     loading = true;
                 }
             }
@@ -138,33 +148,23 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
 
 
-    // Click on article
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_details)
+        ItemClickSupport.addTo(rvResultList, R.layout.fragment_details)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        /**
-                        topStoriesDetailsFragment = new TopStoriesDetailsFragment();
+
+                        resultDetailFragment = new ResultDetailFragment();
                         Bundle args = new Bundle();
-                        args.putString("key", topStoriesAdapter.getArticle(position).getUrl());
-                        topStoriesDetailsFragment.setArguments(args);
+                        args.putString("key", resultAdapter.getArticle(position).getWeb_url());
+                        resultDetailFragment.setArguments(args);
 
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_page_top_stories, topStoriesDetailsFragment)
+                                .replace(R.id.fragment_page_result, resultDetailFragment)
                                 .addToBackStack(null)
                                 .commit();
-**/
 
-
-
-                        Intent intent= new Intent(getActivity() , DetailActivity.class);
-
-                        intent.putExtra("key_url", topStoriesAdapter.getArticle(position).getUrl());
-
-                        startActivity(intent);
                     }
-
                 });
     }
 
@@ -180,9 +180,9 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     }
 
     @Override
-    public void setDataToRecyclerView(List<TopStories> topStoriesArrayList) {
-        topStoriesAdapter.updateList(topStoriesArrayList);
-        topStoriesAdapter.notifyDataSetChanged();
+    public void setDataToRecyclerView(List<Docs> resultArrayList) {
+        resultAdapter.updateList(resultArrayList);
+        resultAdapter.notifyDataSetChanged();
 
         // This will help us to fetch data from next page no.
         pageNo++;
@@ -197,19 +197,23 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     @Override
     public void onDestroy() {
         super.onDestroy();
-        topStoriesPresenter.onDestroy();
+        resultPresenter.onDestroy();
     }
+
 
 
     @Override
     public void showEmptyView() {
-        rvTopStoriesList.setVisibility(View.GONE);
+
+        rvResultList.setVisibility(View.GONE);
         tvEmptyView.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     public void hideEmptyView() {
-        rvTopStoriesList.setVisibility(View.VISIBLE);
+        rvResultList.setVisibility(View.VISIBLE);
         tvEmptyView.setVisibility(View.GONE);
     }
+
 }
