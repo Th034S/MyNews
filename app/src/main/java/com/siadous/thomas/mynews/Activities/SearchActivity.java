@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews.Activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.siadous.thomas.mynews.Fragments.SearchFragment;
 import com.siadous.thomas.mynews.R;
@@ -20,8 +24,9 @@ import com.siadous.thomas.mynews.result_list.ResultActivity;
 import com.siadous.thomas.mynews.result_list.ResultFragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
 
     SearchFragment searchFragment;
 
@@ -36,6 +41,9 @@ public class SearchActivity extends AppCompatActivity {
     CheckBox entrepreneursCheckBox;
     String keyword = " ";
     ResultFragment resultFragment;
+    Spinner beginDateSpinner;
+    Spinner endDateSpinner;
+    DatePickerDialog datePickerDialog;
 
 
     @Override
@@ -48,6 +56,23 @@ public class SearchActivity extends AppCompatActivity {
         configureToolbar();
 
         initUI();
+/**
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getApplicationContext(), SearchActivity.this, year, month, day);
+
+
+        beginDateSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
+**/
 
         searchButton.setEnabled(false);
 
@@ -83,6 +108,9 @@ public class SearchActivity extends AppCompatActivity {
        }
 
    }
+
+
+
 
 
     private void configureAndShowSearchFragment() {
@@ -189,7 +217,12 @@ public class SearchActivity extends AppCompatActivity {
         businessCheckBox = findViewById(R.id.checkBox_business);
         artsCheckBox = findViewById(R.id.checkBox_arts);
         entrepreneursCheckBox = findViewById(R.id.checkBox_entrepreneurs);
-
+        beginDateSpinner = findViewById(R.id.spinner_begin_date);
+        endDateSpinner = findViewById(R.id.spinner_end_date);
     }
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+    }
 }

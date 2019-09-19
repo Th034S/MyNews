@@ -87,7 +87,7 @@ public class ResultFragment extends Fragment implements ResultContract.View, Sho
         resultPresenter = new ResultPresenter(this);
 
         // Obtenir les données de la page 1
-        resultPresenter.requestDataFromServer(categories, keyword);
+      //  resultPresenter.requestDataFromServer(categories, keyword);
         this.configureOnClickRecyclerView();
 
         return result;
@@ -139,7 +139,7 @@ public class ResultFragment extends Fragment implements ResultContract.View, Sho
                 }
                 if (!loading && (totalItemCount - visibleItemCount)
                         <= (firstVisibleItem + visibleThreshold)) {
-                    resultPresenter.getMoreData(pageNo, categories, keyword);
+                //    resultPresenter.getMoreData(pageNo, categories, keyword);
                     loading = true;
                 }
             }

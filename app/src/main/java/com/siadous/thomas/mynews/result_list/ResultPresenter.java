@@ -25,21 +25,21 @@ public class ResultPresenter implements ResultContract.Presenter, ResultContract
 
 
     @Override
-    public void getMoreData(int pageNo, ArrayList<String> categories, String keyword) {
+    public void getMoreData(int pageNo, ArrayList<String> categories, String keyword, String beginDate, String endDate) {
 
         if (resultListView != null) {
             resultListView.showProgress();
         }
-        resultListModel.getResultList(this, pageNo, categories, keyword);
+        resultListModel.getResultList(this, pageNo, categories, keyword, beginDate, endDate);
     }
 
     @Override
-    public void requestDataFromServer(ArrayList<String> categories, String keyword) {
+    public void requestDataFromServer(ArrayList<String> categories, String keyword, String beginDate, String endDate) {
         if (resultListView != null) {
             resultListView.showProgress();
         }
         Log.d("dataRequest", "lelelelelelel");
-        resultListModel.getResultList(this, 1, categories, keyword);
+        resultListModel.getResultList(this, 1, categories, keyword, beginDate, endDate);
     }
 
     @Override

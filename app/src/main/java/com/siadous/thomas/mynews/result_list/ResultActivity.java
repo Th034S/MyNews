@@ -64,6 +64,8 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
 
     String keyword;
     ArrayList<String> categories;
+    String beginDate;
+    String endDate;
 
 
 
@@ -89,7 +91,7 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
         resultPresenter = new ResultPresenter(this);
 
         // Obtenir les données de la page 1
-        resultPresenter.requestDataFromServer(categories, keyword);
+        resultPresenter.requestDataFromServer(categories, keyword, beginDate, endDate);
         this.configureOnClickRecyclerView();
     }
 
@@ -155,7 +157,7 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
                 }
                 if (!loading && (totalItemCount - visibleItemCount)
                         <= (firstVisibleItem + visibleThreshold)) {
-                    resultPresenter.getMoreData(pageNo, categories, keyword);
+                    resultPresenter.getMoreData(pageNo, categories, keyword, beginDate, endDate);
                     loading = true;
                 }
             }

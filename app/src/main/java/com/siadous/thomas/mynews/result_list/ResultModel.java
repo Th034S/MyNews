@@ -27,12 +27,12 @@ public class ResultModel implements ResultContract.Model {
      * @param pageNo : Which page to load.
      */
     @Override
-    public void getResultList(final ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, ArrayList<String> categories, String keyword) {
+    public void getResultList(final ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, ArrayList<String> categories, String keyword, String beginDate, String endDate) {
 
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        Call<ArticleSearch> call = apiService.getArticleSearch(API_KEY, categories, pageNo, keyword);
+        Call<ArticleSearch> call = apiService.getArticleSearch(API_KEY, categories, pageNo, keyword, beginDate, endDate);
 
         call.enqueue(new Callback<ArticleSearch>() {
             @Override
