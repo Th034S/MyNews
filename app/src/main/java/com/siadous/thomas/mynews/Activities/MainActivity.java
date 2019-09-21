@@ -38,11 +38,12 @@ public class MainActivity extends AppCompatActivity {
         //3 - Handle actions on menu items
         switch (item.getItemId()) {
             case R.id.menu_activity_main_params:
-                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                launchNotificationActivity();
+                // Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_activity_main_search:
                 launchSearchActivity();
-                Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
+                 // Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -71,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.startActivity(myIntent);
     }
 
+
+    private void launchNotificationActivity() {
+        Intent myIntent = new Intent(MainActivity.this, NotificationActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
 
     // Add menu in Toolbar
     @Override

@@ -30,4 +30,8 @@ public interface ApiInterface {
                                          @Query("page") int PageNo, @Query("keyword") String keyword,
                                          @Query("begin_date") String beginDate, @Query("end_date") String endDate );
 
+
+    @GET ("svc/search/v2/articlesearch.json")
+    Call<ArticleSearch> getArticleForNotification(@Query("api-key") String apiKey, @Query("q") ArrayList<String> categories,
+                                         @Query("page") int PageNo, @Query("keyword") String keyword);
 }

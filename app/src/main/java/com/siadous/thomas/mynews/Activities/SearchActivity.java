@@ -131,9 +131,11 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         switch (item.getItemId()) {
             case android.R.id.home:
 
+                /**
                 Intent intent = new Intent(SearchActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                **/
                 finish();
                 return true;
 
@@ -141,14 +143,14 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
                 return super.onOptionsItemSelected(item);
         }
     }
-
+/**
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(SearchActivity.this, MainActivity.class));
         finish();
     }
-
+**/
 
     private void launchResultFragmentWithBundle() {
 
