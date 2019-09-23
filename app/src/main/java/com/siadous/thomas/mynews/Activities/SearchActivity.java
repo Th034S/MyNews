@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.siadous.thomas.mynews.Fragments.SearchFragment;
@@ -41,8 +42,8 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
     CheckBox entrepreneursCheckBox;
     String keyword = " ";
     ResultFragment resultFragment;
-    Spinner beginDateSpinner;
-    Spinner endDateSpinner;
+    LinearLayout linearLayoutBeginDate;
+    LinearLayout linearLayoutEndDate;
     DatePickerDialog datePickerDialog;
 
 
@@ -56,23 +57,10 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         configureToolbar();
 
         initUI();
-/**
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getApplicationContext(), SearchActivity.this, year, month, day);
 
 
-        beginDateSpinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePickerDialog.show();
-            }
-        });
-**/
+        configureClickDate();
+
 
         searchButton.setEnabled(false);
 
@@ -90,6 +78,31 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         configureAndShowSearchFragment();
     }
 
+
+    private void configureClickDate() {
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(
+                SearchActivity.this, SearchActivity.this, year, month, day);
+
+
+        linearLayoutBeginDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
+
+        linearLayoutEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
+    }
 
    private void configureToolbar() {
        Toolbar toolbar = findViewById(R.id.toolbar);
@@ -219,8 +232,9 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         businessCheckBox = findViewById(R.id.checkBox_business);
         artsCheckBox = findViewById(R.id.checkBox_arts);
         entrepreneursCheckBox = findViewById(R.id.checkBox_entrepreneurs);
-        beginDateSpinner = findViewById(R.id.spinner_begin_date);
-        endDateSpinner = findViewById(R.id.spinner_end_date);
+        linearLayoutBeginDate = findViewById(R.id.linear_layout_begin_date);
+        linearLayoutEndDate = findViewById(R.id.linear_layout_end_date);
+
     }
 
     @Override
