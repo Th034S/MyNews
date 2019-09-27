@@ -144,18 +144,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        /**
-                        topStoriesDetailsFragment = new TopStoriesDetailsFragment();
-                        Bundle args = new Bundle();
-                        args.putString("key", topStoriesAdapter.getArticle(position).getUrl());
-                        topStoriesDetailsFragment.setArguments(args);
-
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_page_top_stories, topStoriesDetailsFragment)
-                                .addToBackStack(null)
-                                .commit();
-**/
-
 
 
                         Intent intent= new Intent(getActivity() , DetailActivity.class);

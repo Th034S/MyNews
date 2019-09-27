@@ -26,12 +26,12 @@ public interface ApiInterface {
     Call<Education> getEducation(@Query("api-key") String apiKey, @Query("page") int PageNo);
 
     @GET ("svc/search/v2/articlesearch.json")
-    Call<ArticleSearch> getArticleSearch(@Query("api-key") String apiKey, @Query("q") ArrayList<String> categories,
+    Call<ArticleSearch> getArticleSearch(@Query("api-key") String apiKey, @Query("q") String categories,
                                          @Query("page") int PageNo, @Query("keyword") String keyword,
-                                         @Query("begin_date") String beginDate, @Query("end_date") String endDate );
+                                         @Query("begin_date") int beginDate, @Query("end_date") int endDate );
 
 
     @GET ("svc/search/v2/articlesearch.json")
-    Call<ArticleSearch> getArticleForNotification(@Query("api-key") String apiKey, @Query("q") ArrayList<String> categories,
+    Call<ArticleSearch> getArticleForNotification(@Query("api-key") String apiKey, @Query("q") String categories,
                                          @Query("page") int PageNo, @Query("keyword") String keyword);
 }

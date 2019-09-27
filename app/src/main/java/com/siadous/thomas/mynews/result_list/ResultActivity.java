@@ -63,9 +63,9 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     private GridLayoutManager mLayoutManager;
 
     String keyword;
-    ArrayList<String> categories;
-    String beginDate;
-    String endDate;
+    String categories;
+    int beginDate;
+    int endDate;
 
 
 
@@ -77,7 +77,9 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
         Intent intent = getIntent();
         if (null != intent) {
             keyword = intent.getStringExtra("keyword");
-            categories = intent.getStringArrayListExtra("categories");
+            categories = intent.getStringExtra("categories");
+            beginDate = intent.getIntExtra("begin_date", 0 );
+            endDate = intent.getIntExtra("end_date", 0);
         }
 
         configureToolbar();

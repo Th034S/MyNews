@@ -2,6 +2,7 @@ package com.siadous.thomas.mynews.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
 
     SearchFragment searchFragment;
 
-    ArrayList<String> categories;
+    String categories = "";
     Button searchButton;
     EditText editTextSearch;
     CheckBox politicsCheckBox;
@@ -42,9 +43,19 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
     CheckBox entrepreneursCheckBox;
     String keyword = " ";
     ResultFragment resultFragment;
-    LinearLayout linearLayoutBeginDate;
-    LinearLayout linearLayoutEndDate;
+    ConstraintLayout constraintLayoutBeginDate;
+    ConstraintLayout constraintLayoutEndDate;
     DatePickerDialog datePickerDialog;
+    int beginDate;
+    int endDate;
+    int day;
+    int month;
+    int year;
+    int day2;
+    int month2;
+    int year2;
+    DatePickerDialog datePickerDialogBegin;
+    DatePickerDialog datePickerDialogEnd;
 
 
     @Override
@@ -71,7 +82,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
             public void onClick(View view) {
                 retrieveKeyWord();
                 retrieveCategories();
-                launchResultFragmentWithBundle();
+                launchResultActivity();
             }
         });
 
@@ -81,25 +92,33 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
 
     private void configureClickDate() {
         final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
 
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(
+        datePickerDialogBegin = new DatePickerDialog(
                 SearchActivity.this, SearchActivity.this, year, month, day);
 
 
-        linearLayoutBeginDate.setOnClickListener(new View.OnClickListener() {
+        final Calendar c1 = Calendar.getInstance();
+        year2 = c1.get(Calendar.YEAR);
+        month2 = c1.get(Calendar.MONTH);
+        day2 = c1.get(Calendar.DAY_OF_MONTH);
+
+        datePickerDialogEnd = new DatePickerDialog(
+                SearchActivity.this, SearchActivity.this, year2, month2, day2);
+
+        constraintLayoutBeginDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datePickerDialog.show();
+                datePickerDialogBegin.show();
             }
         });
 
-        linearLayoutEndDate.setOnClickListener(new View.OnClickListener() {
+        constraintLayoutEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datePickerDialog.show();
+                datePickerDialogEnd.show();
             }
         });
     }
@@ -124,8 +143,6 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
 
 
 
-
-
     private void configureAndShowSearchFragment() {
         searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.linear_layout_search_activity);
 
@@ -144,11 +161,6 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                /**
-                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                **/
                 finish();
                 return true;
 
@@ -156,21 +168,16 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
                 return super.onOptionsItemSelected(item);
         }
     }
-/**
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(SearchActivity.this, MainActivity.class));
-        finish();
-    }
-**/
 
-    private void launchResultFragmentWithBundle() {
+
+    private void launchResultActivity() {
 
             Intent intent= new Intent(SearchActivity.this ,ResultActivity.class);
 
             intent.putExtra("keyword", keyword);
             intent.putExtra("categories", categories);
+            intent.putExtra("begin_date", beginDate);
+            intent.putExtra("end_date", endDate);
 
             startActivity(intent);
 
@@ -197,24 +204,48 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
     }
 
     private void retrieveCategories() {
-        categories = new ArrayList<>();
+
         if (politicsCheckBox.isChecked()) {
-            categories.add("politics");
+            if (categories.equals("")) {
+                categories = "politics";
+            } else {
+                categories = categories + ", politics";
+            }
         }
-        else if (artsCheckBox.isChecked()) {
-            categories.add("arts");
+        if (artsCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "arts";
+            } else {
+                categories = categories + ", arts";
+            }
         }
-        else if(entrepreneursCheckBox.isChecked()) {
-            categories.add("entrepreneurs");
+        if(entrepreneursCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "entrepreneurs";
+            } else {
+                categories = categories + ", entrepreneurs";
+            }
         }
-        else if(businessCheckBox.isChecked()) {
-            categories.add("business");
+        if(businessCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "business";
+            } else {
+                categories = categories + ", business";
+            }
         }
-        else if(travelCheckBox.isChecked()) {
-            categories.add("travel");
+        if(travelCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "travel";
+            } else {
+                categories = categories + ", travel";
+            }
         }
-        else if(sportsCheckBox.isChecked()) {
-            categories.add("sports");
+        if(sportsCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "sports";
+            } else {
+                categories = categories + ", sports";
+            }
         }
     }
 
@@ -232,13 +263,16 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         businessCheckBox = findViewById(R.id.checkBox_business);
         artsCheckBox = findViewById(R.id.checkBox_arts);
         entrepreneursCheckBox = findViewById(R.id.checkBox_entrepreneurs);
-        linearLayoutBeginDate = findViewById(R.id.linear_layout_begin_date);
-        linearLayoutEndDate = findViewById(R.id.linear_layout_end_date);
+        constraintLayoutBeginDate = findViewById(R.id.constraint_layout_begin_date);
+        constraintLayoutEndDate = findViewById(R.id.constraint_layout_end_date);
 
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-
+        beginDate = year + month + day;
+        datePickerDialogBegin.cancel();
+        endDate = year2 + month2 + day2;
+        datePickerDialogEnd.cancel();
     }
 }

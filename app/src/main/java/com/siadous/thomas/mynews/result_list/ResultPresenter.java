@@ -25,7 +25,7 @@ public class ResultPresenter implements ResultContract.Presenter, ResultContract
 
 
     @Override
-    public void getMoreData(int pageNo, ArrayList<String> categories, String keyword, String beginDate, String endDate) {
+    public void getMoreData(int pageNo, String categories, String keyword, int beginDate, int endDate) {
 
         if (resultListView != null) {
             resultListView.showProgress();
@@ -34,7 +34,7 @@ public class ResultPresenter implements ResultContract.Presenter, ResultContract
     }
 
     @Override
-    public void requestDataFromServer(ArrayList<String> categories, String keyword, String beginDate, String endDate) {
+    public void requestDataFromServer(String categories, String keyword, int beginDate, int endDate) {
         if (resultListView != null) {
             resultListView.showProgress();
         }

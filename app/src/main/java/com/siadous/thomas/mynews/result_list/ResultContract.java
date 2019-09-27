@@ -18,7 +18,7 @@ public interface ResultContract {
             void onFailure(Throwable t);
         }
 
-        void getResultList(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, ArrayList<String> categories, String keyword, String beginDate, String endDate);
+        void getResultList(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate);
     }
 
     // Display data in a recycler view
@@ -38,9 +38,9 @@ public interface ResultContract {
 
         void onDestroy();
 
-        void getMoreData(int pageNo, ArrayList<String> categories, String keyword, String beginDate, String endDate);
+        void getMoreData(int pageNo, String categories, String keyword, int beginDate, int endDate);
 
-        void requestDataFromServer( ArrayList<String> categories, String keyword, String beginDate, String endDate);
+        void requestDataFromServer( String categories, String keyword, int beginDate, int endDate);
 
     }
 }

@@ -27,7 +27,7 @@ public class ResultModel implements ResultContract.Model {
      * @param pageNo : Which page to load.
      */
     @Override
-    public void getResultList(final ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, ArrayList<String> categories, String keyword, String beginDate, String endDate) {
+    public void getResultList(final ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate) {
 
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
