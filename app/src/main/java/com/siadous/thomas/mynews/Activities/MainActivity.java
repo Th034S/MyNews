@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
 import com.siadous.thomas.mynews.Fragments.HomeFragment;
-import com.siadous.thomas.mynews.Fragments.SearchFragment;
 import com.siadous.thomas.mynews.R;
 
 
@@ -16,7 +15,7 @@ import com.siadous.thomas.mynews.R;
 public class MainActivity extends AppCompatActivity {
 
     private HomeFragment homeFragment;
-    SearchFragment searchFragment;
+
 
 
     @Override
@@ -57,14 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void launchSearchFragment() {
-        searchFragment = new SearchFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout_main , searchFragment)
-                .addToBackStack(null)
-                .commit();
 
-    }
 
 
     private void launchSearchActivity() {

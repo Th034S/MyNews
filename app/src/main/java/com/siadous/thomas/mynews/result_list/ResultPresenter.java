@@ -34,12 +34,30 @@ public class ResultPresenter implements ResultContract.Presenter, ResultContract
     }
 
     @Override
+    public void getMoreDataWithoutDate(int pageNo, String categories, String keyword) {
+        if (resultListView != null) {
+            resultListView.showProgress();
+        }
+        resultListModel.getResultListWithoutDate(this, pageNo, categories, keyword);
+    }
+
+    @Override
     public void requestDataFromServer(String categories, String keyword, int beginDate, int endDate) {
         if (resultListView != null) {
             resultListView.showProgress();
         }
         Log.d("dataRequest", "lelelelelelel");
         resultListModel.getResultList(this, 1, categories, keyword, beginDate, endDate);
+    }
+
+    @Override
+    public void requestDataFromServerWithoutDate(String categories, String keyword) {
+        if (resultListView != null) {
+            resultListView.showProgress();
+        }
+        Log.d("dataRequest", "lelelelelelel");
+        resultListModel.getResultListWithoutDate(this, 1, categories, keyword);
+
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.siadous.thomas.mynews.Activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,25 +11,19 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 
-import com.siadous.thomas.mynews.Fragments.SearchFragment;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.result_list.ResultActivity;
-import com.siadous.thomas.mynews.result_list.ResultFragment;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SearchActivity extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
 
-    SearchFragment searchFragment;
+  //  SearchFragment searchFragment;
 
     String categories = "";
     Button searchButton;
@@ -42,12 +35,12 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
     CheckBox artsCheckBox;
     CheckBox entrepreneursCheckBox;
     String keyword = " ";
-    ResultFragment resultFragment;
+   // ResultFragment resultFragment;
     ConstraintLayout constraintLayoutBeginDate;
     ConstraintLayout constraintLayoutEndDate;
     DatePickerDialog datePickerDialog;
-    int beginDate;
-    int endDate;
+    int beginDate = 0;
+    int endDate = 0;
     int day;
     int month;
     int year;
@@ -86,7 +79,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
             }
         });
 
-        configureAndShowSearchFragment();
+        //configureAndShowSearchFragment();
     }
 
 
@@ -97,7 +90,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         day = c.get(Calendar.DAY_OF_MONTH);
 
         datePickerDialogBegin = new DatePickerDialog(
-                SearchActivity.this, SearchActivity.this, year, month, day);
+                SearchActivity.this,R.style.DialogTheme , SearchActivity.this, year, month, day);
 
 
         final Calendar c1 = Calendar.getInstance();
@@ -106,7 +99,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         day2 = c1.get(Calendar.DAY_OF_MONTH);
 
         datePickerDialogEnd = new DatePickerDialog(
-                SearchActivity.this, SearchActivity.this, year2, month2, day2);
+                SearchActivity.this, R.style.DialogTheme, SearchActivity.this, year2, month2, day2);
 
         constraintLayoutBeginDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +135,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
    }
 
 
-
+/**
     private void configureAndShowSearchFragment() {
         searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.linear_layout_search_activity);
 
@@ -155,7 +148,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
                     .commit();
         }
     }
-
+**/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -176,8 +169,10 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
 
             intent.putExtra("keyword", keyword);
             intent.putExtra("categories", categories);
-            intent.putExtra("begin_date", beginDate);
-            intent.putExtra("end_date", endDate);
+            if(beginDate!= 0 && endDate !=0) {
+                intent.putExtra("begin_date", beginDate);
+                intent.putExtra("end_date", endDate);
+            }
 
             startActivity(intent);
 
@@ -271,8 +266,6 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         beginDate = year + month + day;
-        datePickerDialogBegin.cancel();
         endDate = year2 + month2 + day2;
-        datePickerDialogEnd.cancel();
     }
 }

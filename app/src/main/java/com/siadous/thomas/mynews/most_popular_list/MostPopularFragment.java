@@ -43,7 +43,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private MostPopularDetailFragment mostPopularDetailFragment;
+
 
     public View result;
 
@@ -140,7 +140,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
 
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvMostPopularList, R.layout.fragment_details)
+        ItemClickSupport.addTo(rvMostPopularList, R.layout.activity_detail)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

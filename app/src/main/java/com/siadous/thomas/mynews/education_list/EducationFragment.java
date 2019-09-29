@@ -44,7 +44,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
     private EducationResponse education;
-    private EducationDetailFragment educationDetailFragment;
+
 
     public View result;
 
@@ -140,7 +140,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
 
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvEducationList, R.layout.fragment_details)
+        ItemClickSupport.addTo(rvEducationList, R.layout.activity_detail)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

@@ -32,4 +32,8 @@
         </item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/blueColor</item>
+    </style>
+
 </resources>

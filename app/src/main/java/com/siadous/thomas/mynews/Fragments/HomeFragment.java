@@ -21,7 +21,7 @@ import com.siadous.thomas.mynews.R;
 public class HomeFragment extends Fragment {
 
     View view;
-    SearchFragment searchFragment;
+
     String TAG = "HomeFragment";
 
     public HomeFragment() {

@@ -48,7 +48,6 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
     private ArticleSearchResponse articleSearch;
-    private ResultDetailFragment resultDetailFragment;
     DetailActivity detailActivity;
 
     public View result;
@@ -92,8 +91,13 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
         // Initialiser le Presenter
         resultPresenter = new ResultPresenter(this);
 
-        // Obtenir les données de la page 1
-        resultPresenter.requestDataFromServer(categories, keyword, beginDate, endDate);
+
+        if(beginDate !=0 && endDate !=0) {
+            // Obtenir les données de la page 1
+            resultPresenter.requestDataFromServer(categories, keyword, beginDate, endDate);
+        }else {
+            resultPresenter.requestDataFromServerWithoutDate(categories, keyword);
+        }
         this.configureOnClickRecyclerView();
     }
 
@@ -159,7 +163,9 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
                 }
                 if (!loading && (totalItemCount - visibleItemCount)
                         <= (firstVisibleItem + visibleThreshold)) {
-                    resultPresenter.getMoreData(pageNo, categories, keyword, beginDate, endDate);
+                    if(beginDate != 0 && endDate != 0) {
+                        resultPresenter.getMoreData(pageNo, categories, keyword, beginDate, endDate);
+                    } else { resultPresenter.getMoreDataWithoutDate(pageNo, categories, keyword); }
                     loading = true;
                 }
             }
@@ -186,7 +192,7 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     }
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvResultList, R.layout.fragment_details)
+        ItemClickSupport.addTo(rvResultList, R.layout.activity_detail)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

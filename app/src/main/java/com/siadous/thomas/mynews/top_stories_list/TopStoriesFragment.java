@@ -42,7 +42,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private TopStoriesDetailsFragment topStoriesDetailsFragment;
+
 
     public View result;
 
@@ -140,7 +140,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
     // Click on article
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(rvTopStoriesList, R.layout.fragment_details)
+        ItemClickSupport.addTo(rvTopStoriesList, R.layout.activity_detail)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {

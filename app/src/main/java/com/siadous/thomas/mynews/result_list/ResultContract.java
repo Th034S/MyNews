@@ -13,12 +13,13 @@ public interface ResultContract {
 
         interface OnFinishedListener {
 
-            void onFinished(List<Docs> educationList);
+            void onFinished(List<Docs> resultList);
 
             void onFailure(Throwable t);
         }
 
         void getResultList(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate);
+        void getResultListWithoutDate(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword);
     }
 
     // Display data in a recycler view
@@ -39,8 +40,10 @@ public interface ResultContract {
         void onDestroy();
 
         void getMoreData(int pageNo, String categories, String keyword, int beginDate, int endDate);
+        void getMoreDataWithoutDate(int pageNo, String categories, String keyword);
+
 
         void requestDataFromServer( String categories, String keyword, int beginDate, int endDate);
-
+        void requestDataFromServerWithoutDate( String categories, String keyword);
     }
 }

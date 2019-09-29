@@ -16,7 +16,6 @@ import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.DateUtils;
 import com.siadous.thomas.mynews.result_list.ResultActivity;
-import com.siadous.thomas.mynews.result_list.ResultFragment;
 
 import java.util.List;
 
