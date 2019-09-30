@@ -9,18 +9,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.siadous.thomas.mynews.Activities.DetailActivity;
-import com.siadous.thomas.mynews.Activities.MainActivity;
 import com.siadous.thomas.mynews.Activities.SearchActivity;
 import com.siadous.thomas.mynews.Adapters.ResultAdapter;
 import com.siadous.thomas.mynews.Model.ArticleSearch.ArticleSearchResponse;

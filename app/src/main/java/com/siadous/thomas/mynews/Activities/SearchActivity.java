@@ -2,6 +2,7 @@ package com.siadous.thomas.mynews.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,13 +16,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.result_list.ResultActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class SearchActivity extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
+public class SearchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
   //  SearchFragment searchFragment;
 
@@ -34,6 +37,8 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
     CheckBox businessCheckBox;
     CheckBox artsCheckBox;
     CheckBox entrepreneursCheckBox;
+    TextView textViewBeginSetText;
+    TextView textViewEndSetText;
     String keyword = " ";
    // ResultFragment resultFragment;
     ConstraintLayout constraintLayoutBeginDate;
@@ -44,11 +49,10 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
     int day;
     int month;
     int year;
-    int day2;
-    int month2;
-    int year2;
+
     DatePickerDialog datePickerDialogBegin;
     DatePickerDialog datePickerDialogEnd;
+    private SimpleDateFormat dateFormatter;
 
 
     @Override
@@ -61,7 +65,6 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         configureToolbar();
 
         initUI();
-
 
         configureClickDate();
 
@@ -89,17 +92,22 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
 
+        long timeNowInmillis = c.getTimeInMillis() + 86_400_000;
+
         datePickerDialogBegin = new DatePickerDialog(
                 SearchActivity.this,R.style.DialogTheme , SearchActivity.this, year, month, day);
 
 
-        final Calendar c1 = Calendar.getInstance();
-        year2 = c1.get(Calendar.YEAR);
-        month2 = c1.get(Calendar.MONTH);
-        day2 = c1.get(Calendar.DAY_OF_MONTH);
+        datePickerDialogBegin.getDatePicker().setMaxDate(timeNowInmillis);
+
 
         datePickerDialogEnd = new DatePickerDialog(
-                SearchActivity.this, R.style.DialogTheme, SearchActivity.this, year2, month2, day2);
+                SearchActivity.this, R.style.DialogTheme, SearchActivity.this, year, month, day);
+
+        datePickerDialogEnd.getDatePicker().setMaxDate(timeNowInmillis);
+
+
+
 
         constraintLayoutBeginDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,13 +116,17 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
             }
         });
 
+
         constraintLayoutEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datePickerDialogEnd.show();
             }
         });
+
     }
+
+
 
    private void configureToolbar() {
        Toolbar toolbar = findViewById(R.id.toolbar);
@@ -169,7 +181,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
 
             intent.putExtra("keyword", keyword);
             intent.putExtra("categories", categories);
-            if(beginDate!= 0 && endDate !=0) {
+            if(beginDate != 0 && endDate != 0) {
                 intent.putExtra("begin_date", beginDate);
                 intent.putExtra("end_date", endDate);
             }
@@ -244,6 +256,7 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         }
     }
 
+
     private void retrieveKeyWord() {
         keyword = editTextSearch.getText().toString();
     }
@@ -260,12 +273,51 @@ public class SearchActivity extends AppCompatActivity  implements DatePickerDial
         entrepreneursCheckBox = findViewById(R.id.checkBox_entrepreneurs);
         constraintLayoutBeginDate = findViewById(R.id.constraint_layout_begin_date);
         constraintLayoutEndDate = findViewById(R.id.constraint_layout_end_date);
+        textViewBeginSetText = findViewById(R.id.text_view_begin_set_text);
+        textViewEndSetText = findViewById(R.id.text_view_end_set_text);
 
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        beginDate = year + month + day;
-        endDate = year2 + month2 + day2;
+    public void onDateSet(DatePicker datePicker, int ye, int mo, int da) {
+        Log.d("Search", " on DateSet GOOD !");
+
+
+
+        int m = mo + 1;
+        int o = 0;
+        int d = da;
+        if(datePickerDialogBegin.isShowing()) {
+            if (m < 10) {
+                beginDate = Integer.valueOf("" + ye + o + m + d);
+                textViewBeginSetText.setText(d + "/" + o + m + "/" + ye);
+            }
+            if (d < 10) {
+                beginDate = Integer.valueOf("" + ye + m + o + d);
+                textViewBeginSetText.setText("" + o + d + "/" + m + "/" + ye);
+            }
+            if(d < 10 && m < 10) {
+                beginDate = Integer.valueOf("" + ye + o + m + o + d);
+                textViewBeginSetText.setText("" + o + d + "/" + o + m + "/" + ye);
+            }
+
+        }
+        if(datePickerDialogEnd.isShowing()) {
+            if (m < 10) {
+                endDate = Integer.valueOf("" + ye + o + m + d);
+                textViewEndSetText.setText(d + "/" + o + m + "/" + ye);
+            }
+            if (d < 10) {
+                endDate = Integer.valueOf("" + ye + m + o + d);
+                textViewEndSetText.setText("" + o + d + "/" + m + "/" + ye);
+            }
+            if(d < 10 && m < 10) {
+                endDate = Integer.valueOf("" + ye + o + m + o + d);
+                textViewEndSetText.setText("" + o + d + "/" + o + m + "/" + ye);
+            }
+        }
     }
+
+
+
 }
