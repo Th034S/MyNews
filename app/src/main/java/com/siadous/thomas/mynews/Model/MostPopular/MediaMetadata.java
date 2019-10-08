@@ -48,10 +48,11 @@ public class MediaMetadata {
     {
         this.height = height;
     }
-
+/**
     @Override
     public String toString()
     {
         return "ClassPojo [format = "+format+", width = "+width+", url = "+url+", height = "+height+"]";
     }
+    **/
 }

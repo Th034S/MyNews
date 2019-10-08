@@ -79,14 +79,12 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
 
         configureToolbar();
 
-
         initUI();
 
         setListeners();
 
         // Initialiser le Presenter
         resultPresenter = new ResultPresenter(this);
-
 
         if(beginDate !=0 && endDate !=0) {
             // Obtenir les données de la page 1

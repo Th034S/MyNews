@@ -144,17 +144,6 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        /**
-                        educationDetailFragment = new EducationDetailFragment();
-                        Bundle args = new Bundle();
-                        args.putString("key", educationAdapter.getArticle(position).getWeb_url());
-                        educationDetailFragment.setArguments(args);
-
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_page_education, educationDetailFragment)
-                                .addToBackStack(null)
-                                .commit();
-                        **/
 
 
                         Intent intent= new Intent(getActivity() , DetailActivity.class);

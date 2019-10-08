@@ -51,7 +51,8 @@ public class TopStoriesModel implements TopStoriesContract.Model {
             @Override
             public void onFailure(@NonNull Call<TopStoriesListResponse> call, @NonNull Throwable t) {
                 // Log error here since request failed
-                Log.e(TAG, t.toString());
+                Log.e(
+                        TAG, t.toString());
                 onFinishedListener.onFailure(t);
             }
         });

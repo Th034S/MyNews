@@ -1,49 +1,67 @@
 package com.siadous.thomas.mynews.Model.MostPopular;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MostPopular {
 
 
+    @Expose
     @SerializedName("section")
     private String section;
 
+    @Expose
     @SerializedName("abstracts")
     private String abstracts;
 
+    @Expose
     @SerializedName("source")
     private String source;
 
+    @Expose
     @SerializedName("asset_id")
     private String asset_id;
 
+    @Expose
     @SerializedName("media")
     private Media[] media;
 
+    @Expose
     @SerializedName("type")
     private String type;
 
+    @Expose
     @SerializedName("title")
     private String title;
 
+    @Expose
     @SerializedName("uri")
     private String uri;
 
+    @Expose
     @SerializedName("url")
     private String url;
 
+    @Expose
     @SerializedName("adx_keywords")
     private String adx_keywords;
 
+    @Expose
     @SerializedName("id")
     private String id;
 
+    @Expose
     @SerializedName("byline")
     private String byline;
 
+    @Expose
     @SerializedName("published_date")
     private String published_date;
 
+    @Expose
     @SerializedName("views")
     private String views;
 

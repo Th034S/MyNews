@@ -145,19 +145,6 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
-                    /**
-                        mostPopularDetailFragment = new MostPopularDetailFragment();
-                        Bundle args = new Bundle();
-                        args.putString("key", mostPopularAdapter.getArticle(position).getUrl());
-                        mostPopularDetailFragment.setArguments(args);
-
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_page_most_popular, mostPopularDetailFragment)
-                                .addToBackStack(null)
-                                .commit();
-
-                     **/
-
                         Intent intent= new Intent(getActivity() , DetailActivity.class);
 
                         intent.putExtra("key_url", mostPopularAdapter.getArticle(position).getUrl());

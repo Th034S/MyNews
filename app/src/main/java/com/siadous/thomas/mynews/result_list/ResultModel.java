@@ -20,6 +20,11 @@ import static com.siadous.thomas.mynews.Utils.ApiClient.API_KEY;
 public class ResultModel implements ResultContract.Model {
 
     private final String TAG = "ResultModel";
+    private static int numberOfArticle = 0;
+
+    public static int getNumberOfArticle() {
+        return numberOfArticle;
+    }
 
     /**
      * This function will fetch movies data
@@ -62,7 +67,7 @@ public class ResultModel implements ResultContract.Model {
     }
 
     @Override
-    public void getResultListWithoutDate(final OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword) {
+    public int getResultListWithoutDate(final OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword) {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
@@ -76,6 +81,7 @@ public class ResultModel implements ResultContract.Model {
                     try {
                         List<Docs> result = response.body().getResponse().getDocs();
                         Log.d(TAG, "Number of articles received: "  + result.size());
+                        numberOfArticle = result.size();
                         onFinishedListener.onFinished(result);
                     } catch(NullPointerException e) {
                         Log.d(TAG, String.valueOf(e));
@@ -93,5 +99,6 @@ public class ResultModel implements ResultContract.Model {
                 onFinishedListener.onFailure(t);
             }
         });
+        return numberOfArticle;
     }
 }

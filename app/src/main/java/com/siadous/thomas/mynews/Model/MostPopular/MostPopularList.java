@@ -1,20 +1,25 @@
 package com.siadous.thomas.mynews.Model.MostPopular;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class MostPopularList {
 
+    @Expose
     @SerializedName("copyright")
     private String copyright;
 
+    @Expose
     @SerializedName("results")
     private List<MostPopular> results;
 
+    @Expose
     @SerializedName("num_results")
     private String num_results;
 
+    @Expose
     @SerializedName("status")
     private String status;
 

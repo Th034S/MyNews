@@ -1,11 +1,15 @@
 package com.siadous.thomas.mynews.Model.MostPopular;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Media {
 
     private String copyright;
 
+    @Expose
     @SerializedName("media-metadata")
     private MediaMetadata[] mediaMetadata;
 
@@ -76,10 +80,11 @@ public class Media {
     {
         this.approved_for_syndication = approved_for_syndication;
     }
-
+/**
     @Override
     public String toString()
     {
         return "ClassPojo [copyright = "+copyright+", media-metadata = "+mediaMetadata+", subtype = "+subtype+", caption = "+caption+", type = "+type+", approved_for_syndication = "+approved_for_syndication+"]";
     }
+    **/
 }

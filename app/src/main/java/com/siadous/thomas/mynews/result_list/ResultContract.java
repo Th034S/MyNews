@@ -19,7 +19,7 @@ public interface ResultContract {
         }
 
         void getResultList(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate);
-        void getResultListWithoutDate(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword);
+        int getResultListWithoutDate(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword);
     }
 
     // Display data in a recycler view

@@ -6,6 +6,7 @@ import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
 import com.siadous.thomas.mynews.Model.MostPopular.MostPopularList;
 import com.siadous.thomas.mynews.Utils.ApiClient;
 import com.siadous.thomas.mynews.Utils.ApiInterface;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +34,7 @@ public class MostPopularModel implements MostPopularContract.Model {
         call.enqueue(new Callback<MostPopularList>() {
             @Override
             public void onResponse(@NonNull Call<MostPopularList> call, @NonNull Response<MostPopularList> response) {
+                Log.d("mostPop", "aaaaaaaaa");
                 try {
                     assert response.body() != null;
                     List<MostPopular> mostPopulars = response.body().getResults();
@@ -46,6 +48,7 @@ public class MostPopularModel implements MostPopularContract.Model {
             @Override
             public void onFailure(@NonNull Call<MostPopularList> call, @NonNull Throwable t) {
                 // Log error here since request failed
+                Log.d("mostPop", "bbbbbbbbb");
                 Log.e(TAG, t.toString());
                 onFinishedListener.onFailure(t);
             }

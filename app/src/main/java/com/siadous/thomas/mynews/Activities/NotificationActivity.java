@@ -1,9 +1,12 @@
 package com.siadous.thomas.mynews.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,14 +15,19 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import com.siadous.thomas.mynews.R;
+import com.siadous.thomas.mynews.Utils.NotificationWorker;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class NotificationActivity extends AppCompatActivity {
 
 
-    ArrayList<String> categories;
+    String categories = "";
     EditText editTextSearch;
     CheckBox politicsCheckBox;
     CheckBox sportsCheckBox;
@@ -29,6 +37,13 @@ public class NotificationActivity extends AppCompatActivity {
     CheckBox entrepreneursCheckBox;
     Switch aSwitch;
     String keyword = " ";
+    private SharedPreferences mPreferences; // Use to store data
+    public final static String PREFERENCE_FILE = "PREFERENCE_FILE";
+    public final static String PREF_KEYWORD = "PREF_KEYWORD";
+    private String keywordPref;
+    private String categoriesPref;
+    public final static String PREF_CATEGORIES = "PREF_CATEGORIES";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +54,46 @@ public class NotificationActivity extends AppCompatActivity {
 
         initUI();
 
+        aSwitch.setEnabled(false);
+
+        editTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if((politicsCheckBox.isChecked() || businessCheckBox.isChecked() || sportsCheckBox.isChecked() ||
+                        artsCheckBox.isChecked() || travelCheckBox.isChecked() || entrepreneursCheckBox.isChecked())
+                        && s.toString().length() != 0) {
+                    aSwitch.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         aSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 retrieveKeyWord();
                 retrieveCategories();
+
+                mPreferences = getSharedPreferences(PREFERENCE_FILE, MODE_PRIVATE);
+
+                keywordPref = mPreferences.getString(PREF_KEYWORD, null);
+                categoriesPref = mPreferences.getString(PREF_CATEGORIES, null);
+
+                mPreferences.edit().putString(PREF_KEYWORD, keyword).apply();
+                mPreferences.edit().putString(PREF_CATEGORIES, categories).apply();
+
+                PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(NotificationWorker.class, 15, TimeUnit.SECONDS).build();
+
+                WorkManager.getInstance().enqueue(periodicWorkRequest);
             }
         });
     }
@@ -84,26 +134,51 @@ public class NotificationActivity extends AppCompatActivity {
 
 
     private void retrieveCategories() {
-        categories = new ArrayList<>();
+
         if (politicsCheckBox.isChecked()) {
-            categories.add("politics");
+            if (categories.equals("")) {
+                categories = "politics";
+            } else {
+                categories = categories + ", politics";
+            }
         }
-        else if (artsCheckBox.isChecked()) {
-            categories.add("arts");
+        if (artsCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "arts";
+            } else {
+                categories = categories + ", arts";
+            }
         }
-        else if(entrepreneursCheckBox.isChecked()) {
-            categories.add("entrepreneurs");
+        if(entrepreneursCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "entrepreneurs";
+            } else {
+                categories = categories + ", entrepreneurs";
+            }
         }
-        else if(businessCheckBox.isChecked()) {
-            categories.add("business");
+        if(businessCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "business";
+            } else {
+                categories = categories + ", business";
+            }
         }
-        else if(travelCheckBox.isChecked()) {
-            categories.add("travel");
+        if(travelCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "travel";
+            } else {
+                categories = categories + ", travel";
+            }
         }
-        else if(sportsCheckBox.isChecked()) {
-            categories.add("sports");
+        if(sportsCheckBox.isChecked()) {
+            if (categories.equals("")) {
+                categories = "sports";
+            } else {
+                categories = categories + ", sports";
+            }
         }
     }
+
 
     private void retrieveKeyWord() {
         keyword = editTextSearch.getText().toString();
