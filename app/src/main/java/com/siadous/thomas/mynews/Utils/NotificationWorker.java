@@ -1,8 +1,10 @@
 package com.siadous.thomas.mynews.Utils;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
@@ -37,7 +39,6 @@ public class NotificationWorker extends Worker {
     @Override
     public Result doWork() {
 
-
         mPreference = getApplicationContext().getSharedPreferences(NotificationActivity.PREFERENCE_FILE, MODE_PRIVATE);
 
         keyword = mPreference.getString(NotificationActivity.PREF_KEYWORD, null);
@@ -48,19 +49,30 @@ public class NotificationWorker extends Worker {
 
         numberOfArticle = resultModel.getResultListWithoutDate(onFinishedListener, 1, keyword, categories);
 
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getApplicationContext())
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Articles")
-                .setContentText("Nombre d'articles trouvés : " + numberOfArticle)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-
-        NotificationManager mNotificationManager =  getSystemService(this.getApplicationContext(), NotificationManager.class);
-
-
-        mNotificationManager.notify(0, builder.build());
+        displayNotification();
 
         return Result.success();
+    }
+
+
+    private void displayNotification() {
+
+     NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+
+     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+         NotificationChannel channel = new NotificationChannel("simplifiedcoding", "simplifiedcoding", NotificationManager.IMPORTANCE_DEFAULT);
+         assert notificationManager != null;
+         notificationManager.createNotificationChannel(channel);
+     }
+
+     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "simplifiedcoding")
+             .setContentTitle("Articles")
+             .setContentText("Nombre d'articles trouvés : " + numberOfArticle)
+             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+             .setSmallIcon(R.drawable.ic_launcher_background);
+
+        assert notificationManager != null;
+        notificationManager.notify(1, builder.build());
+
     }
 }

@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -22,6 +23,8 @@ import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.NotificationWorker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class NotificationActivity extends AppCompatActivity {
@@ -43,6 +46,8 @@ public class NotificationActivity extends AppCompatActivity {
     private String keywordPref;
     private String categoriesPref;
     public final static String PREF_CATEGORIES = "PREF_CATEGORIES";
+    int a;
+    int b;
 
 
     @Override
@@ -54,28 +59,8 @@ public class NotificationActivity extends AppCompatActivity {
 
         initUI();
 
-        aSwitch.setEnabled(false);
 
-        editTextSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if((politicsCheckBox.isChecked() || businessCheckBox.isChecked() || sportsCheckBox.isChecked() ||
-                        artsCheckBox.isChecked() || travelCheckBox.isChecked() || entrepreneursCheckBox.isChecked())
-                        && s.toString().length() != 0) {
-                    aSwitch.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         aSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +76,25 @@ public class NotificationActivity extends AppCompatActivity {
                 mPreferences.edit().putString(PREF_KEYWORD, keyword).apply();
                 mPreferences.edit().putString(PREF_CATEGORIES, categories).apply();
 
-                PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(NotificationWorker.class, 15, TimeUnit.SECONDS).build();
+                Calendar currentDate = Calendar.getInstance();
+                Calendar dueDate = Calendar.getInstance();
 
-                WorkManager.getInstance().enqueue(periodicWorkRequest);
+                dueDate.set(Calendar.HOUR_OF_DAY, 8);
+                dueDate.set(Calendar.MINUTE, 0);
+                dueDate.set(Calendar.SECOND, 0);
+
+                if(dueDate.before(currentDate)) {
+                    dueDate.add(Calendar.HOUR_OF_DAY, 24);
+                }
+
+                long timeDiff =  dueDate.getTimeInMillis() - currentDate.getTimeInMillis();
+
+                OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class).setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+                        .addTag("TAG_OUTPUT").build();
+                
+
+                WorkManager.getInstance().enqueue(oneTimeWorkRequest);
+
             }
         });
     }
@@ -107,7 +108,7 @@ public class NotificationActivity extends AppCompatActivity {
 
 
         try {
-            getSupportActionBar().setTitle("Notifications");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Notifications");
 
             // display back button
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
