@@ -15,6 +15,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -46,8 +48,8 @@ public class NotificationActivity extends AppCompatActivity {
     private String keywordPref;
     private String categoriesPref;
     public final static String PREF_CATEGORIES = "PREF_CATEGORIES";
-    int a;
-    int b;
+    String[] splitCategories;
+
 
 
     @Override
@@ -60,15 +62,58 @@ public class NotificationActivity extends AppCompatActivity {
         initUI();
 
 
+        mPreferences = getSharedPreferences(PREFERENCE_FILE, MODE_PRIVATE);
+
+        if ((mPreferences.getString(NotificationActivity.PREF_KEYWORD, null)) != null) {
+            keywordPref = mPreferences.getString(NotificationActivity.PREF_KEYWORD, null);
+            editTextSearch.setText(keywordPref);
+        }
+
+        if((mPreferences.getString(PREF_CATEGORIES, null)) != null){
+            categoriesPref = mPreferences.getString(NotificationActivity.PREF_CATEGORIES, null);
+
+            assert categoriesPref != null;
+            splitCategories =  categoriesPref.split(", ");
+
+            checkSplitCategories();
+        }
+
+        onClickSwitch();
+
+    }
 
 
+    private void checkSplitCategories() {
+        for (int a = 0; a < splitCategories.length ; a++) {
+            if (splitCategories[a].equals("politics")) {
+                politicsCheckBox.setChecked(true);
+            }
+            if (splitCategories[a].equals("arts")) {
+                artsCheckBox.setChecked(true);
+            }
+            if (splitCategories[a].equals("sports")) {
+                sportsCheckBox.setChecked(true);
+            }
+            if (splitCategories[a].equals("entrepreneurs")) {
+                entrepreneursCheckBox.setChecked(true);
+            }
+            if (splitCategories[a].equals("business")) {
+                businessCheckBox.setChecked(true);
+            }
+            if (splitCategories[a].equals("travel")) {
+                travelCheckBox.setChecked(true);
+            }
+        }
+
+    }
+
+
+    private void onClickSwitch() {
         aSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 retrieveKeyWord();
                 retrieveCategories();
-
-                mPreferences = getSharedPreferences(PREFERENCE_FILE, MODE_PRIVATE);
 
                 keywordPref = mPreferences.getString(PREF_KEYWORD, null);
                 categoriesPref = mPreferences.getString(PREF_CATEGORIES, null);
@@ -89,18 +134,21 @@ public class NotificationActivity extends AppCompatActivity {
 
                 long timeDiff =  dueDate.getTimeInMillis() - currentDate.getTimeInMillis();
 
+
+                Constraints constraints = new Constraints.Builder()
+                        .setRequiredNetworkType(NetworkType.CONNECTED)
+                        .build();
+
                 OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class).setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+                        .setConstraints(constraints)
                         .addTag("TAG_OUTPUT").build();
-                
+
 
                 WorkManager.getInstance().enqueue(oneTimeWorkRequest);
 
             }
         });
     }
-
-
-
 
     private void configureToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -117,7 +165,6 @@ public class NotificationActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             Log.e("your app", e.toString());
         }
-
     }
 
     @Override

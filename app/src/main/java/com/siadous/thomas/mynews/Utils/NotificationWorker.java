@@ -49,13 +49,13 @@ public class NotificationWorker extends Worker {
 
         numberOfArticle = resultModel.getResultListWithoutDate(onFinishedListener, 1, keyword, categories);
 
-        displayNotification();
+        displayNotification(keyword);
 
         return Result.success();
     }
 
 
-    private void displayNotification() {
+    private void displayNotification(String keyword) {
 
      NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
 
@@ -66,7 +66,7 @@ public class NotificationWorker extends Worker {
      }
 
      NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "simplifiedcoding")
-             .setContentTitle("Articles")
+             .setContentTitle("Articles sur : " + keyword)
              .setContentText("Nombre d'articles trouvés : " + numberOfArticle)
              .setPriority(NotificationCompat.PRIORITY_DEFAULT)
              .setSmallIcon(R.drawable.ic_launcher_background);
