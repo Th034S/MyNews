@@ -8,6 +8,11 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
+import androidx.work.Constraints;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -16,6 +21,9 @@ import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.result_list.ResultContract;
 import com.siadous.thomas.mynews.result_list.ResultModel;
 
+
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -48,6 +56,7 @@ public class NotificationWorker extends Worker {
         resultModel = new ResultModel();
 
         numberOfArticle = resultModel.getResultListWithoutDate(onFinishedListener, 1, keyword, categories);
+
 
         displayNotification(keyword);
 

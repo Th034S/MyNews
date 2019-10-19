@@ -16,10 +16,12 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import androidx.work.Constraints;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
+import androidx.work.WorkerParameters;
 
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.Utils.NotificationWorker;
@@ -121,6 +123,9 @@ public class NotificationActivity extends AppCompatActivity {
                 mPreferences.edit().putString(PREF_KEYWORD, keyword).apply();
                 mPreferences.edit().putString(PREF_CATEGORIES, categories).apply();
 
+
+
+
                 Calendar currentDate = Calendar.getInstance();
                 Calendar dueDate = Calendar.getInstance();
 
@@ -137,17 +142,21 @@ public class NotificationActivity extends AppCompatActivity {
 
                 Constraints constraints = new Constraints.Builder()
                         .setRequiredNetworkType(NetworkType.CONNECTED)
+                        .setRequiresDeviceIdle(true)
+                        .setRequiresCharging(true)
                         .build();
 
-                OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class).setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+                OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class)
+                        .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
                         .setConstraints(constraints)
-                        .addTag("TAG_OUTPUT").build();
+                        .addTag("TAG_OUTPUT")
+                        .build();
 
-
-                WorkManager.getInstance().enqueue(oneTimeWorkRequest);
+                WorkManager.getInstance().enqueueUniqueWork("TAG", ExistingWorkPolicy.REPLACE ,oneTimeWorkRequest);
 
             }
         });
+
     }
 
     private void configureToolbar() {
