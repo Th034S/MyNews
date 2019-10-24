@@ -12,6 +12,12 @@ import android.webkit.WebView;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.result_list.ResultActivity;
 
+import java.util.Objects;
+
+/*
+DetailActivity
+who loads the URL of the detail of an article through a webview
+ */
 public class DetailActivity extends AppCompatActivity {
 
     private WebView webView;
@@ -22,12 +28,10 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-
         Intent intent = getIntent();
         if (null != intent) {
             data = intent.getStringExtra("key_url");
         }
-
 
         configureToolbar();
 
@@ -43,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         try {
-            getSupportActionBar().setTitle("Detail");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Detail");
 
             // display back button
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,21 +63,11 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                /**
-                Intent intent = new Intent(DetailActivity.this, ResultActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                **/
-                finish();
-                return true;
-
-            default:
-
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
 
     }
 }

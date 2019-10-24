@@ -86,23 +86,23 @@ public class NotificationActivity extends AppCompatActivity {
 
 
     private void checkSplitCategories() {
-        for (int a = 0; a < splitCategories.length ; a++) {
-            if (splitCategories[a].equals("politics")) {
+        for (String splitCategory : splitCategories) {
+            if (splitCategory.equals("politics")) {
                 politicsCheckBox.setChecked(true);
             }
-            if (splitCategories[a].equals("arts")) {
+            if (splitCategory.equals("arts")) {
                 artsCheckBox.setChecked(true);
             }
-            if (splitCategories[a].equals("sports")) {
+            if (splitCategory.equals("sports")) {
                 sportsCheckBox.setChecked(true);
             }
-            if (splitCategories[a].equals("entrepreneurs")) {
+            if (splitCategory.equals("entrepreneurs")) {
                 entrepreneursCheckBox.setChecked(true);
             }
-            if (splitCategories[a].equals("business")) {
+            if (splitCategory.equals("business")) {
                 businessCheckBox.setChecked(true);
             }
-            if (splitCategories[a].equals("travel")) {
+            if (splitCategory.equals("travel")) {
                 travelCheckBox.setChecked(true);
             }
         }
@@ -122,9 +122,6 @@ public class NotificationActivity extends AppCompatActivity {
 
                 mPreferences.edit().putString(PREF_KEYWORD, keyword).apply();
                 mPreferences.edit().putString(PREF_CATEGORIES, categories).apply();
-
-
-
 
                 Calendar currentDate = Calendar.getInstance();
                 Calendar dueDate = Calendar.getInstance();

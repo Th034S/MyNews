@@ -1,6 +1,5 @@
 package com.siadous.thomas.mynews.top_stories_list;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.siadous.thomas.mynews.Activities.DetailActivity;
 import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
 import com.siadous.thomas.mynews.Model.TopStories.TopStories;
@@ -43,7 +41,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
 
-
     public View result;
 
     private int pageNo = 1;
@@ -67,7 +64,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
         result = inflater.inflate(R.layout.fragment_top_stories, container, false);
 
-        // Reference
         initUI();
 
         setListeners();

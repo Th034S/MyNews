@@ -29,7 +29,6 @@ public class PageAdapter extends FragmentPagerAdapter {
         }
     }
 
-
     // How many tabs do i want
     @Override
     public int getCount() {

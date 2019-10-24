@@ -86,7 +86,6 @@ public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularAdapter.
 
     }
 
-
     // Le nombre d'éléments à afficher
     @Override
     public int getItemCount() {

@@ -40,7 +40,6 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
     TextView textViewBeginSetText;
     TextView textViewEndSetText;
     String keyword = " ";
-   // ResultFragment resultFragment;
     ConstraintLayout constraintLayoutBeginDate;
     ConstraintLayout constraintLayoutEndDate;
     DatePickerDialog datePickerDialog;
@@ -60,14 +59,11 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-         Log.d("TAG", "on create SearchActivity");
-
         configureToolbar();
 
         initUI();
 
-        configureClickDate();
-
+        configureDatePickerAndClickDate();
 
         searchButton.setEnabled(false);
 
@@ -82,11 +78,10 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
             }
         });
 
-        //configureAndShowSearchFragment();
     }
 
 
-    private void configureClickDate() {
+    private void configureDatePickerAndClickDate() {
         final Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
@@ -97,7 +92,6 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
         datePickerDialogBegin = new DatePickerDialog(
                 SearchActivity.this,R.style.DialogTheme , SearchActivity.this, year, month, day);
 
-
         datePickerDialogBegin.getDatePicker().setMaxDate(timeNowInmillis);
 
 
@@ -105,7 +99,6 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
                 SearchActivity.this, R.style.DialogTheme, SearchActivity.this, year, month, day);
 
         datePickerDialogEnd.getDatePicker().setMaxDate(timeNowInmillis);
-
 
 
 
@@ -147,31 +140,14 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
    }
 
 
-/**
-    private void configureAndShowSearchFragment() {
-        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.linear_layout_search_activity);
 
-        if (searchFragment == null) {
-
-            searchFragment = new SearchFragment();
-
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.linear_layout_search_activity, searchFragment)
-                    .commit();
-        }
-    }
-**/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -279,42 +255,59 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int ye, int mo, int da) {
+    public void onDateSet(DatePicker datePicker, int ye, int mo, int d) {
         Log.d("Search", " on DateSet GOOD !");
 
+        storeDateAndDisplayDate(ye, mo, d);
+    }
 
+    private void storeDateAndDisplayDate(int ye, int mo, int d){
 
         int m = mo + 1;
         int o = 0;
-        int d = da;
+
         if(datePickerDialogBegin.isShowing()) {
-            if (m < 10) {
-                beginDate = Integer.valueOf("" + ye + o + m + d);
-                textViewBeginSetText.setText(d + "/" + o + m + "/" + ye);
-            }
-            if (d < 10) {
-                beginDate = Integer.valueOf("" + ye + m + o + d);
-                textViewBeginSetText.setText("" + o + d + "/" + m + "/" + ye);
-            }
-            if(d < 10 && m < 10) {
-                beginDate = Integer.valueOf("" + ye + o + m + o + d);
-                textViewBeginSetText.setText("" + o + d + "/" + o + m + "/" + ye);
+            if (d < 10 || m < 10)
+            {
+                if (m < 10) {
+                    beginDate = Integer.valueOf("" + ye + o + m + d);
+                    textViewBeginSetText.setText(d + "/" + o + m + "/" + ye);
+                }
+                if (d < 10) {
+                    beginDate = Integer.valueOf("" + ye + m + o + d);
+                    textViewBeginSetText.setText("" + o + d + "/" + m + "/" + ye);
+                }
+                if(d < 10 && m < 10) {
+                    beginDate = Integer.valueOf("" + ye + o + m + o + d);
+                    textViewBeginSetText.setText("" + o + d + "/" + o + m + "/" + ye);
+                }
+            } else
+            {
+                beginDate = Integer.valueOf("" + ye + m + d);
+                textViewBeginSetText.setText("" + d + "/" + m + "/" + ye);
             }
 
         }
         if(datePickerDialogEnd.isShowing()) {
-            if (m < 10) {
-                endDate = Integer.valueOf("" + ye + o + m + d);
-                textViewEndSetText.setText(d + "/" + o + m + "/" + ye);
+            if (d < 10 || m < 10) {
+                if (m < 10) {
+                    endDate = Integer.valueOf("" + ye + o + m + d);
+                    textViewEndSetText.setText(d + "/" + o + m + "/" + ye);
+                }
+                if (d < 10) {
+                    endDate = Integer.valueOf("" + ye + m + o + d);
+                    textViewEndSetText.setText("" + o + d + "/" + m + "/" + ye);
+                }
+                if (d < 10 && m < 10) {
+                    endDate = Integer.valueOf("" + ye + o + m + o + d);
+                    textViewEndSetText.setText("" + o + d + "/" + o + m + "/" + ye);
+                }
+            } else
+            {
+                endDate = Integer.valueOf("" + ye + m + d);
+                textViewEndSetText.setText("" + d + "/" + m + "/" + ye);
             }
-            if (d < 10) {
-                endDate = Integer.valueOf("" + ye + m + o + d);
-                textViewEndSetText.setText("" + o + d + "/" + m + "/" + ye);
-            }
-            if(d < 10 && m < 10) {
-                endDate = Integer.valueOf("" + ye + o + m + o + d);
-                textViewEndSetText.setText("" + o + d + "/" + o + m + "/" + ye);
-            }
+
         }
     }
 
