@@ -8,7 +8,6 @@ import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
 import com.siadous.thomas.mynews.Utils.ApiClient;
 import com.siadous.thomas.mynews.Utils.ApiInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,19 +19,17 @@ import static com.siadous.thomas.mynews.Utils.ApiClient.API_KEY;
 public class ResultModel implements ResultContract.Model {
 
     private final String TAG = "ResultModel";
-    private static int numberOfArticle = 0;
+    private static int numberOfArticle;
 
-    public static int getNumberOfArticle() {
-        return numberOfArticle;
-    }
-
+    
     /**
      * This function will fetch movies data
      * @param onFinishedListener
      * @param pageNo : Which page to load.
+     * @return
      */
     @Override
-    public void getResultList(final ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate) {
+    public int getResultList(final OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate) {
 
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
@@ -47,6 +44,7 @@ public class ResultModel implements ResultContract.Model {
                     try {
                         List<Docs> result = response.body().getResponse().getDocs();
                         Log.d(TAG, "Number of articles received: "  + result.size());
+                        numberOfArticle = result.size();
                         onFinishedListener.onFinished(result);
                     } catch(NullPointerException e) {
                         Log.d(TAG, String.valueOf(e));
@@ -64,6 +62,7 @@ public class ResultModel implements ResultContract.Model {
                 onFinishedListener.onFailure(t);
             }
         });
+        return numberOfArticle;
     }
 
     @Override

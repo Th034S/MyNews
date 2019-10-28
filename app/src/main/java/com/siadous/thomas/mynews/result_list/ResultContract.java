@@ -3,7 +3,6 @@ package com.siadous.thomas.mynews.result_list;
 import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ResultContract {
@@ -18,7 +17,7 @@ public interface ResultContract {
             void onFailure(Throwable t);
         }
 
-        void getResultList(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate);
+        int getResultList(OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword, int beginDate, int endDate);
         int getResultListWithoutDate(ResultContract.Model.OnFinishedListener onFinishedListener, int pageNo, String categories, String keyword);
     }
 

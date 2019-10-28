@@ -66,13 +66,13 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                           // holder.pbLoadImage.setVisibility(View.GONE);
+                            //holder.pbLoadImage.setVisibility(View.GONE);
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                           // holder.pbLoadImage.setVisibility(View.GONE);
+                            //holder.pbLoadImage.setVisibility(View.GONE);
                             return false;
                         }
                     })
@@ -102,7 +102,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     // On référence les éléments de movie card
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        ProgressBar pbLoadImage;
+        //ProgressBar pbLoadImage;
         TextView fragmentItemTitle;
         TextView fragmentDate;
         ImageView fragmentImageView;
@@ -115,7 +115,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentDate = itemView.findViewById(R.id.fragment_date);
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
             fragmentCategory = itemView.findViewById(R.id.fragment_category);
-            //pbLoadImage = itemView.findViewById(R.id.pb_load_image);
+             //pbLoadImage = itemView.findViewById(R.id.pb_load_image);
 
         }
         Context getContext() {

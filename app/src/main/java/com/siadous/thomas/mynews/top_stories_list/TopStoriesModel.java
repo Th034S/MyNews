@@ -19,14 +19,16 @@ import static com.siadous.thomas.mynews.Utils.ApiClient.API_KEY;
 public class TopStoriesModel implements TopStoriesContract.Model {
 
     private final String TAG = "TopStoriesModel";
+    private int numberOfArticle;
 
     /**
      * This function will fetch movies data
      * @param onFinishedListener
      * @param pageNo : Which page to load.
+     * @return
      */
     @Override
-    public void getTopStoriesList(final OnFinishedListener onFinishedListener, int pageNo) {
+    public int getTopStoriesList(final OnFinishedListener onFinishedListener, int pageNo) {
 
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
@@ -41,6 +43,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
                     assert response.body() != null;
                     List<TopStories> topStories = response.body().getResults();
                     Log.d(TAG, "Number of articles received: " + topStories.size());
+                    numberOfArticle = topStories.size();
                     onFinishedListener.onFinished(topStories);
                 } catch (NullPointerException e) {
                     Log.d("TAG", String.valueOf(e));
@@ -56,6 +59,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
                 onFinishedListener.onFailure(t);
             }
         });
+        return numberOfArticle;
     }
 
 }
