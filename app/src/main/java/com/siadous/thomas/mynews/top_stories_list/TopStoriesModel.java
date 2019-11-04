@@ -36,21 +36,26 @@ public class TopStoriesModel implements TopStoriesContract.Model {
         Call<TopStoriesListResponse> call = apiService.getTopStories(API_KEY, pageNo);
         call.enqueue(new Callback<TopStoriesListResponse>() {
 
-            // correct call
+            // correct call or error
             @Override
             public void onResponse(@NonNull Call<TopStoriesListResponse> call, @NonNull Response<TopStoriesListResponse> response) {
                 try {
                     assert response.body() != null;
-                    List<TopStories> topStories = response.body().getResults();
-                    Log.d(TAG, "Number of articles received: " + topStories.size());
-                    numberOfArticle = topStories.size();
-                    onFinishedListener.onFinished(topStories);
+                    if(response.isSuccessful()) {
+                        List<TopStories> topStories = response.body().getResults();
+                        Log.d(TAG, "Number of articles received: " + topStories.size());
+                        numberOfArticle = topStories.size();
+                        onFinishedListener.onFinished(topStories);
+                    } else {
+
+                    }
+
                 } catch (NullPointerException e) {
                     Log.d("TAG", String.valueOf(e));
                 }
             }
 
-            // bad call or error
+            // bad call
             @Override
             public void onFailure(@NonNull Call<TopStoriesListResponse> call, @NonNull Throwable t) {
                 // Log error here since request failed

@@ -2,7 +2,6 @@ package com.siadous.thomas.mynews.Activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +20,9 @@ import android.widget.TextView;
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.result_list.ResultActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class SearchActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-
-  //  SearchFragment searchFragment;
 
     String categories = "";
     Button searchButton;
@@ -42,7 +38,6 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
     String keyword = " ";
     ConstraintLayout constraintLayoutBeginDate;
     ConstraintLayout constraintLayoutEndDate;
-    DatePickerDialog datePickerDialog;
     int beginDate = 0;
     int endDate = 0;
     int day;
@@ -51,7 +46,6 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
 
     DatePickerDialog datePickerDialogBegin;
     DatePickerDialog datePickerDialogEnd;
-    private SimpleDateFormat dateFormatter;
 
 
     @Override
@@ -120,11 +114,9 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
     }
 
 
-
    private void configureToolbar() {
        Toolbar toolbar = findViewById(R.id.toolbar);
        setSupportActionBar(toolbar);
-
 
        try {
            getSupportActionBar().setTitle("Search Articles");
@@ -136,9 +128,7 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
        } catch (NullPointerException e) {
            Log.e("your app", e.toString());
        }
-
    }
-
 
 
     @Override
@@ -152,19 +142,15 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
 
 
     private void launchResultActivity() {
-
+        
             Intent intent= new Intent(SearchActivity.this ,ResultActivity.class);
-
             intent.putExtra("keyword", keyword);
             intent.putExtra("categories", categories);
             if(beginDate != 0 && endDate != 0) {
                 intent.putExtra("begin_date", beginDate);
                 intent.putExtra("end_date", endDate);
             }
-
             startActivity(intent);
-
-
     }
 
     private void enableSearchButton() {

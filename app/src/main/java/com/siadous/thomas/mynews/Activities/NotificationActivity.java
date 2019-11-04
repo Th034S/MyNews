@@ -66,6 +66,7 @@ public class NotificationActivity extends AppCompatActivity {
 
         mPreferences = getSharedPreferences(PREFERENCE_FILE, MODE_PRIVATE);
 
+        // Put at new keyword and categories
         if ((mPreferences.getString(NotificationActivity.PREF_KEYWORD, null)) != null) {
             keywordPref = mPreferences.getString(NotificationActivity.PREF_KEYWORD, null);
             editTextSearch.setText(keywordPref);
@@ -77,7 +78,7 @@ public class NotificationActivity extends AppCompatActivity {
             assert categoriesPref != null;
             splitCategories =  categoriesPref.split(", ");
 
-            checkSplitCategories();
+            checkCategoriesAtNew();
         }
 
         onClickSwitch();
@@ -85,7 +86,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
 
-    private void checkSplitCategories() {
+    private void checkCategoriesAtNew() {
         for (String splitCategory : splitCategories) {
             if (splitCategory.equals("politics")) {
                 politicsCheckBox.setChecked(true);
@@ -160,8 +161,8 @@ public class NotificationActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         try {
+
             Objects.requireNonNull(getSupportActionBar()).setTitle("Notifications");
 
             // display back button
@@ -171,19 +172,16 @@ public class NotificationActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             Log.e("your app", e.toString());
         }
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 

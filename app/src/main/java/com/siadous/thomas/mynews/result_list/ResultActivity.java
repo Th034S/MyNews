@@ -43,10 +43,7 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;
-    private ArticleSearchResponse articleSearch;
-    DetailActivity detailActivity;
 
-    public View result;
 
     private int pageNo = 1;
 
@@ -83,11 +80,11 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
 
         setListeners();
 
-        // Initialiser le Presenter
+        // Initialize presenter
         resultPresenter = new ResultPresenter(this);
 
         if(beginDate !=0 && endDate !=0) {
-            // Obtenir les données de la page 1
+            // get data from page 1
             resultPresenter.requestDataFromServer(categories, keyword, beginDate, endDate);
         }else {
             resultPresenter.requestDataFromServerWithoutDate(categories, keyword);

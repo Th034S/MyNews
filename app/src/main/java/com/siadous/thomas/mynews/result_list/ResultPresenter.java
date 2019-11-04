@@ -46,7 +46,6 @@ public class ResultPresenter implements ResultContract.Presenter, ResultContract
         if (resultListView != null) {
             resultListView.showProgress();
         }
-        Log.d("dataRequest", "lelelelelelel");
         resultListModel.getResultList(this, 1, categories, keyword, beginDate, endDate);
     }
 
@@ -55,7 +54,6 @@ public class ResultPresenter implements ResultContract.Presenter, ResultContract
         if (resultListView != null) {
             resultListView.showProgress();
         }
-        Log.d("dataRequest", "lelelelelelel");
         resultListModel.getResultListWithoutDate(this, 1, categories, keyword);
 
     }

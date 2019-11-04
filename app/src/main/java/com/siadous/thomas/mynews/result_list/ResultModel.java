@@ -21,7 +21,7 @@ public class ResultModel implements ResultContract.Model {
     private final String TAG = "ResultModel";
     private static int numberOfArticle;
 
-    
+
     /**
      * This function will fetch movies data
      * @param onFinishedListener

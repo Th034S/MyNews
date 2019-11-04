@@ -90,16 +90,17 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
     }
 
 
-
     public TopStories getArticle(int position){
         return this.topStoriesList.get(position);
     }
+
 
     public void updateList( List<TopStories> topStoriesList) {
         this.topStoriesList = topStoriesList;
     }
 
-    // On référence les éléments de movie card
+
+    // Reference item elements of fragment item
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         //ProgressBar pbLoadImage;
@@ -115,7 +116,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.My
             fragmentDate = itemView.findViewById(R.id.fragment_date);
             fragmentImageView = itemView.findViewById(R.id.fragment_main_item_image);
             fragmentCategory = itemView.findViewById(R.id.fragment_category);
-             //pbLoadImage = itemView.findViewById(R.id.pb_load_image);
+            //pbLoadImage = itemView.findViewById(R.id.pb_load_image);
 
         }
         Context getContext() {

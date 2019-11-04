@@ -21,7 +21,7 @@ who loads the URL of the detail of an article through a webview
 public class DetailActivity extends AppCompatActivity {
 
     private WebView webView;
-    String data;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (null != intent) {
-            data = intent.getStringExtra("key_url");
+            url = intent.getStringExtra("key_url");
         }
 
         configureToolbar();
@@ -38,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         webView = findViewById(R.id.web_view_details);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl(data);
+        webView.loadUrl(url);
 
     }
 
