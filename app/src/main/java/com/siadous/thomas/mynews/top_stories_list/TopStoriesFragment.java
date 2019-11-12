@@ -15,16 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.siadous.thomas.mynews.Activities.DetailActivity;
-import com.siadous.thomas.mynews.Adapters.TopStoriesAdapter;
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
+import com.siadous.thomas.mynews.activities.DetailActivity;
+import com.siadous.thomas.mynews.adapters.TopStoriesAdapter;
+import com.siadous.thomas.mynews.model.TopStories.TopStories;
 import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
-import com.siadous.thomas.mynews.Utils.ItemClickSupport;
-import com.siadous.thomas.mynews.Utils.ShowEmptyView;
+import com.siadous.thomas.mynews.utils.GridSpacingItemDecoration;
+import com.siadous.thomas.mynews.utils.ItemClickSupport;
+import com.siadous.thomas.mynews.utils.ShowEmptyView;
 import java.util.ArrayList;
 import java.util.List;
-import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
+import static com.siadous.thomas.mynews.utils.GridSpacingItemDecoration.dpToPx;
 
 
 /**
@@ -62,7 +62,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        result = inflater.inflate(R.layout.fragment_top_stories, container, false);
+        result = inflater.inflate(R.layout.fragment_categories_list, container, false);
 
         initUI();
 
@@ -82,7 +82,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
 
     private void initUI() {
 
-        rvTopStoriesList = result.findViewById(R.id.rv_top_stories_list);
+        rvTopStoriesList = result.findViewById(R.id.rv_list);
 
         topStoriesList = new ArrayList<>();
         topStoriesAdapter = new TopStoriesAdapter(this, topStoriesList);

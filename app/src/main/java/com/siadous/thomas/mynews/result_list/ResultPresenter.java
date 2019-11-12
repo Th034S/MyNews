@@ -1,10 +1,7 @@
 package com.siadous.thomas.mynews.result_list;
 
-import android.util.Log;
+import com.siadous.thomas.mynews.model.ArticleSearch.Docs;
 
-import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResultPresenter implements ResultContract.Presenter, ResultContract.Model.OnFinishedListener {

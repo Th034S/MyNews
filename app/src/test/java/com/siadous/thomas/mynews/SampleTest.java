@@ -1,16 +1,13 @@
 package com.siadous.thomas.mynews;
 
-import com.siadous.thomas.mynews.Activities.NotificationActivity;
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
 import com.siadous.thomas.mynews.result_list.ResultContract;
 import com.siadous.thomas.mynews.result_list.ResultModel;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesContract;
 import com.siadous.thomas.mynews.top_stories_list.TopStoriesModel;
-import com.siadous.thomas.mynews.top_stories_list.TopStoriesPresenter;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -28,8 +25,8 @@ public class SampleTest {
     @Test
     public void getTopStories_isNotCorrect() {
         int numberOfArticle;
-        TopStoriesContract.Model.OnFinishedListener onFinishedListener = null;
-        TopStoriesModel topStoriesModel = new TopStoriesModel();
+        TopStoriesContract.Model.OnFinishedListener onFinishedListener = mock(TopStoriesContract.Model.OnFinishedListener.class);
+        TopStoriesModel topStoriesModel = mock(TopStoriesModel.class);
 
         numberOfArticle = topStoriesModel.getTopStoriesList(onFinishedListener, 1);
         assertNotEquals(-1, numberOfArticle);

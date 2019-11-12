@@ -1,6 +1,6 @@
 package com.siadous.thomas.mynews.top_stories_list;
 
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
+import com.siadous.thomas.mynews.model.TopStories.TopStories;
 
 import java.util.List;
 

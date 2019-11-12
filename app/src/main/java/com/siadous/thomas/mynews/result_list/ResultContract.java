@@ -1,6 +1,6 @@
 package com.siadous.thomas.mynews.result_list;
 
-import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
+import com.siadous.thomas.mynews.model.ArticleSearch.Docs;
 
 
 import java.util.List;

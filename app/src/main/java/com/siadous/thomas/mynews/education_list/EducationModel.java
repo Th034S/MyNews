@@ -3,10 +3,10 @@ package com.siadous.thomas.mynews.education_list;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.siadous.thomas.mynews.Model.Education.Docs;
-import com.siadous.thomas.mynews.Model.Education.Education;
-import com.siadous.thomas.mynews.Utils.ApiClient;
-import com.siadous.thomas.mynews.Utils.ApiInterface;
+import com.siadous.thomas.mynews.model.Education.Docs;
+import com.siadous.thomas.mynews.model.Education.Education;
+import com.siadous.thomas.mynews.utils.ApiClient;
+import com.siadous.thomas.mynews.utils.ApiInterface;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.siadous.thomas.mynews.Utils.ApiClient.API_KEY;
+import static com.siadous.thomas.mynews.utils.ApiClient.API_KEY;
 
 public class EducationModel implements EducationContract.Model {
 

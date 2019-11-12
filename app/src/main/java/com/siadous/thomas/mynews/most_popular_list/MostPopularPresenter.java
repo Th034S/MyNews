@@ -1,6 +1,6 @@
 package com.siadous.thomas.mynews.most_popular_list;
 
-import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
+import com.siadous.thomas.mynews.model.MostPopular.MostPopular;
 
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.siadous.thomas.mynews.education_list;
 
 
-import com.siadous.thomas.mynews.Model.Education.Docs;
+import com.siadous.thomas.mynews.model.Education.Docs;
 
 import java.util.List;
 

@@ -16,20 +16,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.siadous.thomas.mynews.Activities.DetailActivity;
-import com.siadous.thomas.mynews.Activities.SearchActivity;
-import com.siadous.thomas.mynews.Adapters.ResultAdapter;
-import com.siadous.thomas.mynews.Model.ArticleSearch.ArticleSearchResponse;
-import com.siadous.thomas.mynews.Model.ArticleSearch.Docs;
+import com.siadous.thomas.mynews.activities.DetailActivity;
+import com.siadous.thomas.mynews.activities.SearchActivity;
+import com.siadous.thomas.mynews.adapters.ResultAdapter;
+import com.siadous.thomas.mynews.model.ArticleSearch.Docs;
 import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
-import com.siadous.thomas.mynews.Utils.ItemClickSupport;
-import com.siadous.thomas.mynews.Utils.ShowEmptyView;
+import com.siadous.thomas.mynews.utils.GridSpacingItemDecoration;
+import com.siadous.thomas.mynews.utils.ItemClickSupport;
+import com.siadous.thomas.mynews.utils.ShowEmptyView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
+import static com.siadous.thomas.mynews.utils.GridSpacingItemDecoration.dpToPx;
 
 public class ResultActivity extends AppCompatActivity implements ResultContract.View, ShowEmptyView {
 

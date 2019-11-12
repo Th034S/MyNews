@@ -16,18 +16,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.siadous.thomas.mynews.Activities.DetailActivity;
-import com.siadous.thomas.mynews.Adapters.EducationAdapter;
-import com.siadous.thomas.mynews.Model.Education.Docs;
-import com.siadous.thomas.mynews.Model.Education.EducationResponse;
+import com.siadous.thomas.mynews.activities.DetailActivity;
+import com.siadous.thomas.mynews.adapters.EducationAdapter;
+import com.siadous.thomas.mynews.model.Education.Docs;
+import com.siadous.thomas.mynews.model.Education.EducationResponse;
 import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
-import com.siadous.thomas.mynews.Utils.ItemClickSupport;
-import com.siadous.thomas.mynews.Utils.ShowEmptyView;
+import com.siadous.thomas.mynews.utils.GridSpacingItemDecoration;
+import com.siadous.thomas.mynews.utils.ItemClickSupport;
+import com.siadous.thomas.mynews.utils.ShowEmptyView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
+import static com.siadous.thomas.mynews.utils.GridSpacingItemDecoration.dpToPx;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +66,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        result = inflater.inflate(R.layout.fragment_education, container, false);
+        result = inflater.inflate(R.layout.fragment_categories_list, container, false);
 
         initUI();
 
@@ -85,7 +85,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
 
     private void initUI() {
 
-        rvEducationList = result.findViewById(R.id.rv_education_list);
+        rvEducationList = result.findViewById(R.id.rv_list);
 
         educationList = new ArrayList<>();
         educationAdapter = new EducationAdapter(this, educationList);

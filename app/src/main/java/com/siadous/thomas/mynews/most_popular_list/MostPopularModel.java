@@ -2,17 +2,17 @@ package com.siadous.thomas.mynews.most_popular_list;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
-import com.siadous.thomas.mynews.Model.MostPopular.MostPopularList;
-import com.siadous.thomas.mynews.Utils.ApiClient;
-import com.siadous.thomas.mynews.Utils.ApiInterface;
+import com.siadous.thomas.mynews.model.MostPopular.MostPopular;
+import com.siadous.thomas.mynews.model.MostPopular.MostPopularList;
+import com.siadous.thomas.mynews.utils.ApiClient;
+import com.siadous.thomas.mynews.utils.ApiInterface;
 
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.siadous.thomas.mynews.Utils.ApiClient.API_KEY;
+import static com.siadous.thomas.mynews.utils.ApiClient.API_KEY;
 
 public class MostPopularModel implements MostPopularContract.Model {
 

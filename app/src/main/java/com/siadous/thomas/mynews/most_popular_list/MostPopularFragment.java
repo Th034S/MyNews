@@ -16,18 +16,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.siadous.thomas.mynews.Activities.DetailActivity;
-import com.siadous.thomas.mynews.Adapters.MostPopularAdapter;
-import com.siadous.thomas.mynews.Model.MostPopular.MostPopular;
+import com.siadous.thomas.mynews.activities.DetailActivity;
+import com.siadous.thomas.mynews.adapters.MostPopularAdapter;
+import com.siadous.thomas.mynews.model.MostPopular.MostPopular;
 import com.siadous.thomas.mynews.R;
-import com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration;
-import com.siadous.thomas.mynews.Utils.ItemClickSupport;
-import com.siadous.thomas.mynews.Utils.ShowEmptyView;
-import com.siadous.thomas.mynews.result_list.ResultActivity;
+import com.siadous.thomas.mynews.utils.GridSpacingItemDecoration;
+import com.siadous.thomas.mynews.utils.ItemClickSupport;
+import com.siadous.thomas.mynews.utils.ShowEmptyView;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.siadous.thomas.mynews.Utils.GridSpacingItemDecoration.dpToPx;
+import static com.siadous.thomas.mynews.utils.GridSpacingItemDecoration.dpToPx;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +65,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        result = inflater.inflate(R.layout.fragment_most_popular, container, false);
+        result = inflater.inflate(R.layout.fragment_categories_list, container, false);
 
         initUI();
 
@@ -85,7 +84,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
 
     private void initUI() {
 
-        rvMostPopularList = result.findViewById(R.id.rv_most_popular_list);
+        rvMostPopularList = result.findViewById(R.id.rv_list);
 
         mostPopularList = new ArrayList<>();
         mostPopularAdapter = new MostPopularAdapter(this, mostPopularList);

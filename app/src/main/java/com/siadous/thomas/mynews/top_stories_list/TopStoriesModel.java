@@ -3,10 +3,10 @@ package com.siadous.thomas.mynews.top_stories_list;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.siadous.thomas.mynews.Model.TopStories.TopStories;
-import com.siadous.thomas.mynews.Model.TopStories.TopStoriesListResponse;
-import com.siadous.thomas.mynews.Utils.ApiClient;
-import com.siadous.thomas.mynews.Utils.ApiInterface;
+import com.siadous.thomas.mynews.model.TopStories.TopStories;
+import com.siadous.thomas.mynews.model.TopStories.TopStoriesListResponse;
+import com.siadous.thomas.mynews.utils.ApiClient;
+import com.siadous.thomas.mynews.utils.ApiInterface;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.siadous.thomas.mynews.Utils.ApiClient.API_KEY;
+import static com.siadous.thomas.mynews.utils.ApiClient.API_KEY;
 
 public class TopStoriesModel implements TopStoriesContract.Model {
 
@@ -59,8 +59,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
             @Override
             public void onFailure(@NonNull Call<TopStoriesListResponse> call, @NonNull Throwable t) {
                 // Log error here since request failed
-                Log.e(
-                        TAG, t.toString());
+                Log.e(TAG, t.toString());
                 onFinishedListener.onFailure(t);
             }
         });
