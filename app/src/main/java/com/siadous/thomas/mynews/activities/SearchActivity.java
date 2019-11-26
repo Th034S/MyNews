@@ -225,7 +225,7 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
 
 
     private void initUI() {
-        searchButton = findViewById(R.id.search_button_fragment);
+        searchButton = findViewById(R.id.search_button);
         editTextSearch = findViewById(R.id.edit_text);
         politicsCheckBox = findViewById(R.id.checkBox_politics);
         sportsCheckBox = findViewById(R.id.checkBox_sports);
