@@ -1,12 +1,15 @@
 package com.siadous.thomas.mynews;
 
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.DatePicker;
 
 import com.siadous.thomas.mynews.activities.MainActivity;
 
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +21,9 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -85,7 +90,7 @@ public class UITest {
     }
 
     @Test
-    public void prefNotEmptyWhenEditTextFilledWithSwitchEnabledInNotificationActivity() {
+    public void prefEditTextNotEmptyWhenEditTextFilledAndSwitchEnabledInNotificationActivity() {
         onView(withId(R.id.menu_activity_main_params))
                 .perform(click());
         onView(withId(R.id.edit_text)).perform(replaceText("Paris"), closeSoftKeyboard());
@@ -96,14 +101,33 @@ public class UITest {
         onView(withId(R.id.edit_text)).check(matches(withText("Paris")));
     }
 
+
     @Test
-    public void changeFragmentFromViewPager() {
-        onView(withId(R.id.activity_main_viewpager)).perform(swipeLeft());
-
-        //onView(withId(R.id.activity_main_tabs)).check(matches(withText("Most Popular")));
-
+    public void prefCategoriesNotEmptyWhenCategoriesCheckedAndSwitchEnabledInNotificationActivity() {
+        onView(withId(R.id.menu_activity_main_params))
+                .perform(click());
+        onView(withId(R.id.checkBox_arts)).perform(click());
+        onView(withId(R.id.checkBox_business)).perform(click());
+        onView(withId(R.id.switch1)).perform(click());
+        Espresso.pressBackUnconditionally();
+        onView(withId(R.id.menu_activity_main_params))
+                .perform(click());
+        onView(withId(R.id.checkBox_arts)).check(matches(isChecked()));
+        onView(withId(R.id.checkBox_business)).check(matches(isChecked()));
     }
 
+
+
+    @Test
+    public void displayDateAfterSelectInDatePicker() {
+        onView(withId(R.id.menu_activity_main_search))
+                .perform(click());
+        onView(withId(R.id.constraint_layout_begin_date)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2019, 11, 1));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.text_view_begin_set_text)).check(matches(withText("01/11/2019")));
+
+    }
 
 
 }
