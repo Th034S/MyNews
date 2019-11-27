@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -87,7 +88,7 @@ public class UITest {
     public void prefNotEmptyWhenEditTextFilledWithSwitchEnabledInNotificationActivity() {
         onView(withId(R.id.menu_activity_main_params))
                 .perform(click());
-        onView(withId(R.id.edit_text)).perform(typeText("Paris"), closeSoftKeyboard());
+        onView(withId(R.id.edit_text)).perform(replaceText("Paris"), closeSoftKeyboard());
         onView(withId(R.id.switch1)).perform(click());
         Espresso.pressBackUnconditionally();
         onView(withId(R.id.menu_activity_main_params))
