@@ -16,11 +16,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class SampleTest {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
+public class UnitTest {
 
     @Test
     public void getTopStories_isNotCorrect() {
@@ -46,7 +42,7 @@ public class SampleTest {
     }
 
     @Test
-    public void getResultList_isNotCorrect() {
+    public void ResultList_isFilled() {
         String keyword = "paris";
         String categories = "politics, business";
         int numberOfArticle;

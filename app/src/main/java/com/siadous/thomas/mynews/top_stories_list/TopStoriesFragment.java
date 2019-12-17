@@ -141,7 +141,6 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
-
                         Intent intent= new Intent(getActivity() , DetailActivity.class);
 
                         intent.putExtra("key_url", topStoriesAdapter.getArticle(position).getUrl());

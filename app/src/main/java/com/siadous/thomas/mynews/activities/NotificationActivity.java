@@ -12,14 +12,18 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import com.siadous.thomas.mynews.R;
 import com.siadous.thomas.mynews.utils.NotificationWorker;
 
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -121,6 +125,34 @@ public class NotificationActivity extends AppCompatActivity {
                 mPreferences.edit().putString(PREF_KEYWORD, keyword).apply();
                 mPreferences.edit().putString(PREF_CATEGORIES, categories).apply();
 
+
+                Calendar currentDate = Calendar.getInstance();
+                Calendar dueDate = Calendar.getInstance();
+
+                dueDate.set(Calendar.HOUR_OF_DAY, 8);
+                dueDate.set(Calendar.MINUTE, 0);
+                dueDate.set(Calendar.SECOND, 0);
+
+                if(dueDate.before(currentDate)) {
+                    dueDate.add(Calendar.HOUR_OF_DAY, 24);
+                }
+
+                long timeDiff =  dueDate.getTimeInMillis() - currentDate.getTimeInMillis();
+
+                Constraints constraints = new Constraints.Builder()
+                        .setRequiresCharging(true)
+                        .setTriggerContentMaxDelay(timeDiff, TimeUnit.MILLISECONDS)
+                        .build();
+
+// TEST
+                PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                        NotificationWorker.class,24, TimeUnit.HOURS)
+                        .setConstraints(constraints)
+                        .build();
+
+                WorkManager.getInstance().enqueue(periodicWorkRequest);
+
+/*
                 Calendar currentDate = Calendar.getInstance();
                 Calendar dueDate = Calendar.getInstance();
 
@@ -148,7 +180,7 @@ public class NotificationActivity extends AppCompatActivity {
                         .build();
 
                 WorkManager.getInstance().enqueueUniqueWork("TAG", ExistingWorkPolicy.REPLACE ,oneTimeWorkRequest);
-
+*/
             }
         });
 

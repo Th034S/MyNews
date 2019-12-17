@@ -17,4 +17,6 @@
 
     <string name="text_switch_button">Enable notifications (once per day)</string>
     <string name="search_button">SEARCH</string>
+    <string name="begin_date">Begin date</string>
+    <string name="end_date">End date</string>
 </resources>

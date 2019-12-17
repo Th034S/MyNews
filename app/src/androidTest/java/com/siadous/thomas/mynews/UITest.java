@@ -1,5 +1,6 @@
 package com.siadous.thomas.mynews;
 
+import android.content.SharedPreferences;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
@@ -10,10 +11,13 @@ import android.widget.DatePicker;
 import com.siadous.thomas.mynews.activities.MainActivity;
 
 import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -21,11 +25,14 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.siadous.thomas.mynews.activities.NotificationActivity.PREFERENCE_FILE;
 import static org.hamcrest.Matchers.allOf;
 
 /**
@@ -37,11 +44,11 @@ import static org.hamcrest.Matchers.allOf;
 public class UITest {
 
 
+    private final static String PREFERENCE_FILE = "PREFERENCE_FILE";
+
     @Rule
     public ActivityTestRule mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
-
-
 
 
     @Test
@@ -66,6 +73,7 @@ public class UITest {
     public void editTextOfSearchActivityEmptyNoResultActivityLaunched() {
         onView(withId(R.id.menu_activity_main_search))
                 .perform(click());
+        onView(withId(R.id.edit_text)).perform(replaceText(""), closeSoftKeyboard());
         onView(withId(R.id.edit_text)).check(matches(withText("")));
         onView(withId(R.id.search_button)).perform(click());
         onView(withId(R.id.search_button)).check(matches(isDisplayed()));
@@ -106,16 +114,19 @@ public class UITest {
     public void prefCategoriesNotEmptyWhenCategoriesCheckedAndSwitchEnabledInNotificationActivity() {
         onView(withId(R.id.menu_activity_main_params))
                 .perform(click());
+
         onView(withId(R.id.checkBox_arts)).perform(click());
         onView(withId(R.id.checkBox_business)).perform(click());
+
         onView(withId(R.id.switch1)).perform(click());
         Espresso.pressBackUnconditionally();
         onView(withId(R.id.menu_activity_main_params))
                 .perform(click());
         onView(withId(R.id.checkBox_arts)).check(matches(isChecked()));
         onView(withId(R.id.checkBox_business)).check(matches(isChecked()));
-    }
 
+
+    }
 
 
     @Test
@@ -129,6 +140,11 @@ public class UITest {
 
     }
 
+    @Test
+    public void changeFragmentFromViewPager() {
+        onView(withId(R.id.activity_main_viewpager)).perform(swipeLeft());
+        onView(withId(R.id.activity_main_tabs)).check(matches(hasDescendant(withText("Most Popular"))));
+    }
 
 }
 
