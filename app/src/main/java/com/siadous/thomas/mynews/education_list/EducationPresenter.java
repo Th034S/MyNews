@@ -13,9 +13,9 @@ public class EducationPresenter implements EducationContract.Presenter, Educatio
     private EducationContract.View educationListView;
     private EducationContract.Model educationListModel;
 
-    EducationPresenter(EducationContract.View educationListView) {
+    EducationPresenter(EducationContract.View educationListView, EducationContract.Model model) {
         this.educationListView = educationListView;
-        educationListModel = new EducationModel();
+        educationListModel = model;
     }
 
     @Override
@@ -38,7 +38,6 @@ public class EducationPresenter implements EducationContract.Presenter, Educatio
         if (educationListView != null) {
             educationListView.showProgress();
         }
-        Log.d("dataRequest", "lelelelelelel");
         educationListModel.getEducationList(this, 1);
     }
 

@@ -83,7 +83,10 @@ public class NotificationActivity extends AppCompatActivity {
             splitCategories =  categoriesPref.split(", ");
 
             checkCategoriesAtNew();
+
+            aSwitch.setChecked(true);
         }
+
 
     }
 

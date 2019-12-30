@@ -73,7 +73,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
         setListeners();
 
         // Initialiser le Presenter
-        educationPresenter = new EducationPresenter(this);
+        educationPresenter = new EducationPresenter(this, new EducationModel());
 
         // Obtenir les données de la page 1
         educationPresenter.requestDataFromServer();

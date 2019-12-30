@@ -25,9 +25,9 @@ public interface TopStoriesContract {
 
         void hideProgress();
 
-        void setDataToRecyclerView(List<TopStories> topStoriesList);
+        void setDataToRecyclerView(List<TopStories> topStoriesList); // if success
 
-        void onResponseFailure(Throwable throwable);
+        void onResponseFailure(Throwable throwable); // if echec
 
     }
 
