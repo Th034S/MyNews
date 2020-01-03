@@ -62,28 +62,6 @@ public class TopStories {
 
 
 
-    public TopStories(String[] per_facet, String subsection, String item_type, String[] org_facet, String section, String abstracts, String title, String[] des_facet, String url,
-                      String short_url, String material_type_facet, Multimedia[] multimedia, String[] geo_facet, String updated_date, String created_date, String byline, String published_date, String kicker) {
-        this.per_facet = per_facet;
-        this.subsection = subsection;
-        this.item_type = item_type;
-        this.org_facet = org_facet;
-        this.section = section;
-        this.abstracts = abstracts;
-        this.title = title;
-        this.des_facet = des_facet;
-        this.url = url;
-        this.short_url = short_url;
-        this.material_type_facet = material_type_facet;
-        this.multimedia = multimedia;
-        this.geo_facet = geo_facet;
-        this.updated_date = updated_date;
-        this.created_date = created_date;
-        this.byline = byline;
-        this.published_date = published_date;
-        this.kicker = kicker;
-    }
-
 
     public String[] getPer_facet ()
     {

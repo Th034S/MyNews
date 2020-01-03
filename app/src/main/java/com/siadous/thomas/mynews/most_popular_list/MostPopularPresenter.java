@@ -10,9 +10,9 @@ public class MostPopularPresenter implements MostPopularContract.Presenter, Most
     private MostPopularContract.View mostPopularListView;
     private MostPopularContract.Model mostPopularListModel;
 
-    MostPopularPresenter(MostPopularContract.View mostPopularListView) {
+    MostPopularPresenter(MostPopularContract.View mostPopularListView, MostPopularContract.Model mostPopularListModel) {
         this.mostPopularListView = mostPopularListView;
-        mostPopularListModel = new MostPopularModel();
+        this.mostPopularListModel = mostPopularListModel;
     }
 
     @Override

@@ -69,7 +69,7 @@ public class TopStoriesFragment extends Fragment implements TopStoriesContract.V
         setListeners();
 
         // Initialize the Presenter
-        topStoriesPresenter = new TopStoriesPresenter(this);
+        topStoriesPresenter = new TopStoriesPresenter(this, new TopStoriesModel());
         // Get data of page one
         topStoriesPresenter.requestDataFromServer();
 

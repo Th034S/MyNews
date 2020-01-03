@@ -72,7 +72,7 @@ public class MostPopularFragment extends Fragment implements MostPopularContract
         setListeners();
 
         // Initialiser le Presenter
-        mostPopularPresenter = new MostPopularPresenter(this);
+        mostPopularPresenter = new MostPopularPresenter(this, new MostPopularModel());
 
         // Obtenir les données de la page 1
         mostPopularPresenter.requestDataFromServer();

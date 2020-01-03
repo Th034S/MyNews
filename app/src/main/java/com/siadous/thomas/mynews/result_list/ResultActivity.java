@@ -32,8 +32,6 @@ import static com.siadous.thomas.mynews.utils.GridSpacingItemDecoration.dpToPx;
 
 public class ResultActivity extends AppCompatActivity implements ResultContract.View, ShowEmptyView {
 
-
-
     private static final String TAG = "ResultFragment";
     private ResultPresenter resultPresenter;
     private RecyclerView rvResultList;
@@ -80,7 +78,7 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
         setListeners();
 
         // Initialize presenter
-        resultPresenter = new ResultPresenter(this);
+        resultPresenter = new ResultPresenter(this, new ResultModel());
 
         if(beginDate !=0 && endDate !=0) {
             // get data from page 1

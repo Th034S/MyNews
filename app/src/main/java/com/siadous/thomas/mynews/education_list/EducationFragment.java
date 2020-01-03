@@ -39,7 +39,7 @@ public class EducationFragment extends Fragment implements EducationContract.Vie
     private EducationPresenter educationPresenter;
     private RecyclerView rvEducationList;
     private List<Docs> educationList;
-    private EducationAdapter educationAdapter;  // A VOIR
+    private EducationAdapter educationAdapter;
     private ProgressBar pbLoading;
     private TextView tvEmptyView;
     private LinearLayout linearLayoutItem;

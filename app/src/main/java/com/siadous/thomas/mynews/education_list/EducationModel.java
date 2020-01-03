@@ -44,7 +44,6 @@ public class EducationModel implements EducationContract.Model {
                         onFinishedListener.onFinished(educations);
                     } catch(NullPointerException e) {
                         Log.d(TAG, String.valueOf(e));
-                        Log.d(TAG, "blibli");
                     }
                 }
 
@@ -54,7 +53,6 @@ public class EducationModel implements EducationContract.Model {
             public void onFailure(@NonNull Call<Education> call, @NonNull Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
-                Log.d(TAG, "blabla");
                 onFinishedListener.onFailure(t);
             }
         });

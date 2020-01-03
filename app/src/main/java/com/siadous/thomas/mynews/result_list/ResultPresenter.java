@@ -10,9 +10,9 @@ public class ResultPresenter implements ResultContract.Presenter, ResultContract
     private ResultContract.View resultListView;
     private ResultContract.Model resultListModel;
 
-    ResultPresenter(ResultContract.View resultListView) {
+    ResultPresenter(ResultContract.View resultListView, ResultContract.Model resultListModel) {
         this.resultListView = resultListView;
-        resultListModel = new ResultModel();
+        this.resultListModel = resultListModel;
     }
 
     @Override

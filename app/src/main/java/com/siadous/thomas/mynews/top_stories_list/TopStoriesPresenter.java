@@ -9,9 +9,9 @@ public class TopStoriesPresenter implements TopStoriesContract.Presenter, TopSto
     private TopStoriesContract.View topStoriesListView;
     private TopStoriesContract.Model topStoriesListModel;
 
-    TopStoriesPresenter(TopStoriesContract.View topStoriesListView) {
+    TopStoriesPresenter(TopStoriesContract.View topStoriesListView, TopStoriesContract.Model topStoriesListModel) {
         this.topStoriesListView = topStoriesListView;
-        topStoriesListModel = new TopStoriesModel();
+        this.topStoriesListModel = topStoriesListModel;
     }
 
     @Override

@@ -51,7 +51,6 @@ public class EducationPresenter implements EducationContract.Presenter, Educatio
 
     @Override
     public void onFailure(Throwable t) {
-
         educationListView.onResponseFailure(t);
         if (educationListView != null) {
             educationListView.hideProgress();
