@@ -28,7 +28,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
      * @return
      */
     @Override
-    public int getTopStoriesList(final OnFinishedListener onFinishedListener, int pageNo) {
+    public void getTopStoriesList(final OnFinishedListener onFinishedListener, int pageNo) {
 
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
@@ -63,7 +63,7 @@ public class TopStoriesModel implements TopStoriesContract.Model {
                 onFinishedListener.onFailure(t);
             }
         });
-        return numberOfArticle;
+
     }
 
 }

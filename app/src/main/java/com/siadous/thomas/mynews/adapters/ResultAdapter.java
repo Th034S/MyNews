@@ -88,7 +88,7 @@ public class ResultAdapter  extends RecyclerView.Adapter<TopStoriesAdapter.MyVie
     public void updateList( List<Docs> resultList ) {
         this.resultList = resultList;
     }
-
+/*
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         ProgressBar pbLoadImage;
@@ -114,5 +114,5 @@ public class ResultAdapter  extends RecyclerView.Adapter<TopStoriesAdapter.MyVie
             return fragmentItemTitle.getContext();
         }
     }
-
+*/
 }

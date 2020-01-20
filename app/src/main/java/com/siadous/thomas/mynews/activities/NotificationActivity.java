@@ -86,8 +86,6 @@ public class NotificationActivity extends AppCompatActivity {
 
             aSwitch.setChecked(true);
         }
-
-
     }
 
     private void checkCategoriesAtNew() {

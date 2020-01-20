@@ -16,7 +16,7 @@ public interface TopStoriesContract {
             void onFailure(Throwable t);
         }
 
-        int getTopStoriesList(OnFinishedListener onFinishedListener, int pageNo);
+        void getTopStoriesList(OnFinishedListener onFinishedListener, int pageNo);
     }
 
     // Display data in a recycler view
