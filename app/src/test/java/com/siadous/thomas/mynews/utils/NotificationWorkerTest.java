@@ -1,5 +1,5 @@
 package com.siadous.thomas.mynews.utils;
-
+/*
 
 import android.content.Context;
 import android.util.Log;
@@ -90,5 +90,6 @@ public class NotificationWorkerTest {
         assertThat(workInfo.getState(), is(WorkInfo.State.ENQUEUED));
     }
 
-*/
+
 }
+*/
